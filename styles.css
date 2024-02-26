@@ -1,0 +1,69 @@
+/* Basic styling for the left-hand side panel */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f0f8ff; /* light blue resembling sea */
+}
+.container {
+  display: flex;
+}
+.sidebar {
+  width: 200px;
+  background-color: #d2f4e8; /* light sea green */
+  padding: 20px;
+  height: 100vh;
+}
+.main-content {
+  flex: 1;
+  padding: 20px;
+}
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+.sidebar li {
+  margin-bottom: 10px;
+}
+.sidebar a {
+  text-decoration: none;
+  color: #00796b; /* dark sea green */
+}
+.sidebar a:hover {
+  color: #007bff; /* dark blue */
+}
+#map {
+  width: 100%;
+  height: 400px;
+  margin-top: 20px;
+}
+
+/* Styling for the contact form */
+#contact {
+  margin-top: 40px;
+}
+#contact-form {
+  max-width: 400px;
+  margin-top: 20px;
+}
+#contact-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+#contact-form input[type="email"],
+#contact-form input[type="text"],
+#contact-form textarea {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+}
+#contact-form button {
+  background-color: #00796b; /* dark sea green */
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+#contact-form button:hover {
+  background-color: #005a51; /* darker sea green */
+}
