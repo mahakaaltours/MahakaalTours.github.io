@@ -1,4 +1,4 @@
-// JavaScript code for form validation
+// JavaScript code for form validation and scrolling to the top
 document.addEventListener("DOMContentLoaded", function() {
   const form = document.getElementById("contact-form");
   form.addEventListener("submit", function(event) {
@@ -38,4 +38,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return regex.test(email);
   }
+
+  // Scroll to the top of the page on reload
+  window.scrollTo(0, 0);
 });
