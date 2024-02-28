@@ -70,7 +70,19 @@
   </ul>
 </div>
 
+<!-- Modal for video player -->
+<div id="videoModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <video id="player" controls>
+      <!-- Video source will be dynamically added by JavaScript -->
+    </video>
+  </div>
+</div>
 
 <script src="script.js"></script>
+<!-- Add Plyr.js library -->
+<script src="https://cdn.plyr.io/3.6.8/plyr.js"></script>
+<link rel="stylesheet" href="https://cdn.plyr.io/3.6.8/plyr.css" />
 </body>
 </html>
