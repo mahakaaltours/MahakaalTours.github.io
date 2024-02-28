@@ -230,4 +230,4 @@ document.addEventListener("DOMContentLoaded", function() {
     }
   }
   
-}
+});
