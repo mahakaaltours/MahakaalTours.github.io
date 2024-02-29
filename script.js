@@ -7,6 +7,12 @@ document.addEventListener("DOMContentLoaded", function() {
   function generateThumbnails() {
     thumbnailsContainer.innerHTML = ""; // Clear previous thumbnails
 
+    const images = [
+      '20230823_143831.jpg',
+      '20231016_075917.jpg',
+      '20231016_090933.jpg'
+    ];
+    
     images.forEach(image => {
       const thumbnail = document.createElement("img");
       thumbnail.src = "media/" + image;
@@ -92,7 +98,12 @@ document.addEventListener("DOMContentLoaded", function() {
     const thumbnailsContainer = document.getElementById("thumbnails");
 
     // List of image and video files
-
+    const files = [
+      '20230823_143831.jpg',
+      '20231016_075917.jpg',
+      '20231016_090933.jpg'
+    ];
+    
     // Sort files by name (latest to oldest)
     files.sort().reverse();
 
