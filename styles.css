@@ -72,3 +72,15 @@ body {
 #contact-form button:hover {
   background-color: #005a51; /* darker sea green */
 }
+
+/* Styling for the thumbnails */
+.thumbnails {
+  width: 100px; /* Adjust the width as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin: 5px; /* Add some margin between thumbnails */
+  cursor: pointer; /* Change cursor to pointer when hovering over thumbnails */
+}
+
+.thumbnails:hover {
+  opacity: 0.7; /* Reduce opacity when hovering over thumbnails */
+}
