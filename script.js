@@ -214,6 +214,8 @@ document.addEventListener("DOMContentLoaded", function() {
     return extension === "mp4" ? "video" : "image";
   }
 
+  let currentIndex = 0; // Keep track of the current image index
+  
   function openFullSize(file, type) {
     if (type === "video") {
       // Create a Plyr video player
@@ -244,6 +246,18 @@ document.addEventListener("DOMContentLoaded", function() {
       window.open(file);
     }
   }
+  
+  function showNextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  const nextImage = images[currentIndex];
+  openFullSize("media/" + nextImage, "image");
+}
+
+  function showPreviousImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  const previousImage = images[currentIndex];
+  openFullSize("media/" + previousImage, "image");
+}
 
 // Initialize visitor count
 let visitorCount = 0;
