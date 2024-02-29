@@ -46,6 +46,30 @@ document.addEventListener("DOMContentLoaded", function() {
       'IMG_20231114_153059_572.jpg'
     ];
     
+    const columnCount = 8; // Number of thumbnails per column
+    const rowCount = Math.ceil(images.length / columnCount); // Calculate number of rows
+
+    for (let i = 0; i < rowCount; i++) {
+      const row = document.createElement("div");
+      row.classList.add("thumbnail-row");
+      
+      for (let j = 0; j < columnCount; j++) {
+        const index = i * columnCount + j;
+        if (index >= images.length) break; // Exit loop if all images are added
+        
+        const thumbnail = document.createElement("img");
+        thumbnail.src = "media/" + images[index];
+        thumbnail.alt = images[index];
+        thumbnail.classList.add("thumbnail");
+
+        thumbnail.addEventListener("click", function() {
+          openFullSize("media/" + images[index], "image");
+        });
+
+        row.appendChild(thumbnail);
+      }
+    thumbnailsContainer.appendChild(row);
+  }
     images.forEach(image => {
       const thumbnail = document.createElement("img");
       thumbnail.src = "media/" + image;
