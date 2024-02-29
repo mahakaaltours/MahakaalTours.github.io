@@ -1,49 +1,13 @@
 // JavaScript code for form validation
 document.addEventListener("DOMContentLoaded", function() {
-    
   const galleryLink = document.querySelector('.sidebar a[href="#gallery"]');
   const thumbnailsContainer = document.querySelector(".thumbnails");
   
-  const form = document.getElementById("contact-form");
-  form.addEventListener("submit", function(event) {
-    event.preventDefault();
-    const email = document.getElementById("email").value;
-    const subject = document.getElementById("subject").value;
-    const message = document.getElementById("message").value;
-
-    if (!isValidEmail(email)) {
-      alert("Please enter a valid email address.");
-      return;
-    }
-
-    if (subject.trim() === "") {
-      alert("Please enter a subject.");
-      return;
-    }
-
-    if (message.trim() === "") {
-      alert("Please enter a message.");
-      return;
-    }
-
-    // Form submission logic goes here
-    // You can submit the form using AJAX or any other method
-    // For simplicity, I'm just logging the form data to the console
-    console.log("Email:", email);
-    console.log("Subject:", subject);
-    console.log("Message:", message);
-
-    // Clear form fields after successful submission
-    form.reset();
+  // Function to generate thumbnail images
+  function generateThumbnails() {
+    thumbnailsContainer.innerHTML = ""; // Clear previous thumbnails
     
-    function isValidEmail(email) {
-    // Very basic email validation
-    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return regex.test(email);
-  }
-  });
-  
-    const image = [
+    const images = [
       '20230409_141047.jpg',
       '20230409_141049.jpg',
       '20230409_141051.jpg',
@@ -84,9 +48,6 @@ document.addEventListener("DOMContentLoaded", function() {
       'IMG-20230224-WA0030.jpg',
       'IMG_20231114_153059_572.jpg'
     ];
-    // Function to generate thumbnail images
-    function generateThumbnails() {
-      thumbnailsContainer.innerHTML = ""; // Clear previous thumbnails
 
     images.forEach(image => {
       const thumbnail = document.createElement("img");
@@ -101,28 +62,66 @@ document.addEventListener("DOMContentLoaded", function() {
       thumbnailsContainer.appendChild(thumbnail);
     });
   }
+
+  // Event listener for clicking on the "Gallery" link
+  galleryLink.addEventListener("click", function(event) {
+    event.preventDefault(); // Prevent default anchor behavior
+
+    // Scroll to the top of the page
+    window.scrollTo(0, 0);
+
+    // Show the gallery section
+    document.getElementById("gallery").style.display = "block";
+
+    // Generate thumbnails
+    generateThumbnails();
+  });
   
-    // Event listener for clicking on the "Gallery" link
-    galleryLink.addEventListener("click", function(event) {
-      event.preventDefault(); // Prevent default anchor behavior
+  const form = document.getElementById("contact-form");
+  form.addEventListener("submit", function(event) {
+    event.preventDefault();
+    const email = document.getElementById("email").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
 
-      // Scroll to the top of the page
-      window.scrollTo(0, 0);
+    if (!isValidEmail(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
 
-      // Show the gallery section
-      document.getElementById("gallery").style.display = "block";
+    if (subject.trim() === "") {
+      alert("Please enter a subject.");
+      return;
+    }
 
-      // Generate thumbnails
-      generateThumbnails();
-    });
+    if (message.trim() === "") {
+      alert("Please enter a message.");
+      return;
+    }
+
+    // Form submission logic goes here
+    // You can submit the form using AJAX or any other method
+    // For simplicity, I'm just logging the form data to the console
+    console.log("Email:", email);
+    console.log("Subject:", subject);
+    console.log("Message:", message);
+
+    // Clear form fields after successful submission
+    form.reset();
     
-      // Scroll to the top of the page on reload
-    scrollToTop();
+    function isValidEmail(email) {
+    // Very basic email validation
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+  }
+  });
 
-    // Load thumbnails for images and videos
-    loadThumbnails();
+  // Scroll to the top of the page on reload
+  scrollToTop();
+
+  // Load thumbnails for images and videos
+  loadThumbnails();
   
-
   function scrollToTop() {
     window.scrollTo(0, 0);
   }
