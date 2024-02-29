@@ -37,6 +37,16 @@ body {
   height: 40px; /* Define the height of the icons */
   border-radius: 50%; /* Make the icons circular */
 }
+/* Styling for the thumbnails */
+.thumbnail {
+  width: 100px; /* Adjust the width as needed */
+  height: 100px; /* Maintain aspect ratio */
+  margin: 5px; /* Add some margin between thumbnails */
+  cursor: pointer; /* Change cursor to pointer when hovering over thumbnails */
+}
+.thumbnail:hover {
+  opacity: 0.7; /* Reduce opacity when hovering over thumbnails */
+}
 #map {
   width: 100%;
   height: 400px;
@@ -71,16 +81,4 @@ body {
 }
 #contact-form button:hover {
   background-color: #005a51; /* darker sea green */
-}
-
-/* Styling for the thumbnails */
-.thumbnails {
-  width: 100px; /* Adjust the width as needed */
-  height: auto; /* Maintain aspect ratio */
-  margin: 5px; /* Add some margin between thumbnails */
-  cursor: pointer; /* Change cursor to pointer when hovering over thumbnails */
-}
-
-.thumbnails:hover {
-  opacity: 0.7; /* Reduce opacity when hovering over thumbnails */
 }

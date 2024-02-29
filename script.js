@@ -1,7 +1,8 @@
 // JavaScript code for form validation
 document.addEventListener("DOMContentLoaded", function() {
   const galleryLink = document.querySelector('.sidebar a[href="#gallery"]');
-  const thumbnailsContainer = document.querySelector(".thumbnails");
+  // const thumbnailsContainer = document.querySelector(".thumbnail");
+  const thumbnailsContainer = document.getElementById("thumbnails");
   
   // Function to generate thumbnail images
   function generateThumbnails() {
