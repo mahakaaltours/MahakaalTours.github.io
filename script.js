@@ -11,7 +11,39 @@ document.addEventListener("DOMContentLoaded", function() {
     const images = [
       '20230823_143831.jpg',
       '20231016_075917.jpg',
-      '20231016_090933.jpg'
+      '20231016_090933.jpg',
+      '20230409_161010.jpg',
+      '20230409_161129.jpg',
+      '20230409_161206.jpg',
+      '20230726_202728.jpg',
+      '20230726_202850.jpg',
+      '20230823_143720.jpg',
+      '20230823_143842.jpg',
+      '20230823_143843.jpg',
+      '20230823_145116.jpg',
+      '20230823_145118.jpg',
+      '20231015_130324.jpg',
+      '20231015_130329.jpg',
+      '20231016_074846.jpg',
+      '20231016_074849.jpg',
+      '20231016_075920.jpg',
+      '20231016_080106.jpg',
+      '20231016_085620.jpg',
+      '20231016_090937.jpg',
+      '20231016_091133.jpg',
+      '20231016_091143.jpg',
+      '20231016_091241.jpg',
+      '20231016_091316.jpg',
+      '20231016_091327.jpg',
+      '20231016_091410.jpg',
+      'IMG-20221006-WA0004.jpg',
+      'IMG-20221006-WA0006.jpg',
+      'IMG-20221006-WA0008.jpg',
+      'IMG-20221006-WA0009.jpg',
+      'IMG-20221030-WA0000.jpg',
+      'IMG-20230224-WA0025.jpg',
+      'IMG-20230224-WA0030.jpg',
+      'IMG_20231114_153059_572.jpg'
     ];
     
     images.forEach(image => {
@@ -102,7 +134,39 @@ document.addEventListener("DOMContentLoaded", function() {
     const files = [
       '20230823_143831.jpg',
       '20231016_075917.jpg',
-      '20231016_090933.jpg'
+      '20231016_090933.jpg',
+      '20230409_161010.jpg',
+      '20230409_161129.jpg',
+      '20230409_161206.jpg',
+      '20230726_202728.jpg',
+      '20230726_202850.jpg',
+      '20230823_143720.jpg',
+      '20230823_143842.jpg',
+      '20230823_143843.jpg',
+      '20230823_145116.jpg',
+      '20230823_145118.jpg',
+      '20231015_130324.jpg',
+      '20231015_130329.jpg',
+      '20231016_074846.jpg',
+      '20231016_074849.jpg',
+      '20231016_075920.jpg',
+      '20231016_080106.jpg',
+      '20231016_085620.jpg',
+      '20231016_090937.jpg',
+      '20231016_091133.jpg',
+      '20231016_091143.jpg',
+      '20231016_091241.jpg',
+      '20231016_091316.jpg',
+      '20231016_091327.jpg',
+      '20231016_091410.jpg',
+      'IMG-20221006-WA0004.jpg',
+      'IMG-20221006-WA0006.jpg',
+      'IMG-20221006-WA0008.jpg',
+      'IMG-20221006-WA0009.jpg',
+      'IMG-20221030-WA0000.jpg',
+      'IMG-20230224-WA0025.jpg',
+      'IMG-20230224-WA0030.jpg',
+      'IMG_20231114_153059_572.jpg'
     ];
     
     // Sort files by name (latest to oldest)
@@ -156,5 +220,21 @@ document.addEventListener("DOMContentLoaded", function() {
       window.open(file);
     }
   }
+
+// Initialize visitor count
+let visitorCount = 0;
+
+// Function to update and display visitor count
+function updateVisitorCount() {
+  // Increment visitor count
+  visitorCount++;
+  
+  // Update count element
+  const countElement = document.getElementById("count");
+  countElement.textContent = visitorCount;
+}
+
+// Call the function to update the visitor count
+updateVisitorCount();
   
 });

@@ -82,3 +82,13 @@ body {
 #contact-form button:hover {
   background-color: #005a51; /* darker sea green */
 }
+#visitor-count {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
