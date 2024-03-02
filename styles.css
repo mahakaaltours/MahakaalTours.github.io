@@ -47,6 +47,15 @@ body {
 .thumbnail:hover {
   opacity: 0.7; /* Reduce opacity when hovering over thumbnails */
 }
+.iframe-container {
+	display: flex; /* Use flexbox */
+}
+
+/* Adjust div styles as needed */
+.iframe-container div {
+	width: 50%; /* Each div takes 50% of the container width */
+	box-sizing: border-box; /* Include padding and border in the width calculation */
+}
 #map {
   width: 100%;
   height: 400px;
@@ -92,3 +101,4 @@ body {
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
+
