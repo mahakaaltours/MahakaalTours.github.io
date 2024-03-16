@@ -1,9 +1,44 @@
+// function w3_open() {
+//   console.log("Function open called");
+//   document.getElementById("leftPanel").style.display = "block";
+// }
+
+// function w3_close() {
+//   console.log("Function close called");
+//   document.getElementById("leftPanel").style.display = "none";
+// }
+// Define a flag variable to keep track of the panel state
+let isPanelOpen = false;
+
+function togglePanel() {
+    console.log("Function called");
+    var panel = document.getElementById("leftPanel");
+    console.log(isPanelOpen);
+    if (isPanelOpen) {
+        // panel.classList.add("closed"); // Close the panel
+        console.log("closed");
+        document.getElementById("leftPanel").style.display = "none";
+    } else {
+        console.log("open");
+        // panel.classList.remove("closed"); // Open the panel
+        document.getElementById("leftPanel").style.display = "block";
+    } 
+    // Update the flag variable to reflect the new panel state
+    isPanelOpen = !isPanelOpen;
+}
+
+
 // JavaScript code for form validation
 document.addEventListener("DOMContentLoaded", function() {
   const galleryLink = document.querySelector('.sidebar a[href="#gallery"]');
   // const thumbnailsContainer = document.querySelector(".thumbnail");
   const thumbnailsContainer = document.getElementById("thumbnails");
   
+  // JavaScript code to scroll to the top of the page on refresh (F5)
+  window.addEventListener('beforeunload', function() {
+    window.scrollTo(0, 0); // Scroll to the top of the page
+  });
+
   // Function to generate thumbnail images
   function generateThumbnails() {
     thumbnailsContainer.innerHTML = ""; // Clear previous thumbnails

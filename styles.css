@@ -8,28 +8,52 @@ body {
 .container {
   display: flex;
 }
-.sidebar {
-  width: 200px;
+.left-panel {
+  position: flex;
+  display: none;
   background-color: #d2f4e8; /* light sea green */
+  /* background-color: #333; */
   padding: 20px;
-  height: 100vh;
+  left: 180; /* Initially hidden */
+  width: 200px;
+  /* height: 100%; */
+  top: 0;
+  /* height: 100vh; */
+  transition: left 0.9s ease;
+}
+.left-panel.closed {
+  left: -200px; /* Move off-screen when closed */
+}
+/* Styles for the navigation button */
+.navbar {
+    background-color: #333;
+    padding: 10px;
+}
+.collapse-btn {
+    background: none;
+    border: none;
+    /* color: rgb(0, 255, 55); */
+    color: orange;
+    font-size: 20px;
+    cursor: pointer;
 }
 .main-content {
   flex: 1;
   padding: 20px;
 }
-.sidebar ul {
+.left-panel ul {
   list-style-type: none;
   padding: 0;
 }
-.sidebar li {
+.left-panel li {
   margin-bottom: 10px;
 }
-.sidebar a {
+.left-panel a {
   text-decoration: none;
+  /* color: #27e2f0; /*dark sea green */
   color: #00796b; /* dark sea green */
 }
-.sidebar a:hover {
+.left-panel a:hover {
   color: #007bff; /* dark blue */
 }
 .social-links img {
