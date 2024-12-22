@@ -1,2 +1,2 @@
 # MahakaalTours.github.io
-Tours &amp; Travel - Renting Services
+Tours &amp; Travel - Bike/Scooty & Car Renting Services
