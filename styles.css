@@ -378,7 +378,7 @@ body {
 }
 
 .d_card:nth-child(4):before {
-  background-image: url(./media/peak.jpg);
+  background-image: url(./media/Peak.jpg);
   background-size: cover;
   background-position: center;
   overflow: clip;
