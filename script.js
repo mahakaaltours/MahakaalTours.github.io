@@ -76,7 +76,12 @@ window.addEventListener('scroll', () => {
   });
 });
 
-// Trigger scroll on page load to set correct initial active link nav
+// Trigger dynamic updates on load
 window.addEventListener('load', () => {
+  // Set dynamic copyright year
+  const yearElement = document.getElementById('current-year');
+  if (yearElement) yearElement.textContent = new Date().getFullYear();
+
+  // Set correct initial active link nav
   window.dispatchEvent(new Event('scroll'));
 });
