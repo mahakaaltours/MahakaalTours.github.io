@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - Mahakaal 🔱 Tours & Bike Rental</title>
+    <link rel="icon" href="fav.png" type="image/png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Custom scrollbar for gallery */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #111827;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #374151;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+
+        .lightbox-enter {
+            opacity: 0;
+            transform: scale(0.9);
+        }
+
+        .lightbox-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 300ms, transform 300ms;
+        }
+
+        .lightbox-exit {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .lightbox-exit-active {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 300ms, transform 300ms;
+        }
+    </style>
+</head>
+
+<body
+    class="font-sans antialiased bg-gray-900 text-gray-100 overflow-x-hidden selection:bg-brand-500 selection:text-white min-h-screen flex flex-col">
+
+    <!-- Navigation -->
+    <nav
+        class="fixed w-full z-40 transition-all duration-300 backdrop-blur-md bg-gray-900/60 border-b border-gray-700/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <div class="flex-shrink-0">
+                    <a href="index.html" class="flex items-center group">
+                        <div
+                            class="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center mr-3 border border-brand-500/20 group-hover:bg-brand-500/20 transition-colors">
+                            <i class="fas fa-arrow-left text-brand-400"></i>
+                        </div>
+                        <h1
+                            class="text-xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-teal-300 group-hover:from-brand-300 group-hover:to-teal-200 transition-all">
+                            Back to Home
+                        </h1>
+                    </a>
+                </div>
+                <div class="text-gray-300 font-display font-semibold text-lg hidden sm:block">
+                    Our Gallery
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Gallery Header -->
+    <main class="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10">
+        <div class="mb-12 text-center">
+            <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-4 animate-fade-in-up">Capturing
+                Memories</h2>
+            <div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mb-6"></div>
+            <p class="text-gray-400 max-w-2xl mx-auto text-lg animate-fade-in-up delay-200">A glimpse into the stunning
+                landscapes, majestic views, and unforgettable journeys.</p>
+        </div>
+
+        <!-- Gallery Grid -->
+        <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4" id="galleryGrid">
+            <!-- Images will be dynamically injected here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 bg-gray-950 text-center border-t border-gray-800/50 mt-auto relative z-10">
+        <p class="text-gray-500 font-medium tracking-wide text-sm">&copy; 2024 Mahakaal Tours & Bike Rental. All rights
+            reserved.</p>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox"
+        class="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300">
+
+        <!-- Top actions -->
+        <div
+            class="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-gradient-to-b from-black/80 to-transparent">
+            <div class="text-gray-400 font-medium tracking-wider text-sm px-4" id="imageCounter">1 / 10</div>
+            <button id="closeBtn"
+                class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all backdrop-blur-md">
+                <i class="fas fa-times text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Main Image Container -->
+        <div class="relative w-full h-full flex items-center justify-center p-4 sm:p-12" id="lightboxContent">
+            <!-- Prev Button -->
+            <button id="prevBtn"
+                class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 hover:bg-brand-500/80 hover:scale-110 flex items-center justify-center text-white transition-all backdrop-blur-md z-50">
+                <i class="fas fa-chevron-left text-xl sm:text-2xl"></i>
+            </button>
+
+            <!-- The Image -->
+            <img id="lightboxImg" src="" alt="Gallery Image"
+                class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
+
+            <!-- Next Button -->
+            <button id="nextBtn"
+                class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 hover:bg-brand-500/80 hover:scale-110 flex items-center justify-center text-white transition-all backdrop-blur-md z-50">
+                <i class="fas fa-chevron-right text-xl sm:text-2xl"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // List of images from the media folder
+        const images = [
+            "20230409_141047.jpg", "20230409_141049.jpg", "20230409_141051.jpg", "20230409_144038.jpg",
+            "20230409_154456.jpg", "20230409_161010.jpg", "20230409_161129.jpg", "20230409_161206.jpg",
+            "20230726_202728.jpg", "20230726_202850.jpg", "20230823_143720.jpg", "20230823_143831.jpg",
+            "20230823_143842.jpg", "20230823_143843.jpg", "20230823_145116.jpg", "20230823_145118.jpg",
+            "20231015_130324.jpg", "20231015_130329.jpg", "20231016_074846.jpg", "20231016_074849.jpg",
+            "20231016_075917.jpg", "20231016_075920.jpg", "20231016_080106.jpg", "20231016_085620.jpg",
+            "20231016_090933.jpg", "20231016_090937.jpg", "20231016_091133.jpg", "20231016_091143.jpg",
+            "20231016_091241.jpg", "20231016_091316.jpg", "20231016_091327.jpg", "20231016_091410.jpg",
+            "Birthi_Falls.jpg", "IMG-20221006-WA0004.jpg", "IMG-20221006-WA0006.jpg", "IMG-20221006-WA0008.jpg",
+            "IMG-20221006-WA0009.jpg", "IMG-20221030-WA0000.jpg", "IMG-20230224-WA0025.jpg", "IMG-20230224-WA0030.jpg",
+            "IMG_20231114_153059_572.jpg", "Peak.jpg", "Scooty.jpg", "Shiva.jpg"
+        ];
+
+        const galleryGrid = document.getElementById('galleryGrid');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const closeBtn = document.getElementById('closeBtn');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const imageCounter = document.getElementById('imageCounter');
+
+        let currentIndex = 0;
+
+        // Inject images into grid
+        images.forEach((img, index) => {
+            const div = document.createElement('div');
+            div.className = 'break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl bg-gray-800 border border-gray-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300';
+
+            const imageEl = document.createElement('img');
+            imageEl.src = `media/${img}`;
+            imageEl.alt = `Gallery Image ${index + 1}`;
+            imageEl.className = 'w-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out';
+            imageEl.loading = "lazy";
+
+            const overlay = document.createElement('div');
+            overlay.className = 'absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
+            overlay.innerHTML = '<div class="w-12 h-12 rounded-full bg-brand-500/80 text-white flex items-center justify-center backdrop-blur-sm transform scale-50 group-hover:scale-100 transition-transform duration-300"><i class="fas fa-expand text-xl"></i></div>';
+
+            div.appendChild(imageEl);
+            div.appendChild(overlay);
+
+            div.addEventListener('click', () => openLightbox(index));
+
+            galleryGrid.appendChild(div);
+        });
+
+        function openLightbox(index) {
+            currentIndex = index;
+            updateLightboxImage();
+            lightbox.classList.remove('hidden');
+            lightbox.classList.add('flex');
+            // Small delay for fade in effect
+            setTimeout(() => {
+                lightbox.classList.remove('opacity-0');
+                lightbox.classList.add('opacity-100');
+                lightboxImg.classList.remove('scale-95');
+                lightboxImg.classList.add('scale-100');
+            }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove('opacity-100');
+            lightbox.classList.add('opacity-0');
+            lightboxImg.classList.remove('scale-100');
+            lightboxImg.classList.add('scale-95');
+
+            setTimeout(() => {
+                lightbox.classList.add('hidden');
+                lightbox.classList.remove('flex');
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function updateLightboxImage() {
+            lightboxImg.style.opacity = '0';
+            setTimeout(() => {
+                lightboxImg.src = `media/${images[currentIndex]}`;
+                imageCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+                lightboxImg.style.opacity = '1';
+            }, 150);
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateLightboxImage();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateLightboxImage();
+        }
+
+        // Event Listeners
+        closeBtn.addEventListener('click', closeLightbox);
+        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
+        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox || e.target.id === 'lightboxContent') {
+                closeLightbox();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (lightbox.classList.contains('hidden')) return;
+
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') nextImage();
+            if (e.key === 'ArrowLeft') prevImage();
+        });
+    </script>
+</body>
+
+</html>
