@@ -1,6 +1,6 @@
-# Mahakaal Tours & Bike Rental
+# Mahakaal Tours & Bike Rentals
 
-Welcome to the official GitHub Pages site for **Mahakaal Tours & Bike Rental**. This website serves as a digital showcase for our travel and vehicle rental services, featuring a stunning gallery of our past journeys and the beautiful locations we serve.
+Welcome to the official GitHub Pages site for **Mahakaal Tours & Bike Rentals**. This website serves as a digital showcase for our travel and vehicle rental services, featuring a stunning gallery of our past journeys and the beautiful locations we serve.
 
 ## 🚀 Features
 
