@@ -90,7 +90,18 @@
 </head>
 
 <body
-    class="font-sans antialiased bg-gray-900 text-gray-100 overflow-x-hidden selection:bg-brand-500 selection:text-white min-h-screen flex flex-col">
+    class="font-sans antialiased text-gray-100 overflow-x-hidden selection:bg-brand-500 selection:text-white min-h-screen flex flex-col bg-transparent">
+
+    <!-- Video Background -->
+    <div class="fixed inset-0 z-[-1]">
+        <video id="bgVideo" autoplay loop muted playsinline class="w-full h-full object-cover opacity-70">
+            <source src="media/ed18fc17-be92-4858-a4d0-9973872c4649.mp4" type="video/mp4">
+        </video>
+        <!-- Dark gradient overlay to ensure gallery images pop -->
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/75 to-gray-900/95 mix-blend-multiply">
+        </div>
+    </div>
 
     <!-- Navigation -->
     <nav
@@ -175,11 +186,11 @@
     <script>
         // List of images from the media folder
         const images = [
-            "20230409_141047.jpg", "20230409_141049.jpg", "20230409_141051.jpg", "20230409_144038.jpg",
+            "20230409_141049.jpg", "20230409_144038.jpg",
             "20230409_154456.jpg", "20230409_161010.jpg", "20230409_161129.jpg", "20230409_161206.jpg",
             "20230726_202728.jpg", "20230726_202850.jpg", "20230823_143720.jpg", "20230823_143831.jpg",
-            "20230823_143842.jpg", "20230823_143843.jpg", "20230823_145116.jpg", "20230823_145118.jpg",
-            "20231015_130324.jpg", "20231015_130329.jpg", "20231016_074846.jpg", "20231016_074849.jpg",
+            "20230823_143842.jpg", "20230823_145118.jpg",
+            "20231015_130324.jpg", "20231016_074849.jpg",
             "20231016_075917.jpg", "20231016_075920.jpg", "20231016_080106.jpg", "20231016_085620.jpg",
             "20231016_090933.jpg", "20231016_090937.jpg", "20231016_091133.jpg", "20231016_091143.jpg",
             "20231016_091241.jpg", "20231016_091316.jpg", "20231016_091327.jpg", "20231016_091410.jpg",
@@ -267,6 +278,10 @@
             currentIndex = (currentIndex - 1 + images.length) % images.length;
             updateLightboxImage();
         }
+
+        // Set Background Video Playback Speed
+        const bgVideo = document.getElementById('bgVideo');
+        if (bgVideo) bgVideo.playbackRate = 0.5; // (0.5 means half speed, 1.0 is normal, 2.0 is double)
 
         // Event Listeners
         closeBtn.addEventListener('click', closeLightbox);
