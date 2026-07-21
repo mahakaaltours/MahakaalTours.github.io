@@ -262,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // 1. Target the Total Reviews counter
       const totalCounter = document.querySelector('[data-id="total-reviews-counter"]');
       if (totalCounter && rawTotal > 0) {
-        const roundedTotal = Math.floor(rawTotal / 25) * 25;
+        const roundedTotal = Math.floor(rawTotal / 10) * 10;
         totalCounter.setAttribute('data-target', roundedTotal);
         totalCounter.textContent = "0";
       }
@@ -274,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
         fiveStarPercentage = Math.max(0.1, Math.min(0.98, fiveStarPercentage));
 
         const estimatedFiveStars = Math.round(rawTotal * fiveStarPercentage);
-        const roundedStars = Math.floor(estimatedFiveStars / 25) * 25;
+        const roundedStars = Math.floor(estimatedFiveStars / 10) * 10;
 
         starCounter.setAttribute('data-target', roundedStars);
         starCounter.textContent = "0";
