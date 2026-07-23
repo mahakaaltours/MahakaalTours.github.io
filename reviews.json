@@ -1,7 +1,7 @@
 {
-    "total_reviews": 769,
+    "total_reviews": 776,
     "rating": 5,
-    "updated_at": "2026-07-20T17:05:53.361Z",
+    "updated_at": "2026-07-23T03:00:26.916Z",
     "reviews": [
         {
             "user": {
@@ -73,7 +73,7 @@
             },
             "rating": 5,
             "snippet": "Best experience and best customer support with good velue for money",
-            "date": "3 weeks ago"
+            "date": "4 weeks ago"
         }
     ]
 }

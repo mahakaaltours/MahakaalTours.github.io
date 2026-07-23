@@ -248,18 +248,72 @@ document.addEventListener("DOMContentLoaded", () => {
   }, 3500);
 });
 
+
+// document.addEventListener("DOMContentLoaded", () => {
+//   // Use a flag or check to ensure initCounters doesn't run globally before the data arrives
+//   fetch('reviews.json')
+//     .then(response => {
+//       if (!response.ok) throw new Error('Network response was not ok');
+//       return response.json();
+//     })
+//     .then(data => {
+//       const rawTotal = data.total_reviews || 0;
+//       const rawRating = data.rating || 0.0;
+
+//       // 1. Target the Total Reviews counter
+//       const totalCounter = document.querySelector('[data-id="total-reviews-counter"]');
+//       if (totalCounter && rawTotal > 0) {
+//         const roundedTotal = Math.floor(rawTotal / 10) * 10;
+//         totalCounter.setAttribute('data-target', roundedTotal);
+//         totalCounter.textContent = "0";
+//       }
+
+//       // 2. Target the 5-Star Ratings counter
+//       const starCounter = document.querySelector('[data-id="five-star-counter"]');
+//       if (starCounter && rawTotal > 0) {
+//         let fiveStarPercentage = (rawRating - 3.0) / (5.0 - 3.0);
+//         fiveStarPercentage = Math.max(0.1, Math.min(0.98, fiveStarPercentage));
+
+//         const estimatedFiveStars = Math.round(rawTotal * fiveStarPercentage);
+//         const roundedStars = Math.floor(estimatedFiveStars / 10) * 10;
+
+//         starCounter.setAttribute('data-target', roundedStars);
+//         starCounter.textContent = "0";
+//       }
+
+//       // 3. FIX: Target by data-id attribute so the selector remains structurally permanent
+//       const averageCounter = document.querySelector('[data-id="average-rating-counter"]');
+//       if (averageCounter && rawRating > 0) {
+//         const liveRating = parseFloat(rawRating).toFixed(1);
+//         averageCounter.setAttribute('data-target', liveRating);
+//         averageCounter.textContent = "0.0";
+//       }
+
+//       // Safe trigger execution now that DOM tokens are mutated
+//       if (typeof initCounters === 'function') {
+//         initCounters();
+//       }
+//     })
+//     .catch(err => {
+//       console.error("Graceful fallback execution triggered:", err);
+//       if (typeof initCounters === 'function') {
+//         initCounters();
+//       }
+//     });
+// });
+
+
 document.addEventListener("DOMContentLoaded", () => {
-  // Use a flag or check to ensure initCounters doesn't run globally before the data arrives
   fetch('reviews.json')
     .then(response => {
       if (!response.ok) throw new Error('Network response was not ok');
       return response.json();
     })
     .then(data => {
-      const rawTotal = data.total_reviews || 0;
-      const rawRating = data.rating || 0.0;
+      const rawTotal = parseInt(data.total_reviews, 10) || 0;
+      const rawRating = parseFloat(data.rating) || 0.0;
 
-      // 1. Target the Total Reviews counter
+      // 1. Target Total Reviews counter -> Round down to nearest 10
       const totalCounter = document.querySelector('[data-id="total-reviews-counter"]');
       if (totalCounter && rawTotal > 0) {
         const roundedTotal = Math.floor(rawTotal / 10) * 10;
@@ -267,11 +321,12 @@ document.addEventListener("DOMContentLoaded", () => {
         totalCounter.textContent = "0";
       }
 
-      // 2. Target the 5-Star Ratings counter
+      // 2. Target 5-Star Ratings counter -> Round down to nearest 10
       const starCounter = document.querySelector('[data-id="five-star-counter"]');
       if (starCounter && rawTotal > 0) {
+        // Calculate estimated 5-star count based on rating ratio
         let fiveStarPercentage = (rawRating - 3.0) / (5.0 - 3.0);
-        fiveStarPercentage = Math.max(0.1, Math.min(0.98, fiveStarPercentage));
+        fiveStarPercentage = Math.max(0.1, Math.min(1.0, fiveStarPercentage));
 
         const estimatedFiveStars = Math.round(rawTotal * fiveStarPercentage);
         const roundedStars = Math.floor(estimatedFiveStars / 10) * 10;
@@ -280,26 +335,25 @@ document.addEventListener("DOMContentLoaded", () => {
         starCounter.textContent = "0";
       }
 
-      // 3. FIX: Target by data-id attribute so the selector remains structurally permanent
+      // 3. Target Average Rating counter (Keep exact 1 decimal place, e.g. 5.0)
       const averageCounter = document.querySelector('[data-id="average-rating-counter"]');
       if (averageCounter && rawRating > 0) {
-        const liveRating = parseFloat(rawRating).toFixed(1);
+        const liveRating = rawRating.toFixed(1);
         averageCounter.setAttribute('data-target', liveRating);
         averageCounter.textContent = "0.0";
       }
-
-      // Safe trigger execution now that DOM tokens are mutated
-      if (typeof initCounters === 'function') {
-        initCounters();
-      }
     })
     .catch(err => {
-      console.error("Graceful fallback execution triggered:", err);
+      console.error("Reviews JSON failed to load, falling back to static DOM values:", err);
+    })
+    .finally(() => {
+      // Always initialize counters AFTER the DOM targets have been updated (or after failure)
       if (typeof initCounters === 'function') {
         initCounters();
       }
     });
 });
+
 
 // document.addEventListener('DOMContentLoaded', () => {
 //   // 1. Target your exact grid layouts using the data-ids we added
