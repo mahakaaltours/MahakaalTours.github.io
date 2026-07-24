@@ -85,13 +85,17 @@
 				</div>
 				<!-- Desktop Nav -->
 				<div class="hidden md:block">
-					<div class="ml-10 flex items-baseline space-x-8">
+					<div class="ml-10 flex items-baseline space-x-5">
 						<a href="#"
 							class="nav-link text-brand-400 font-semibold px-3 py-2 rounded-md transition-colors hover:text-brand-300">Home</a>
 						<a href="#destinations"
 							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Destinations</a>
 						<a href="#services"
 							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Services</a>
+						<a href="#Voices"
+							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Voices</a>
+						<!-- <a href="#weather"
+							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Weather</a> -->
 						<a href="gallery.html"
 							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Gallery</a>
 						<a href="https://search.google.com/local/reviews?placeid=ChIJJYix7AGboDkRlVTL1_fHr00"
@@ -118,6 +122,10 @@
 					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Destinations</a>
 				<a href="#services" onclick="toggleMobileNav()"
 					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Services</a>
+				<a href="#Voices" onclick="toggleMobileNav()"
+					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Voices</a>
+				<!-- <a href="#weather" onclick="toggleMobileNav()"
+					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Weather</a> -->
 				<a href="gallery.html" class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Gallery</a>
 				<a href="https://search.google.com/local/reviews?placeid=ChIJJYix7AGboDkRlVTL1_fHr00" target="_blank"
 					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Reviews</a>
@@ -324,8 +332,35 @@
 		</div>
 	</section>
 
+	<!-- Weather Forecast Section -->
+	<section id="weather" class="py-20 relative z-10 bg-gray-950/80 backdrop-blur-xl border-t border-gray-800/80">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<div class="mb-12 text-center">
+				<h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">Local Weather Forecast</h2>
+				<p class="text-gray-400 text-lg max-w-2xl mx-auto">Check real-time weather conditions across popular
+					destinations to plan your ride seamlessly.</p>
+				<div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mt-4"></div>
+			</div>
+
+			<!-- Tomorrow.io Weather Widget Glass Container -->
+			<div
+				class="max-w-4xl mx-auto p-4 md:p-6 rounded-2xl bg-gray-900/60 border border-gray-800 backdrop-blur-md shadow-2xl">
+				<div class="tomorrow" data-location-id="132058,133123,057998,2550047,057643,133716" data-language="EN"
+					data-unit-system="METRIC" data-skin="light" data-widget-type="current6"
+					style="padding-bottom:22px;position:relative;">
+					<a href="https://weather.tomorrow.io/" rel="nofollow noopener noreferrer" target="_blank"
+						style="position: absolute; bottom: 0; transform: translateX(-50%); left: 50%;">
+						<img alt="Powered by Tomorrow.io"
+							src="https://weather-website-client.tomorrow.io/img/powered-by.svg" width="200"
+							height="15" />
+					</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<!-- Reviews Section -->
-	<section id="reviews" class="py-24 relative z-10 bg-gray-900 border-t border-gray-800/80 overflow-hidden">
+	<section id="Voices" class="py-24 relative z-10 bg-gray-900 border-t border-gray-800/80 overflow-hidden">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
 			<div class="text-center">
 				<h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">Voices of Trust: What Our
@@ -338,7 +373,6 @@
 		<div class="w-full mt-12 mb-20 overflow-hidden">
 			<!-- Title stays aligned to content container -->
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-				<!-- <h2 class="text-xl md:text-2xl font-bold text-white tracking-tight">Recent Customer Experiences</h2> -->
 				<p class="text-xs text-gray-400 mt-1">Live updates pulled from our verified business profile</p>
 			</div>
 
@@ -360,7 +394,6 @@
 		</div>
 		<div
 			class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none">
-		</div>
 		</div>
 
 		<!-- Counter Cards Grid Component -->
@@ -459,9 +492,6 @@
 							<a href="#"
 								class="w-12 h-12 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-400 hover:bg-[#1877F2] hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border border-gray-700"><i
 									class="fab fa-facebook-f text-lg"></i></a>
-							<!-- <a href="https://twitter.com/Mahakaaltours"
-								class="w-12 h-12 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-400 hover:bg-[#1DA1F2] hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border border-gray-700"><i
-									class="fab fa-twitter text-lg"></i></a> -->
 							<a href="https://x.com/Mahakaaltours" target="_blank" rel="noopener noreferrer"
 								class="w-12 h-12 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border border-gray-700 hover:border-gray-500">
 								<i class="fa-brands fa-x-twitter text-lg"><svg xmlns="http://www.w3.org/2000/svg"
@@ -497,56 +527,6 @@
 		<p class="text-gray-500 font-medium tracking-wide text-sm">&copy; <span id="current-year">2026</span> Mahakaal
 			Tours & Bike Rentals. All rights reserved.</p>
 	</footer>
-
-	<!-- Scroll-Activated & Collapsible Traffic Analytics Widget Component -->
-	<!-- <div id="analytics-panel"
-		class="fixed bottom-6 right-6 z-[9999] w-72 rounded-xl bg-gray-950/85 border border-gray-800/80 backdrop-blur-xl shadow-2xl overflow-hidden transition-all duration-300 opacity-0 translate-y-10 pointer-events-none hidden sm:block"> -->
-	<!-- Clickable Collapsed Bar Header Header -->
-	<!-- <div onclick="toggleAnalyticsBody()"
-			class="flex items-center justify-between p-3.5 bg-gray-900/60 hover:bg-gray-900/90 cursor-pointer transition-colors select-none">
-			<div class="flex items-center gap-2">
-				<span class="relative flex h-2 w-2">
-					<span
-						class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-					<span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-				</span>
-				<span class="text-xs font-semibold uppercase tracking-wider text-gray-300">Live Analytics</span>
-			</div>
-			<div class="flex items-center gap-3">
-				<i id="analytics-arrow"
-					class="fas fa-chevron-up text-xs text-gray-500 transition-transform duration-300"></i>
-				<button onclick="event.stopPropagation(); document.getElementById('analytics-panel').remove()"
-					class="text-gray-500 hover:text-gray-300 transition-colors">
-					<i class="fas fa-times text-xs"></i>
-				</button>
-			</div>
-		</div> -->
-
-	<!-- Expandable Metric Rows Wrapper Container -->
-	<!-- <div id="analytics-body" class="max-h-0 opacity-0 transition-all duration-300 ease-in-out px-4 bg-gray-950/40">
-			<div class="grid grid-cols-2 gap-3 py-3 border-t border-gray-900">
-				<div class="bg-gray-900/50 p-2 rounded-lg border border-gray-800/40">
-					<p class="text-[10px] uppercase font-bold text-gray-500 tracking-wide">Active Now</p>
-					<p id="stat-active" class="text-lg font-display font-bold text-emerald-400">3</p>
-				</div>
-				<div class="bg-gray-900/50 p-2 rounded-lg border border-gray-800/40">
-					<p class="text-[10px] uppercase font-bold text-gray-500 tracking-wide">Page Views</p>
-					<p id="stat-views" class="text-lg font-display font-bold text-white">48</p>
-				</div>
-				<div class="bg-gray-900/50 p-2 rounded-lg border border-gray-800/40">
-					<p class="text-[10px] uppercase font-bold text-gray-500 tracking-wide">Bounce Rate</p>
-					<p class="text-lg font-display font-bold text-gray-300">24.6%</p>
-				</div>
-				<div class="bg-gray-900/50 p-2 rounded-lg border border-gray-800/40">
-					<p class="text-[10px] uppercase font-bold text-gray-500 tracking-wide">Avg Session</p>
-					<p class="text-lg font-display font-bold text-teal-400">4m 15s</p>
-				</div>
-			</div>
-			<div class="pb-3 text-[9px] text-gray-600 text-right italic">
-				Simulated metrics active
-			</div>
-		</div> -->
-	<!-- </div> -->
 
 	<!-- OpenWidget Script -->
 	<script>
