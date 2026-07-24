@@ -78,8 +78,12 @@
 				<div class="flex flex-shrink-0 items-center gap-3 cursor-pointer">
 					<img src="media/main_icon.png" alt="Mahakaal Tours & Bike Rentals"
 						class="h-12 w-auto object-contain drop-shadow-md">
-					<h1
+					<!-- <h1
 						class="text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-teal-300">
+						Mahakaal Tours & Bike Rentals
+					</h1> -->
+					<h1
+						class="text-lg sm:text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-teal-300 truncate">
 						Mahakaal Tours & Bike Rentals
 					</h1>
 				</div>
@@ -109,6 +113,15 @@
 				<div class="md:hidden flex items-center">
 					<button onclick="toggleMobileNav()" class="text-gray-300 hover:text-white focus:outline-none p-2">
 						<i class="fas fa-bars text-2xl" id="nav-icon"></i>
+						<!-- <button onclick="toggleMobileNav()"
+							class="text-gray-300 hover:text-white focus:outline-none p-2"
+							aria-label="Toggle Navigation">
+							<svg class="w-7 h-7" id="nav-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+								xmlns="http://www.w3.org/2000/svg">
+								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+									d="M4 6h16M4 12h16M4 18h16"></path>
+							</svg>
+						</button> -->
 					</button>
 				</div>
 			</div>
@@ -344,7 +357,9 @@
 
 			<!-- Tomorrow.io Weather Widget Glass Container -->
 			<div
-				class="max-w-4xl mx-auto p-4 md:p-6 rounded-2xl bg-gray-900/60 border border-gray-800 backdrop-blur-md shadow-2xl">
+				class="max-w-4xl mx-auto p-4 md:p-6 rounded-2xl bg-gray-900/60 border border-gray-800 backdrop-blur-md shadow-2xl relative">
+
+				<!-- Weather Widget -->
 				<div class="tomorrow" data-location-id="132058,133123,057998,2550047,057643,133716" data-language="EN"
 					data-unit-system="METRIC" data-skin="light" data-widget-type="current6"
 					style="padding-bottom:22px;position:relative;">
@@ -355,6 +370,43 @@
 							height="15" />
 					</a>
 				</div>
+
+				<!-- Clickable Responsive Overlay Grid -->
+				<!-- Mobile/Small Screens: 2 Columns x 3 Rows | Tablet/Desktop (sm+): 3 Columns x 2 Rows -->
+				<div
+					class="absolute inset-x-4 top-4 bottom-10 md:inset-x-6 md:top-6 md:bottom-12 grid grid-cols-2 grid-rows-3 sm:grid-cols-3 sm:grid-rows-2 gap-3 z-20 pointer-events-none">
+
+					<!-- Haldwani -->
+					<a href="https://weather.tomorrow.io/IN/UT/Haldwani/132058/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Haldwani Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<!-- Nainital -->
+					<a href="https://weather.tomorrow.io/IN/UT/Naini_T%C4%81l/133123/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Nainital Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<!-- Bhowali -->
+					<a href="https://weather.tomorrow.io/IN/UT/Bhowali/057998/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Bhowali Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<!-- Kedarnath -->
+					<a href="https://weather.tomorrow.io/IN/Kedarnath/2550047/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Kedarnath Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<!-- Almora -->
+					<a href="https://weather.tomorrow.io/IN/UT/Almora/057643/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Almora Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<!-- Ranikhet -->
+					<a href="https://weather.tomorrow.io/IN/UT/R%C4%81nikhet/133716/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Ranikhet Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+				</div>
+
 			</div>
 		</div>
 	</section>
