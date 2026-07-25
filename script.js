@@ -316,3 +316,49 @@ document.addEventListener('DOMContentLoaded', () => {
   fjs.parentNode.insertBefore(js, fjs);
 })(document, 'script', 'tomorrow-sdk');
 
+// ---------------------------------------------------------------------------
+// Document Title Manager (SEO Friendly)
+// ---------------------------------------------------------------------------
+const defaultBrandTitle = "Mahakaal 🔱 Tours & Bike Rentals";
+
+// Function to update document title
+function updatePageTitle(sectionName) {
+  if (!sectionName || sectionName.toLowerCase() === 'home' || sectionName.toLowerCase() === 'hero') {
+    document.title = defaultBrandTitle;
+  } else {
+    document.title = `${sectionName} | ${defaultBrandTitle}`;
+  }
+}
+
+// Handle dynamic title update on Scroll
+const sections = document.querySelectorAll('section[id]');
+const observerOptions = {
+  root: null,
+  rootMargin: '-20% 0px -70% 0px', // Triggers as sections enter view
+  threshold: 0
+};
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const sectionId = entry.target.getAttribute('id').toLowerCase();
+
+      if (sectionId === 'home' || sectionId === 'hero') {
+        updatePageTitle('Home');
+      } else {
+        // Capitalize first letter (e.g., 'destinations' -> 'Destinations')
+        const formattedName = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
+        updatePageTitle(formattedName);
+      }
+    }
+  });
+}, observerOptions);
+
+sections.forEach(section => sectionObserver.observe(section));
+
+// Fallback: Reset title to default if scrolled near the top of the page
+window.addEventListener('scroll', () => {
+  if (window.scrollY < 100) {
+    updatePageTitle('Home');
+  }
+});
