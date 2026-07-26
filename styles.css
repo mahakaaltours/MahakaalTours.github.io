@@ -46,3 +46,56 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+
+/* Base styles for each stacked background slide */
+.bg-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  animation: crossfadeLoop 12s infinite ease-in-out;
+}
+
+/* Stagger execution delays so only one image fades in at a time */
+.bg-slide:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.bg-slide:nth-child(2) {
+  animation-delay: 4s;
+}
+
+.bg-slide:nth-child(3) {
+  animation-delay: 8s;
+}
+
+/* Keyframe crossfade sequence over a 12-second total cycle */
+@keyframes crossfadeLoop {
+  0% {
+    opacity: 0.7;
+    /* Fully visible with desired hero opacity */
+  }
+
+  28% {
+    opacity: 0.7;
+    /* Holds visibility for ~3.3 seconds */
+  }
+
+  38% {
+    opacity: 0;
+    /* Crossfades out over ~1.2 seconds */
+  }
+
+  90% {
+    opacity: 0;
+    /* Stays hidden while other images show */
+  }
+
+  100% {
+    opacity: 0.7;
+    /* Seamlessly returns for the next cycle */
+  }
+}
