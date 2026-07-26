@@ -5,6 +5,9 @@ on:
     - cron: '5 20 * * */2' # Runs alternate day at 20:05
   workflow_dispatch: # Allows manual trigger from GitHub UI
 
+permissions:
+  contents: write
+  
 jobs:
   update-reviews:
     runs-on: ubuntu-latest
