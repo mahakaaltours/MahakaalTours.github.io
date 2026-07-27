@@ -11,6 +11,7 @@
 
 		gtag('config', 'G-1TBQ6KC7M6');
 	</script>
+	<script src="config.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Mahakaal 🔱 Tours & Bike Rentals</title>
@@ -602,13 +603,6 @@
 		; (function (n, t, c) { function i(n) { return e._h ? e._h.apply(null, n) : e._q.push(n) } var e = { _q: [], _h: null, _v: "2.0", on: function () { i(["on", c.call(arguments)]) }, once: function () { i(["once", c.call(arguments)]) }, off: function () { i(["off", c.call(arguments)]) }, get: function () { if (!e._h) throw new Error("[OpenWidget] You can't use getters before load."); return i(["get", c.call(arguments)]) }, call: function () { i(["call", c.call(arguments)]) }, init: function () { var n = t.createElement("script"); n.async = !0, n.type = "text/javascript", n.src = "https://cdn.openwidget.com/openwidget.js", t.head.appendChild(n) } }; !n.__ow.asyncInit && e.init(), n.OpenWidget = n.OpenWidget || e }(window, document, [].slice))
 	</script>
 
-	<!-- WhatsApp Widget -->
-	<script async src='https://d2mpatx37cqexb.cloudfront.net/delightchat-whatsapp-widget/embeds/embed.min.js'></script>
-	<script>
-		var wa_btnSetting = { "btnColor": "#16BE45", "ctaText": "Quick Chat on WhatsApp", "cornerRadius": 40, "marginBottom": 20, "marginLeft": 20, "marginRight": 20, "btnPosition": "left", "whatsAppNumber": "918859888845", "welcomeMessage": "☼ Welcome to Mahakaal Tour & Travel Services! ☼ Explore the breathtaking beauty of Uttarakhand with us! Let's create memories together! ", "zIndex": 999999, "btnColorScheme": "light" };
-		window.onload = () => { _waEmbed(wa_btnSetting); };
-	</script>
-
 	<!-- HelloBar -->
 	<script src="https://my.hellobar.com/d070f1f544f1a8cbff724e79db7e067c2b7a2471.js" type="text/javascript"
 		charset="utf-8" async="async"></script>
@@ -616,6 +610,17 @@
 	<!-- Custom Script -->
 	<script src="script.js"></script>
 
+	<!-- Custom Floating WhatsApp Button -->
+	<button id="wa-float-btn" type="button" aria-label="Chat on WhatsApp">
+		<div class="wa-icon-wrapper">
+			<!-- Official WhatsApp SVG Icon -->
+			<svg viewBox="0 0 32 32" class="wa-svg-icon">
+				<path fill="#FFFFFF"
+					d="M16 2a13.9 13.9 0 0 0-12 20.9L2 30l7.3-1.9A13.9 13.9 0 1 0 16 2zm8 19.8c-.3.9-1.8 1.7-2.5 1.8-.7.1-1.6.2-5.3-1.3-4.4-1.8-7.2-6.3-7.4-6.6-.2-.3-1.8-2.4-1.8-4.6 0-2.2 1.1-3.3 1.5-3.8.4-.4.9-.6 1.2-.6.3 0 .6 0 .9.1.3.1.7-.1 1.1.8.4.9 1.3 3.1 1.4 3.3.1.2.2.5 0 .8-.2.3-.3.5-.5.7-.2.2-.4.4-.2.8.5.8 1.8 2.6 3.4 3.7 1.9 1.4 3.3 1.8 3.8 2 .5.2.8.2 1.1-.1.3-.3 1.2-1.4 1.5-1.9.3-.5.7-.4 1.1-.2.4.2 2.7 1.3 3.1 1.5.5.2.8.4.9.6.1.3.1 1.2-.2 2.1z" />
+			</svg>
+		</div>
+		<span class="wa-text-label">Quick Chat on WhatsApp</span>
+	</button>
 </body>
 
 </html>

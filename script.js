@@ -362,3 +362,36 @@ window.addEventListener('scroll', () => {
     updatePageTitle('Home');
   }
 });
+
+// ---------------------------------------------------------------------------
+// WhatsApp Button Configuration
+// ---------------------------------------------------------------------------
+document.addEventListener("DOMContentLoaded", function () {
+  // Get phone number from central config file
+  const phoneNumber = SITE_CONFIG.WHATSAPP_NUMBER;
+  // console.log(phoneNumber);
+
+  // Custom query message
+  const queryMsg = "Hello! I'm interested in your tour packages. Can you please provide me with more information?";
+
+  // Construct official WhatsApp API URL
+  const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(queryMsg)}`;
+  // Clean short URL shown in browser preview on hover
+  const shortWaUrl = `https://wa.me/${phoneNumber}`;
+  // Assign link to button
+  // const waBtn = document.getElementById("wa-float-btn");
+  // if (waBtn) {
+  //   waBtn.href = waUrl;
+  // }
+  const waBtn = document.getElementById("wa-float-btn");
+  if (waBtn) {
+    waBtn.href = shortWaUrl;
+
+    // Dynamically append the full message when clicked
+    waBtn.addEventListener("click", function (e) {
+      e.preventDefault();
+      const fullWaUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(queryMsg)}`;
+      window.open(fullWaUrl, "_blank", "noopener,noreferrer");
+    });
+  }
+});
