@@ -1,7 +1,7 @@
 {
     "total_reviews": 775,
     "rating": 5,
-    "updated_at": "2026-08-02T20:59:29.285Z",
+    "updated_at": "2026-08-04T21:15:20.453Z",
     "reviews": [
         {
             "user": {
@@ -50,12 +50,21 @@
         },
         {
             "user": {
+                "name": "Jatin sharma",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocLgloAChnQIpXiHA_FYV2XM0sQ__XyTGgt913YzPaqRNskcBA=s120-c-rp-mo-br100"
+            },
+            "rating": 5,
+            "snippet": "I rented a classic 350 from kamal bhaiya and the bike was really comfortable and had no braking or other mechanical issues, the clutch was also very smooth, highly recommended 😊",
+            "date": "2 months ago"
+        },
+        {
+            "user": {
                 "name": "jai prakash",
                 "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjVNi7mtYVhLiWGxPbRJjtZU06hwtmkcc02raBih_L5LWG2Pbc0G=s120-c-rp-mo-br100"
             },
             "rating": 5,
             "snippet": "Good bike and scooty are available here book for hassle free ride self drive we got brand new bike and covered munsyari from kathgodam without any problem. Great service. Owner is also very generous. He helped us in rain . Great service overall.",
-            "date": "a month ago"
+            "date": "2 months ago"
         },
         {
             "user": {
@@ -65,15 +74,6 @@
             "rating": 5,
             "snippet": "Service is mind blowing. Price is that much reasonable no one can beat. Staff behaviour is very kind, polite & friendly in nature. And even they give you pickup and drop service for free from station to station.\nNo one market can do that much they did.",
             "date": "7 months ago"
-        },
-        {
-            "user": {
-                "name": "Aditya Jha",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocKplQqUotoMx1CiGAYD7jbaUDeOtPLg3u33H-Co5y7Dt72kjQ=s120-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "Best experience and best customer support with good velue for money",
-            "date": "a month ago"
         }
     ]
 }
