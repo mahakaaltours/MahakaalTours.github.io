@@ -1,7 +1,6 @@
 // Auto-generated & randomized gallery images array
 const images = [
   "PicsArt_01-30-12.56.05.jpg",
-  "IMG-20230224-WA0030.jpg",
   "20230726_202728.jpg",
   "20231016_090933.jpg",
   "20230823_143831.jpg",
