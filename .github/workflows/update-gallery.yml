@@ -1,0 +1,31 @@
+name: Generate Gallery Data
+
+on:
+  push:
+    paths:
+      - 'media/**' # Triggers only when changes occur inside the media folder
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write # Allows the workflow to commit changes back to your repository
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run Gallery Generator
+        run: node generate-gallery.js
+
+      - name: Commit and Push Changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "auto: update gallery-data.js with new images"
+          file_pattern: "gallery-data.js"
