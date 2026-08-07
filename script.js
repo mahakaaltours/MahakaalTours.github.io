@@ -94,10 +94,13 @@ function initThemeToggle() {
   function updateIcons(isLight) {
     [desktopIcon, mobileIcon].forEach(icon => {
       if (!icon) return;
+      // Determine size depending on whether it's mobile or desktop (or keep uniform text-sm)
+      const sizeClass = icon.id === 'theme-toggle-icon-mobile' ? 'text-sm' : 'text-base';
+
       if (isLight) {
-        icon.className = 'fas fa-moon text-base text-indigo-400';
+        icon.className = `fas fa-moon ${sizeClass} text-indigo-400`;
       } else {
-        icon.className = 'fas fa-sun text-base text-yellow-400';
+        icon.className = `fas fa-sun ${sizeClass} text-yellow-400`;
       }
     });
   }
