@@ -11,6 +11,14 @@
 
 		gtag('config', 'G-1TBQ6KC7M6');
 	</script>
+
+	<!-- Anti-Flicker Inline Script for Instant Theme Loading -->
+	<script>
+		if (localStorage.getItem('theme') === 'light') {
+			document.documentElement.classList.add('light-theme');
+		}
+	</script>
+
 	<script src="config.js"></script>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -61,49 +69,45 @@
 </head>
 
 <body
-	class="font-sans antialiased bg-gray-900 text-gray-100 overflow-x-hidden selection:bg-brand-500 selection:text-white">
+	class="font-sans antialiased theme-bg-main theme-text-main overflow-x-hidden selection:bg-brand-500 selection:text-white">
 
 	<!-- Background Image -->
 	<div class="fixed inset-0 z-[-1]">
-		<!-- <img src="media/20231016_090937.jpg" alt="Background" class="w-full h-full object-cover opacity-70"> -->
 		<!-- Background Slideshow Container -->
 		<div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none -z-10">
-			<img src="media/bg4.jpg" alt="Background 4" class="bg-slide opacity-70">
-			<img src="media/bg2.jpg" alt="Background 2" class="bg-slide opacity-0">
-			<img src="media/bg3.jpg" alt="Background 3" class="bg-slide opacity-0">
-			<img src="media/Almora_4.jpg" alt="Background 5" class="bg-slide opacity-0">
-			<img src="media/Almora_2.jpg" alt="Background 1" class="bg-slide opacity-0">
+			<!-- <img src="media/bg1.jpg" alt="Background 1" class="bg-slide opacity-90"> -->
+			<!-- <img src="media/bg4.jpg" alt="Background 4" class="bg-slide opacity-70"> -->
+			<img src="media/bg4.jpg" alt="Background 4" class="bg-slide active">
+			<img src="media/bg2.jpg" alt="Background 2" class="bg-slide">
+			<img src="media/bg3.jpg" alt="Background 3" class="bg-slide">
+			<img src="media/Almora_4.jpg" alt="Background 5" class="bg-slide">
+			<img src="media/Almora_2.jpg" alt="Background 1" class="bg-slide">
 		</div>
-		<div
-			class="absolute inset-0 bg-gradient-to-b from-gray-900/85 via-gray-900/60 to-gray-900/95 mix-blend-multiply">
+		<!-- <div class="absolute inset-0 hero-overlay mix-blend-multiply transition-colors duration-300"> -->
+		<div class="absolute inset-0 hero-overlay mix-blend-overlay transition-all duration-300">
 		</div>
 	</div>
 
 	<!-- Navigation -->
-	<nav class="fixed w-full z-50 transition-all duration-300 backdrop-blur-md bg-gray-900/40 border-b border-gray-700/50"
+	<nav class="fixed w-full z-50 transition-all duration-300 backdrop-blur-md theme-nav border-b border-gray-700/50"
 		id="navbar">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="flex items-center justify-between h-20">
 				<div class="flex flex-shrink-0 items-center gap-3 cursor-pointer">
-
-					<a href="#" onclick="updatePageTitle('Home')"
+					<a href="#home" onclick="updatePageTitle('Home')"
 						class="flex items-center gap-2 sm:gap-3 cursor-pointer min-w-0 hover:opacity-90 transition-opacity">
 						<img src="media/main_icon.png" alt="Mahakaal Tours & Bike Rentals"
-							class="h-12 w-auto object-contain drop-shadow-md">
-						<!-- <h1
-						class="text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-teal-300">
-						Mahakaal Tours & Bike Rentals
-					</h1> -->
+							class="h-12 w-auto object-contain brand-logo-img">
 						<h1
-							class="text-lg sm:text-2xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-teal-300 truncate">
+							class="text-lg sm:text-2xl font-display font-bold truncate text-emerald-800 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-brand-400 dark:to-teal-300 brand-header-title">
 							Mahakaal Tours & Bike Rentals
 						</h1>
 					</a>
 				</div>
 				<!-- Desktop Nav -->
 				<div class="hidden md:block">
-					<div class="ml-10 flex items-baseline space-x-5">
-						<a href="#"
+					<div class="ml-10 flex items-center space-x-4">
+						<a href="#home"
 							class="nav-link text-brand-400 font-semibold px-3 py-2 rounded-md transition-colors hover:text-brand-300">Home</a>
 						<a href="#destinations"
 							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Destinations</a>
@@ -111,53 +115,60 @@
 							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Services</a>
 						<a href="#Voices"
 							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Voices</a>
-						<!-- <a href="#weather"
-							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Weather</a> -->
 						<a href="gallery.html"
 							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Gallery</a>
 						<a href="https://search.google.com/local/reviews?placeid=ChIJJYix7AGboDkRlVTL1_fHr00"
 							target="_blank"
 							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Reviews</a>
 						<a href="#contact"
-							class="nav-link text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Contact
+							class="nav-link whitespace-nowrap flex-shrink-0 text-gray-300 hover:text-white px-3 py-2 rounded-md transition-colors">Contact
 							Us</a>
+
+						<!-- Desktop Theme Toggle Button -->
+						<button id="theme-toggle" type="button" aria-label="Toggle dark and light theme"
+							class="flex-shrink-0 p-2.5 rounded-full text-gray-300 hover:text-white hover:bg-gray-800/60 transition-all duration-200 flex items-center justify-center border border-gray-700/50">
+							<i class="fas fa-sun text-lg text-yellow-400" id="theme-toggle-icon"></i>
+						</button>
 					</div>
 				</div>
 				<!-- Mobile menu button -->
-				<div class="md:hidden flex items-center">
+				<div class="md:hidden flex items-center gap-2">
+					<!-- Mobile Theme Toggle Button -->
+					<button id="theme-toggle-mobile" type="button" aria-label="Toggle dark and light theme"
+						class="flex-shrink-0 p-2.5 rounded-full text-gray-300 hover:text-white hover:bg-gray-800/60 transition-all duration-200 flex items-center justify-center border border-gray-700/50">
+						<i class="fas fa-sun text-base text-yellow-400" id="theme-toggle-icon-mobile"></i>
+					</button>
+
 					<button onclick="toggleMobileNav()" class="text-gray-300 hover:text-white focus:outline-none p-2">
 						<i class="fas fa-bars text-2xl" id="nav-icon"></i>
-						<!-- <button onclick="toggleMobileNav()"
-							class="text-gray-300 hover:text-white focus:outline-none p-2"
-							aria-label="Toggle Navigation">
-							<svg class="w-7 h-7" id="nav-icon-svg" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-								xmlns="http://www.w3.org/2000/svg">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-									d="M4 6h16M4 12h16M4 18h16"></path>
-							</svg>
-						</button> -->
 					</button>
 				</div>
 			</div>
 		</div>
-		<!-- Mobile Nav -->
-		<div class="md:hidden hidden bg-gray-900/95 backdrop-blur-xl border-t border-gray-800 absolute w-full"
+		<!-- Mobile Nav Container -->
+		<div class="md:hidden hidden theme-mobile-menu backdrop-blur-xl border-t border-gray-800 absolute w-full z-50"
 			id="mobile-menu">
-			<div class="px-4 pt-2 pb-6 space-y-2 text-center">
-				<a href="#" onclick="toggleMobileNav()" class="block px-3 py-2 text-brand-400 font-medium">Home</a>
+			<div class="px-4 pt-3 pb-6 space-y-2 text-center">
+				<a href="#home" onclick="toggleMobileNav()"
+					class="nav-link mobile-nav-link block px-3 py-2 rounded-lg font-medium transition-all duration-200">Home</a>
+
 				<a href="#destinations" onclick="toggleMobileNav()"
-					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Destinations</a>
+					class="nav-link mobile-nav-link block px-3 py-2 rounded-lg font-medium transition-all duration-200">Destinations</a>
+
 				<a href="#services" onclick="toggleMobileNav()"
-					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Services</a>
+					class="nav-link mobile-nav-link block px-3 py-2 rounded-lg font-medium transition-all duration-200">Services</a>
+
 				<a href="#Voices" onclick="toggleMobileNav()"
-					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Voices</a>
-				<!-- <a href="#weather" onclick="toggleMobileNav()"
-					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Weather</a> -->
-				<a href="gallery.html" class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Gallery</a>
+					class="nav-link mobile-nav-link block px-3 py-2 rounded-lg font-medium transition-all duration-200">Voices</a>
+
+				<a href="gallery.html"
+					class="nav-link mobile-nav-link block px-3 py-2 rounded-lg font-medium transition-all duration-200">Gallery</a>
+
 				<a href="https://search.google.com/local/reviews?placeid=ChIJJYix7AGboDkRlVTL1_fHr00" target="_blank"
-					class="block px-3 py-2 text-gray-300 hover:text-white font-medium">Reviews</a>
+					class="nav-link mobile-nav-link block px-3 py-2 rounded-lg font-medium transition-all duration-200">Reviews</a>
+
 				<a href="#contact" onclick="toggleMobileNav()"
-					class="block px-3 py-2 text-brand-500 font-medium border border-brand-500/50 rounded-lg text-center mt-4 mx-4">Contact
+					class="nav-link mobile-nav-link block px-3 py-2 rounded-lg font-medium transition-all duration-200 padding-right-4">Contact
 					Us</a>
 			</div>
 		</div>
@@ -178,14 +189,14 @@
 				Tours & Bike Rental Services
 			</div>
 
-			<h1
+			<!-- <h1
 				class="text-5xl md:text-7xl font-display font-extrabold tracking-tight mb-8 animate-fade-in-up drop-shadow-2xl">
 				Explore The <span
 					class="text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-teal-300">Majestic</span><br>Landscapes
 			</h1>
 
 			<p
-				class="mt-4 text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto font-light leading-relaxed mb-10 animate-fade-in-up delay-200">
+				class="mt-4 text-xl md:text-2xl theme-text-muted max-w-3xl mx-auto font-light leading-relaxed mb-10 animate-fade-in-up delay-200">
 				We offer premium Tours and Bike Rental services, including Scooty 🛵 and Car 🚗 rental options in
 				Uttarakhand.
 			</p>
@@ -196,7 +207,27 @@
 					Explore Destinations
 				</a>
 				<a href="#contact"
-					class="px-8 py-4 rounded-xl bg-gray-800/80 hover:bg-gray-700/80 border border-gray-600 text-white font-semibold transition-all backdrop-blur-sm shadow-xl">
+					class="px-8 py-4 rounded-xl theme-btn-secondary border theme-border text-white font-semibold transition-all backdrop-blur-sm shadow-xl">
+					Contact Us
+				</a>
+			</div> -->
+			<!-- Hero Title & Subtitle with dynamic crisp contrast -->
+			<h1 class="hero-title text-4xl md:text-6xl font-extrabold tracking-tight mb-4">
+				Explore The <span class="text-emerald-400">Majestic</span> Landscapes
+			</h1>
+			<p class="hero-subtitle text-lg md:text-xl max-w-2xl mx-auto mb-8 font-medium">
+				We offer premium Tours and Bike Rental services, including Scooty 🛵 and Car 🚗 rental options in
+				Uttarakhand.
+			</p>
+
+			<!-- Hero Action Buttons with distinct interactive hover effects -->
+			<div class="flex flex-wrap justify-center gap-4">
+				<a href="#destinations"
+					class="hero-btn-primary px-6 py-3 rounded-xl font-semibold text-base inline-flex items-center justify-center">
+					Explore Destinations
+				</a>
+				<a href="#contact"
+					class="hero-btn-secondary px-6 py-3 rounded-xl font-semibold text-base inline-flex items-center justify-center">
 					Contact Us
 				</a>
 			</div>
@@ -205,10 +236,11 @@
 
 	<!-- Destinations Section -->
 	<section id="destinations"
-		class="py-24 relative z-10 bg-gray-950/90 backdrop-blur-xl border-y border-gray-800/80 shadow-2xl">
+		class="py-24 relative z-10 theme-section-alt backdrop-blur-xl border-y theme-border shadow-2xl">
 		<div class="max-w-screen-2xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mb-16 text-center">
-				<h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">Popular Destinations</h2>
+				<h2 class="text-4xl md:text-5xl font-display font-bold theme-text-heading mb-4">Popular Destinations
+				</h2>
 				<div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full"></div>
 			</div>
 
@@ -298,8 +330,7 @@
 						<p
 							class="text-gray-300 text-sm opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-150">
 							Explore freely with our scooty & bike rentals &ndash; easy, affordable, and perfect for
-							every
-							adventure!</p>
+							every adventure!</p>
 					</div>
 				</div>
 
@@ -308,38 +339,41 @@
 	</section>
 
 	<!-- Services / Rentals Section -->
-	<section id="services" class="py-24 relative z-10 bg-gray-900/60 backdrop-blur-md">
+	<section id="services" class="py-24 relative z-10 theme-section-base backdrop-blur-md">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="grid lg:grid-cols-2 gap-16 items-center">
 				<div class="order-2 lg:order-1">
-					<h2 class="text-4xl font-display font-bold text-white mb-6">Premium Rentals for Your Journey</h2>
-					<p class="text-gray-400 text-lg mb-8 leading-relaxed">Whether you need the agility of a two-wheeler
+					<h2 class="text-4xl font-display font-bold theme-text-heading mb-6">Premium Rentals for Your Journey
+					</h2>
+					<p class="theme-text-muted text-lg mb-8 leading-relaxed">Whether you need the agility of a
+						two-wheeler
 						or the comfort of a four-wheeler, we provide the best vehicles to make your Uttarakhand trip
 						memorable.</p>
 
 					<div class="space-y-8">
 						<div
-							class="flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-800/50 transition-colors border border-transparent hover:border-gray-700/50">
+							class="flex items-start gap-4 p-4 rounded-2xl theme-card-hover transition-colors border border-transparent theme-border-hover">
 							<div
 								class="w-14 h-14 rounded-xl bg-brand-500/20 flex items-center justify-center flex-shrink-0 border border-brand-500/40 shadow-lg shadow-brand-500/10">
 								<i class="fas fa-motorcycle text-brand-400 text-2xl"></i>
 							</div>
 							<div>
-								<h4 class="text-xl font-bold text-white mb-2">Bike & Scooty Rental</h4>
-								<p class="text-gray-400 leading-relaxed">Perfect for solo travelers or couples wanting
+								<h4 class="text-xl font-bold theme-text-heading mb-2">Bike & Scooty Rental</h4>
+								<p class="theme-text-muted leading-relaxed">Perfect for solo travelers or couples
+									wanting
 									to feel the mountain breeze and navigate freely.</p>
 							</div>
 						</div>
 
 						<div
-							class="flex items-start gap-4 p-4 rounded-2xl hover:bg-gray-800/50 transition-colors border border-transparent hover:border-gray-700/50">
+							class="flex items-start gap-4 p-4 rounded-2xl theme-card-hover transition-colors border border-transparent theme-border-hover">
 							<div
 								class="w-14 h-14 rounded-xl bg-blue-500/20 flex items-center justify-center flex-shrink-0 border border-blue-500/40 shadow-lg shadow-blue-500/10">
 								<i class="fas fa-car text-blue-400 text-2xl"></i>
 							</div>
 							<div>
-								<h4 class="text-xl font-bold text-white mb-2">Car Rental</h4>
-								<p class="text-gray-400 leading-relaxed">Comfortable SUVs and Sedans for families and
+								<h4 class="text-xl font-bold theme-text-heading mb-2">Car Rental</h4>
+								<p class="theme-text-muted leading-relaxed">Comfortable SUVs and Sedans for families and
 									group travels across the terrains of Uttarakhand.</p>
 							</div>
 						</div>
@@ -348,8 +382,7 @@
 
 				<div class="relative order-1 lg:order-2">
 					<div class="absolute inset-0 bg-brand-500 blur-3xl opacity-20 rounded-full animate-pulse"></div>
-					<div
-						class="relative rounded-2xl overflow-hidden border border-gray-700/60 shadow-2xl glass-panel group">
+					<div class="relative rounded-2xl overflow-hidden border theme-border shadow-2xl glass-panel group">
 						<img src="media/Scooty.jpg" alt="Rentals"
 							class="w-full h-96 object-cover transform transition-transform duration-1000 group-hover:scale-105">
 						<div
@@ -362,18 +395,19 @@
 	</section>
 
 	<!-- Weather Forecast Section -->
-	<section id="weather" class="py-20 relative z-10 bg-gray-950/80 backdrop-blur-xl border-t border-gray-800/80">
+	<section id="weather" class="py-20 relative z-10 theme-section-alt backdrop-blur-xl border-t theme-border">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="mb-12 text-center">
-				<h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">Local Weather Forecast</h2>
-				<p class="text-gray-400 text-lg max-w-2xl mx-auto">Check real-time weather conditions across popular
+				<h2 class="text-4xl md:text-5xl font-display font-bold theme-text-heading mb-4">Local Weather Forecast
+				</h2>
+				<p class="theme-text-muted text-lg max-w-2xl mx-auto">Check real-time weather conditions across popular
 					destinations to plan your ride seamlessly.</p>
 				<div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mt-4"></div>
 			</div>
 
 			<!-- Tomorrow.io Weather Widget Glass Container -->
 			<div
-				class="max-w-4xl mx-auto p-4 md:p-6 rounded-2xl bg-gray-900/60 border border-gray-800 backdrop-blur-md shadow-2xl relative">
+				class="max-w-4xl mx-auto p-4 md:p-6 rounded-2xl theme-card-bg border theme-border backdrop-blur-md shadow-2xl relative">
 
 				<!-- Weather Widget -->
 				<div class="tomorrow" data-location-id="132058,133123,057998,2550047,057643,133716" data-language="EN"
@@ -388,80 +422,89 @@
 				</div>
 
 				<!-- Clickable Responsive Overlay Grid -->
-				<!-- Mobile/Small Screens: 2 Columns x 3 Rows | Tablet/Desktop (sm+): 3 Columns x 2 Rows -->
-				<div
+				<!-- <div
 					class="absolute inset-x-4 top-4 bottom-10 md:inset-x-6 md:top-6 md:bottom-12 grid grid-cols-2 grid-rows-3 sm:grid-cols-3 sm:grid-rows-2 gap-3 z-20 pointer-events-none">
 
-					<!-- Haldwani -->
 					<a href="https://weather.tomorrow.io/IN/UT/Haldwani/132058/daily/" target="_blank"
 						rel="noopener noreferrer" title="View Haldwani Weather Details"
 						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
 
-					<!-- Nainital -->
 					<a href="https://weather.tomorrow.io/IN/UT/Naini_T%C4%81l/133123/daily/" target="_blank"
 						rel="noopener noreferrer" title="View Nainital Weather Details"
 						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
 
-					<!-- Bhowali -->
 					<a href="https://weather.tomorrow.io/IN/UT/Bhowali/057998/daily/" target="_blank"
 						rel="noopener noreferrer" title="View Bhowali Weather Details"
 						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
 
-					<!-- Kedarnath -->
 					<a href="https://weather.tomorrow.io/IN/Kedarnath/2550047/daily/" target="_blank"
 						rel="noopener noreferrer" title="View Kedarnath Weather Details"
 						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
 
-					<!-- Almora -->
 					<a href="https://weather.tomorrow.io/IN/UT/Almora/057643/daily/" target="_blank"
 						rel="noopener noreferrer" title="View Almora Weather Details"
 						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
 
-					<!-- Ranikhet -->
+					<a href="https://weather.tomorrow.io/IN/UT/R%C4%81nikhet/133716/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Ranikhet Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+				</div> -->
+				<!-- Clickable Responsive Overlay Grid -->
+				<div
+					class="absolute inset-x-4 top-4 bottom-10 md:inset-x-6 md:top-6 md:bottom-12 grid grid-cols-1 grid-rows-6 min-[376px]:grid-cols-2 min-[376px]:grid-rows-3 min-[528px]:grid-cols-3 min-[528px]:grid-rows-2 gap-3 z-20 pointer-events-none">
+
+					<a href="https://weather.tomorrow.io/IN/UT/Haldwani/132058/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Haldwani Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<a href="https://weather.tomorrow.io/IN/UT/Naini_T%C4%81l/133123/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Nainital Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<a href="https://weather.tomorrow.io/IN/UT/Bhowali/057998/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Bhowali Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<a href="https://weather.tomorrow.io/IN/Kedarnath/2550047/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Kedarnath Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
+					<a href="https://weather.tomorrow.io/IN/UT/Almora/057643/daily/" target="_blank"
+						rel="noopener noreferrer" title="View Almora Weather Details"
+						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
+
 					<a href="https://weather.tomorrow.io/IN/UT/R%C4%81nikhet/133716/daily/" target="_blank"
 						rel="noopener noreferrer" title="View Ranikhet Weather Details"
 						class="pointer-events-auto cursor-pointer rounded-xl border border-transparent hover:border-brand-400/80 hover:shadow-[0_0_15px_rgba(52,211,153,0.3)] hover:scale-[1.02] transition-all duration-300"></a>
 				</div>
-
 			</div>
 		</div>
 	</section>
 
 	<!-- Reviews Section -->
-	<section id="Voices" class="py-24 relative z-10 bg-gray-900 border-t border-gray-800/80 overflow-hidden">
+	<section id="Voices" class="py-24 relative z-10 theme-section-base border-t theme-border overflow-hidden">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
 			<div class="text-center">
-				<h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-4">Voices of Trust: What Our
+				<h2 class="text-4xl md:text-5xl font-display font-bold theme-text-heading mb-4">Voices of Trust: What
+					Our
 					Customers Share</h2>
 				<div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full"></div>
 			</div>
 		</div>
 
-		<!-- Live Testimonial Row Layout (Full Screen Infinite Marquee) -->
+		<!-- Live Testimonial Row Layout -->
 		<div class="w-full mt-12 mb-20 overflow-hidden">
-			<!-- Title stays aligned to content container -->
 			<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
-				<p class="text-xs text-gray-400 mt-1">Live updates pulled from our verified business profile</p>
+				<p class="text-xs theme-text-muted mt-1">Live updates pulled from our verified business profile</p>
 			</div>
 
-			<!-- Marquee Window: Covers full horizontal screen space -->
 			<div class="relative w-full flex overflow-hidden py-2 -my-2 group">
-				<!-- Track container remains a single row -->
 				<div id="live-reviews-marquee-track" class="animate-marquee flex gap-6 px-3 whitespace-nowrap">
-					<!-- Loader State -->
-					<div class="w-full text-center py-8 text-gray-500 text-sm">
+					<div class="w-full text-center py-8 theme-text-muted text-sm">
 						<i class="fas fa-spinner fa-spin mr-2"></i> Connecting to live reviews dataset...
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<!-- Gradient overlays to fade edges cleanly -->
-		<div
-			class="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-gray-900 to-transparent z-10 pointer-events-none">
-		</div>
-		<div
-			class="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-gray-900 to-transparent z-10 pointer-events-none">
 		</div>
 
 		<!-- Counter Cards Grid Component -->
@@ -469,57 +512,61 @@
 			<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 				<!-- Total Reviews Card -->
 				<div
-					class="p-8 rounded-2xl bg-gray-900/40 border border-gray-800 backdrop-blur-md flex flex-col items-center justify-center text-center group hover:border-brand-500/30 transition-all duration-300">
+					class="p-8 rounded-2xl theme-card-bg border theme-border backdrop-blur-md flex flex-col items-center justify-center text-center group hover:border-brand-500/30 transition-all duration-300">
 					<div
 						class="w-14 h-14 rounded-full bg-brand-500/10 flex items-center justify-center mb-4 border border-brand-500/20 text-brand-400 group-hover:scale-110 transition-transform duration-300">
 						<i class="fas fa-comments text-xl"></i>
 					</div>
-					<h3 class="text-gray-400 text-sm font-medium uppercase tracking-wider mb-2">Total Reviews</h3>
-					<div class="text-4xl md:text-5xl font-display font-extrabold text-white flex items-center gap-1">
+					<h3 class="theme-text-muted text-sm font-medium uppercase tracking-wider mb-2">Total Reviews</h3>
+					<div
+						class="text-4xl md:text-5xl font-display font-extrabold theme-text-heading flex items-center gap-1">
 						<span class="counter" data-id="total-reviews-counter" data-target="0">0</span><span>+</span>
 					</div>
-					<p class="text-xs text-gray-500 mt-2">Verified Google Business Reviews</p>
+					<p class="text-xs theme-text-muted mt-2">Verified Google Business Reviews</p>
 				</div>
 
 				<!-- 5 Star Reviews Card -->
 				<div
-					class="p-8 rounded-2xl bg-gray-900/40 border border-gray-800 backdrop-blur-md flex flex-col items-center justify-center text-center group hover:border-yellow-500/30 transition-all duration-300">
+					class="p-8 rounded-2xl theme-card-bg border theme-border backdrop-blur-md flex flex-col items-center justify-center text-center group hover:border-yellow-500/30 transition-all duration-300">
 					<div
 						class="w-14 h-14 rounded-full bg-yellow-500/10 flex items-center justify-center mb-4 border border-yellow-500/20 text-yellow-500 group-hover:scale-110 transition-transform duration-300">
 						<i class="fas fa-star text-xl"></i>
 					</div>
-					<h3 class="text-gray-400 text-sm font-medium uppercase tracking-wider mb-2">5-Star Ratings</h3>
-					<div class="text-4xl md:text-5xl font-display font-extrabold text-white flex items-center gap-1">
+					<h3 class="theme-text-muted text-sm font-medium uppercase tracking-wider mb-2">5-Star Ratings</h3>
+					<div
+						class="text-4xl md:text-5xl font-display font-extrabold theme-text-heading flex items-center gap-1">
 						<span class="counter" data-id="five-star-counter" data-target="0">0</span><span>+</span>
 					</div>
-					<p class="text-xs text-gray-500 mt-2">Top-Tier Customer Experiences</p>
+					<p class="text-xs theme-text-muted mt-2">Top-Tier Customer Experiences</p>
 				</div>
 
 				<!-- Average Rating Card -->
 				<div
-					class="p-8 rounded-2xl bg-gray-900/40 border border-gray-800 backdrop-blur-md flex flex-col items-center justify-center text-center group hover:border-teal-500/30 transition-all duration-300">
+					class="p-8 rounded-2xl theme-card-bg border theme-border backdrop-blur-md flex flex-col items-center justify-center text-center group hover:border-teal-500/30 transition-all duration-300">
 					<div
 						class="w-14 h-14 rounded-full bg-teal-500/10 flex items-center justify-center mb-4 border border-teal-500/20 text-teal-400 group-hover:scale-110 transition-transform duration-300">
 						<i class="fas fa-trophy text-xl"></i>
 					</div>
-					<h3 class="text-gray-400 text-sm font-medium uppercase tracking-wider mb-2">Average Score</h3>
-					<div class="text-4xl md:text-5xl font-display font-extrabold text-white flex items-center gap-1">
+					<h3 class="theme-text-muted text-sm font-medium uppercase tracking-wider mb-2">Average Score</h3>
+					<div
+						class="text-4xl md:text-5xl font-display font-extrabold theme-text-heading flex items-center gap-1">
 						<span class="counter" data-id="average-rating-counter" data-target="0.0"
 							data-decimals="1">0.0</span><span>/5</span>
 					</div>
-					<p class="text-xs text-gray-500 mt-2">Highly Rated Local Experience</p>
+					<p class="text-xs theme-text-muted mt-2">Highly Rated Local Experience</p>
 				</div>
 			</div>
 		</div>
 	</section>
 
 	<!-- Contact & Map Section -->
-	<section id="contact" class="py-24 relative z-10 bg-gray-950 border-t border-gray-800/80">
+	<section id="contact" class="py-24 relative z-10 theme-section-alt border-t theme-border">
 		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 			<div class="grid lg:grid-cols-5 gap-16 lg:gap-12">
 				<div class="lg:col-span-2 flex flex-col justify-center">
-					<h2 class="text-4xl font-display font-bold text-white mb-6">Get In Touch</h2>
-					<p class="text-gray-400 mb-10 text-lg">Plan your next adventure with us. Reach out via phone, visit
+					<h2 class="text-4xl font-display font-bold theme-text-heading mb-6">Get In Touch</h2>
+					<p class="theme-text-muted mb-10 text-lg">Plan your next adventure with us. Reach out via phone,
+						visit
 						our office, or connect on social media.</p>
 
 					<div class="space-y-6 mb-12">
@@ -528,7 +575,7 @@
 								class="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center flex-shrink-0 border border-brand-500/30">
 								<i class="fas fa-map-marker-alt text-brand-400"></i>
 							</div>
-							<p class="text-gray-300 mt-2">Behind Bus Station, Kathgodam<br>Ward No.2, Kathgodam,
+							<p class="theme-text-muted mt-2">Behind Bus Station, Kathgodam<br>Ward No.2, Kathgodam,
 								Haldwani,<br>Harigarh Dalipsingh,
 								Uttarakhand 263126</p>
 						</div>
@@ -538,8 +585,8 @@
 								<i class="fas fa-phone text-brand-400"></i>
 							</div>
 							<div class="flex flex-col gap-1">
-								<p class="text-gray-300 text-lg">+91 8859 8888 45</p>
-								<p class="text-gray-300 text-lg">+91 70170 81858</p>
+								<p class="theme-text-muted text-lg">+91 8859 8888 45</p>
+								<p class="theme-text-muted text-lg">+91 70170 81858</p>
 							</div>
 						</div>
 						<div class="flex items-start gap-4">
@@ -549,20 +596,20 @@
 							</div>
 							<div class="flex flex-col gap-1">
 								<a href="mailto:mahakaaltoursss@gmail.com"
-									class="text-gray-300 text-lg hover:text-brand-400 transition-colors">mahakaaltoursss@gmail.com</a>
+									class="theme-text-muted text-lg hover:text-brand-400 transition-colors">mahakaaltoursss@gmail.com</a>
 							</div>
 						</div>
 					</div>
 
 					<!-- Social Links -->
 					<div>
-						<h4 class="text-sm font-bold text-gray-500 uppercase tracking-widest mb-6">Follow Us</h4>
+						<h4 class="text-sm font-bold theme-text-muted uppercase tracking-widest mb-6">Follow Us</h4>
 						<div class="flex gap-4">
 							<a href="#"
-								class="w-12 h-12 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-400 hover:bg-[#1877F2] hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border border-gray-700"><i
+								class="w-12 h-12 rounded-full theme-btn-secondary flex items-center justify-center theme-text-muted hover:bg-[#1877F2] hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border theme-border"><i
 									class="fab fa-facebook-f text-lg"></i></a>
 							<a href="https://x.com/Mahakaaltours" target="_blank" rel="noopener noreferrer"
-								class="w-12 h-12 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-400 hover:bg-black hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border border-gray-700 hover:border-gray-500">
+								class="w-12 h-12 rounded-full theme-btn-secondary flex items-center justify-center theme-text-muted hover:bg-black hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border theme-border hover:border-gray-500">
 								<i class="fa-brands fa-x-twitter text-lg"><svg xmlns="http://www.w3.org/2000/svg"
 										width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
 										<path
@@ -571,7 +618,7 @@
 							</a>
 
 							<a href="https://www.instagram.com/mahakaaltours?igsh=MWxuZjduYTY0Nmp6Zw=="
-								class="w-12 h-12 rounded-full bg-gray-800/80 flex items-center justify-center text-gray-400 hover:bg-[#E4405F] hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border border-gray-700"><i
+								class="w-12 h-12 rounded-full theme-btn-secondary flex items-center justify-center theme-text-muted hover:bg-[#E4405F] hover:text-white transition-all duration-300 hover:scale-110 shadow-lg border theme-border"><i
 									class="fab fa-instagram text-lg"></i></a>
 						</div>
 					</div>
@@ -579,7 +626,7 @@
 
 				<div class="lg:col-span-3">
 					<div
-						class="rounded-2xl overflow-hidden glass-panel border border-gray-700/60 shadow-[0_0_40px_rgba(0,0,0,0.5)] h-[500px]">
+						class="rounded-2xl overflow-hidden glass-panel border theme-border shadow-[0_0_40px_rgba(0,0,0,0.5)] h-[500px]">
 						<iframe class="w-full h-full filter contrast-125 saturate-50"
 							src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d889.5806095780572!2d79.54532472714098!3d29.2601139866697!2m3!1f0!2f39.075057823824295!3f0!3m2!1i1024!2i768!4f35!3m3!1m2!1s0x39a09b01ecb18825%3A0x4dafc7f7d7cb5495!2sMahakaal%20Tours%20%26%20Bike%20Rentals!5e1!3m2!1sen!2sin!4v1784646532891!5m2!1sen!2sin"
 							style="border:0;" allowfullscreen="" loading="lazy"
@@ -592,8 +639,8 @@
 	</section>
 
 	<!-- Footer -->
-	<footer class="py-8 bg-black/90 text-center border-t border-gray-800/50 relative z-10">
-		<p class="text-gray-500 font-medium tracking-wide text-sm">&copy; <span id="current-year">2026</span> Mahakaal
+	<footer class="py-8 theme-footer theme-text-muted text-center border-t theme-border relative z-10">
+		<p class="font-medium tracking-wide text-sm">&copy; <span id="current-year">2026</span> Mahakaal
 			Tours & Bike Rentals. All rights reserved.</p>
 	</footer>
 
@@ -614,7 +661,6 @@
 	<!-- Custom Floating WhatsApp Button -->
 	<button id="wa-float-btn" type="button" aria-label="Chat on WhatsApp">
 		<div class="wa-icon-wrapper">
-			<!-- Official WhatsApp SVG Icon -->
 			<svg viewBox="0 0 32 32" class="wa-svg-icon">
 				<path fill="#FFFFFF"
 					d="M16 2a13.9 13.9 0 0 0-12 20.9L2 30l7.3-1.9A13.9 13.9 0 1 0 16 2zm8 19.8c-.3.9-1.8 1.7-2.5 1.8-.7.1-1.6.2-5.3-1.3-4.4-1.8-7.2-6.3-7.4-6.6-.2-.3-1.8-2.4-1.8-4.6 0-2.2 1.1-3.3 1.5-3.8.4-.4.9-.6 1.2-.6.3 0 .6 0 .9.1.3.1.7-.1 1.1.8.4.9 1.3 3.1 1.4 3.3.1.2.2.5 0 .8-.2.3-.3.5-.5.7-.2.2-.4.4-.2.8.5.8 1.8 2.6 3.4 3.7 1.9 1.4 3.3 1.8 3.8 2 .5.2.8.2 1.1-.1.3-.3 1.2-1.4 1.5-1.9.3-.5.7-.4 1.1-.2.4.2 2.7 1.3 3.1 1.5.5.2.8.4.9.6.1.3.1 1.2-.2 2.1z" />

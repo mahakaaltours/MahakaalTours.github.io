@@ -1,157 +1,547 @@
-/* Tailwind custom utilities that the CDN couldn't inline easily */
+/* --- Root CSS Variables for Dark & Light Themes --- */
+:root {
+    --bg-main: #111827;
+    --bg-alt: rgba(3, 7, 18, 0.9);
+    --bg-card: rgba(17, 24, 39, 0.4);
+    --text-main: #f3f4f6;
+    --text-heading: #ffffff;
+    --text-muted: #d1d5db;
+    --border-color: rgba(55, 65, 81, 0.8);
+    --border-hover: rgba(75, 85, 99, 0.8);
+    --nav-bg: rgba(17, 24, 39, 0.85);
+    --nav-link-color: #d1d5db;
+    --nav-link-hover: #10b981;
+    /* Emerald Green on hover */
+    --nav-link-active: #10b981;
+    /* Emerald Green for active section */
+    --brand-title-color: #34d399;
+    /* Vibrant mint green in dark mode */
+    --logo-filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    --mobile-menu-bg: rgba(17, 24, 39, 0.95);
 
+    /* Dark Mode Hero Overlay */
+    --hero-overlay: linear-gradient(180deg, rgba(15, 23, 42, 0.65) 0%, rgba(15, 23, 42, 0.40) 50%, rgba(17, 24, 39, 0.90) 100%);
+    --hero-title-color: #ffffff;
+    --hero-sub-color: #f1f5f9;
+
+    --btn-primary-bg: #059669;
+    --btn-primary-hover: #047857;
+    --btn-secondary-bg: rgba(255, 255, 255, 0.15);
+    --btn-secondary-hover: rgba(255, 255, 255, 0.30);
+    --btn-secondary-text: #ffffff;
+    --btn-secondary-border: rgba(255, 255, 255, 0.35);
+}
+
+html.light-theme {
+    --bg-main: #f8fafc;
+    --bg-alt: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --text-main: #1e293b;
+    --text-heading: #0f172a;
+    --text-muted: #475569;
+    --border-color: rgba(226, 232, 240, 0.9);
+    --border-hover: rgba(203, 213, 225, 1);
+    --nav-bg: rgba(255, 255, 255, 0.92);
+    /* --nav-link-color: #334155; */
+    --nav-link-color: #1e293b;
+    --nav-link-hover: #059669;
+    /* Darker Green hover for light background */
+    /* --nav-link-active: #059669; */
+    --nav-link-active: #047857;
+    /* Deep Emerald Green for active link */
+    /* Darker Green active state for light background */
+    --brand-title-color: #047857;
+    /* Deep emerald green for crisp light mode header readability */
+    --logo-filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.2)) contrast(1.08);
+    --mobile-menu-bg: rgba(255, 255, 255, 0.98);
+
+    /* Light Mode Hero Overlay */
+    --hero-overlay: linear-gradient(180deg, rgba(15, 23, 42, 0.55) 0%, rgba(15, 23, 42, 0.30) 60%, rgba(15, 23, 42, 0.75) 100%);
+    --hero-title-color: #ffffff;
+    --hero-sub-color: #ffffff;
+
+    --btn-primary-bg: #059669;
+    --btn-primary-hover: #047857;
+    --btn-secondary-bg: rgba(255, 255, 255, 0.25);
+    --btn-secondary-hover: rgba(255, 255, 255, 0.45);
+    --btn-secondary-text: #ffffff;
+    --btn-secondary-border: rgba(255, 255, 255, 0.5);
+}
+
+/* Light Theme: High-contrast solid dark emerald green */
+html.light-theme .brand-header-title {
+    color: #047857 !important;
+    /* Rich Dark Emerald Green */
+    background: none !important;
+    -webkit-background-clip: unset !important;
+    background-clip: unset !important;
+}
+
+/* --- Brand Logo & Text Styling Classes --- */
+/* Icon shadow contrast enhancement */
+.brand-logo-img {
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.4));
+    transition: filter 0.3s ease;
+}
+
+html.light-theme .brand-logo-img {
+    filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25)) contrast(1.1);
+}
+
+.brand-title-text {
+    color: var(--brand-title-color) !important;
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+
+/* --- Header Brand Styling --- */
+/* --- Hero Container Base (Fixes Light Mode Haze Bleed) --- */
+#hero,
+.hero-section,
+.hero-container {
+    background-color: #0b0f19 !important;
+    position: relative;
+    overflow: hidden;
+}
+
+/* --- Hero Section & Overlay Fixes --- */
+.hero-overlay {
+    background: var(--hero-overlay) !important;
+    mix-blend-mode: normal !important;
+    transition: background 0.4s ease;
+}
+
+.hero-title {
+    color: var(--hero-title-color);
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.hero-subtitle {
+    color: var(--hero-sub-color);
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
+}
+
+/* --- Hero Action Buttons Styles & Interactive Hover Effects --- */
+.hero-btn-primary {
+    background-color: var(--btn-primary-bg);
+    color: #ffffff !important;
+    border: 1px solid transparent;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
+}
+
+.hero-btn-primary:hover {
+    background-color: var(--btn-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(5, 150, 105, 0.5);
+}
+
+.hero-btn-primary:active {
+    transform: translateY(0);
+}
+
+.hero-btn-secondary {
+    background-color: var(--btn-secondary-bg);
+    color: var(--btn-secondary-text) !important;
+    border: 1px solid var(--btn-secondary-border);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.hero-btn-secondary:hover {
+    background-color: var(--btn-secondary-hover);
+    border-color: rgba(255, 255, 255, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    color: #ffffff !important;
+}
+
+.hero-btn-secondary:active {
+    transform: translateY(0);
+}
+
+/* Dynamic Theme Helper Classes */
+.theme-bg-main {
+    background-color: var(--bg-main);
+    transition: background-color 0.3s ease;
+}
+
+.theme-section-base {
+    background-color: var(--bg-main);
+    transition: background-color 0.3s ease;
+}
+
+.theme-section-alt {
+    background-color: var(--bg-alt);
+    transition: background-color 0.3s ease;
+}
+
+.theme-card-bg {
+    background-color: var(--bg-card);
+    transition: background-color 0.3s ease;
+}
+
+.theme-card-hover:hover {
+    background-color: var(--bg-card);
+}
+
+.theme-text-main {
+    color: var(--text-main);
+    transition: color 0.3s ease;
+}
+
+.theme-text-heading {
+    color: var(--text-heading);
+    transition: color 0.3s ease;
+}
+
+.theme-text-muted {
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+.theme-border {
+    border-color: var(--border-color);
+    transition: border-color 0.3s ease;
+}
+
+.theme-border-hover:hover {
+    border-color: var(--border-hover);
+}
+
+.theme-nav {
+    background-color: var(--nav-bg);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.theme-mobile-menu {
+    background-color: var(--mobile-menu-bg);
+}
+
+/* --- Base Mobile Nav Link Styling --- */
+.mobile-nav-link {
+    color: var(--nav-link-color) !important;
+    border: 1px solid transparent !important;
+    background-color: transparent !important;
+    /* border: 1.5px solid transparent; */
+    /* Transparent border to prevent jumpiness when activated */
+    /* background-color: transparent; */
+    transition: all 0.2s ease-in-out;
+    /* color: #374151; */
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border-radius: 0.75rem;
+    /* Soft rounded rectangle matching your screenshot */
+    font-weight: 500;
+}
+
+/* --- Dark Theme Active Pill/Border --- */
+.mobile-nav-link.active,
+.mobile-nav-link[aria-current="page"] {
+    /* color: #34d399 !important; */
+    color: #047857 !important;
+    /* Emerald green title text */
+    /* Vibrant mint green text */
+    border-color: rgba(52, 211, 153, 0.5) !important;
+    /* Soft green border */
+    /* background-color: rgba(52, 211, 153, 0.1) !important; */
+    background-color: #f0fdf4 !important;
+    /* Soft light-green background */
+    border: 1px solid #a7f3d0 !important;
+    /* Clean green outline border */
+    /* Subtle green glow fill */
+    font-weight: 700 !important;
+}
+
+/* --- Light Theme Active Pill/Border --- */
+html.light-theme .mobile-nav-link.active,
+html.light-theme .mobile-nav-link[aria-current="page"] {
+    color: #047857 !important;
+    /* Deep emerald green text */
+    border-color: rgba(4, 120, 87, 0.6) !important;
+    /* Deep green border */
+    background-color: rgba(4, 120, 87, 0.08) !important;
+    /* Light tint fill */
+    font-weight: 700 !important;
+}
+
+/* Optional: Slight hover highlight for inactive mobile items */
+.mobile-nav-link:not(.active):hover {
+    border-color: var(--border-hover);
+}
+
+/* Active State (Dark Theme) */
+.dark .mobile-nav-link.active {
+    color: #34d399 !important;
+    border-color: #34d399 !important;
+    background-color: rgba(52, 211, 153, 0.15) !important;
+    border: 1px solid rgba(52, 211, 153, 0.4) !important;
+    font-weight: 700 !important;
+}
+
+/* --- Consolidated Navigation Links --- */
+
+/* --- Base Navigation Link Styling --- */
+/* Inactive links: Forced color override so Tailwind utility classes don't wash them out */
+.nav-link:not(.active) {
+    color: var(--nav-link-color) !important;
+}
+
+.nav-link {
+    color: var(--nav-link-color);
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* Removed !important so active/hover can take over */
+    font-weight: 500;
+    display: inline-block;
+    transition: color 0.25s ease, font-weight 0.2s ease, transform 0.2s ease;
+}
+
+/* Pre-reserve space for bold text without displaying it */
+/* Invisible bold layer that reserves width */
+.nav-link::after {
+    content: attr(data-text);
+    height: 0;
+    visibility: hidden;
+    overflow: hidden;
+    user-select: none;
+    pointer-events: none;
+    font-weight: 600;
+    /* Match hover font-weight */
+}
+
+/* --- Hover State --- */
+.nav-link:hover {
+    color: var(--nav-link-hover) !important;
+    font-weight: 700 !important;
+}
+
+/* --- Active State (High Specificity to beat base color) --- */
+a.nav-link.active,
+.nav-link.active,
+.nav-link[aria-current="page"] {
+    color: var(--nav-link-active) !important;
+    font-weight: 700 !important;
+}
+
+
+/* .nav-link.active,
+.nav-link[aria-current="page"] {
+    color: var(--nav-link-active) !important;
+    font-weight: 700 !important;
+} */
+
+/* --- Active Link & Hover - Light Theme (Matches Brand Text Color) --- */
+/* html.light-theme .nav-link:hover,
+html.light-theme .nav-link.active,
+html.light-theme .nav-link[aria-current="page"] {
+    color: #047857 !important; */
+/* Exact match to "Mahakaal Tours" brand text */
+/* font-weight: 700 !important;
+} */
+
+
+.theme-btn-secondary {
+    background-color: var(--btn-secondary);
+    transition: background-color 0.3s ease;
+}
+
+.theme-footer {
+    background-color: var(--footer-bg);
+}
+
+/* Custom utilities */
 .animate-fade-in-up {
-  animation: fadeInUp 0.8s ease-out forwards;
-  opacity: 0;
-  transform: translateY(20px);
+    animation: fadeInUp 0.8s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
 }
 
 .delay-200 {
-  animation-delay: 200ms;
+    animation-delay: 200ms;
 }
 
 .delay-400 {
-  animation-delay: 400ms;
+    animation-delay: 400ms;
 }
 
 @keyframes fadeInUp {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .glass-panel {
-  background: rgba(17, 24, 39, 0.4);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: background 0.3s ease;
 }
 
 @keyframes marquee {
-  0% {
-    transform: translateX(0);
-  }
+    0% {
+        transform: translateX(0);
+    }
 
-  100% {
-    transform: translateX(-50%);
-  }
+    100% {
+        transform: translateX(-50%);
+    }
 }
 
 .animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 30s linear infinite;
+    display: flex;
+    width: max-content;
+    animation: marquee 30s linear infinite;
 }
 
 .animate-marquee:hover {
-  animation-play-state: paused;
+    animation-play-state: paused;
 }
-
 
 /* Base styles for each stacked background slide */
+/* Base styles for all background slides */
 .bg-slide {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  animation: crossfadeLoop 20s infinite ease-in-out;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    z-index: 1;
 }
 
-/* Stagger execution delays so only one image fades in at a time */
-.bg-slide:nth-child(1) { animation-delay: 0s; }
-.bg-slide:nth-child(2) { animation-delay: 4s; }
-.bg-slide:nth-child(3) { animation-delay: 8s; }
-.bg-slide:nth-child(4) { animation-delay: 12s; }
-.bg-slide:nth-child(5) { animation-delay: 16s; }
+/* ==========================================
+   EFFECT 1: Smooth Zoom-In (Ken Burns)
+   ========================================== */
+.transition-zoom .bg-slide {
+    transform: scale(1.12);
+    transition: opacity 1.8s ease-in-out, transform 1.8s ease-out;
+}
 
-/* Keyframe crossfade sequence over a 12-second total cycle */
+.transition-zoom .bg-slide.active {
+    opacity: 0.85 !important;
+    transform: scale(1) !important;
+    z-index: 2 !important;
+}
+
+/* ==========================================
+   EFFECT 2: Blur-to-Focus Fade
+   ========================================== */
+.transition-blur .bg-slide {
+    filter: blur(12px);
+    transition: opacity 1.5s ease-in-out, filter 1.5s ease-in-out;
+}
+
+.transition-blur .bg-slide.active {
+    opacity: 0.85 !important;
+    filter: blur(0px) !important;
+    z-index: 2 !important;
+}
+
+/* 4-second offset for each image */
+/* .bg-slide:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.bg-slide:nth-child(2) {
+    animation-delay: 4s;
+}
+
+.bg-slide:nth-child(3) {
+    animation-delay: 8s;
+}
+
+.bg-slide:nth-child(4) {
+    animation-delay: 12s;
+}
+
+.bg-slide:nth-child(5) {
+    animation-delay: 16s;
+} */
+
 @keyframes crossfadeLoop {
-  0% {
-    opacity: 0.7;
-    /* Fully visible with desired hero opacity */
-  }
+    0% {
+        opacity: 1;
+    }
 
-  28% {
-    opacity: 0.7;
-    /* Holds visibility for ~3.3 seconds */
-  }
+    28% {
+        opacity: 1;
+    }
 
-  38% {
-    opacity: 0;
-    /* Crossfades out over ~1.2 seconds */
-  }
+    38% {
+        opacity: 0;
+    }
 
-  90% {
-    opacity: 0;
-    /* Stays hidden while other images show */
-  }
+    90% {
+        opacity: 0;
+    }
 
-  100% {
-    opacity: 0.7;
-    /* Seamlessly returns for the next cycle */
-  }
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Floating Container (Bottom-Left) */
 #wa-float-btn {
-  border: none;
-  cursor: pointer;
-  position: fixed;
-  bottom: 20px;
-  left: 20px;
-  z-index: 999999;
-  display: inline-flex;
-  align-items: center;
-  background-color: #16BE45;
-  color: #FFFFFF;
-  height: 50px;
-  width: 50px;
-  /* Starts as a pure circle */
-  border-radius: 50px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
-  overflow: hidden;
-  text-decoration: none;
-  font-family: inherit;
-  font-weight: 600;
-  font-size: 14px;
-  transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
-  white-space: nowrap;
+    border: none;
+    cursor: pointer;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 999999;
+    display: inline-flex;
+    align-items: center;
+    background-color: #16BE45;
+    color: #FFFFFF;
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    overflow: hidden;
+    text-decoration: none;
+    font-family: inherit;
+    font-weight: 600;
+    font-size: 14px;
+    transition: width 0.35s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.2s ease;
+    white-space: nowrap;
 }
 
-/* Icon Container */
 .wa-icon-wrapper {
-  min-width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    min-width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .wa-svg-icon {
-  width: 28px;
-  height: 28px;
+    width: 28px;
+    height: 28px;
 }
 
-/* Label Text Hidden initially */
 .wa-text-label {
-  opacity: 0;
-  max-width: 0;
-  transition: opacity 0.25s ease, max-width 0.35s ease;
-  padding-right: 0;
+    opacity: 0;
+    max-width: 0;
+    transition: opacity 0.25s ease, max-width 0.35s ease;
+    padding-right: 0;
 }
 
-/* Hover / Focus Expansion Effect */
 #wa-float-btn:hover {
-  width: 230px;
-  /* Expands smoothly on hover */
-  background-color: #12A03A;
-  /* Slightly darker green on hover */
+    width: 230px;
+    background-color: #12A03A;
 }
 
 #wa-float-btn:hover .wa-text-label {
-  opacity: 1;
-  max-width: 170px;
-  padding-right: 18px;
+    opacity: 1;
+    max-width: 170px;
+    padding-right: 18px;
 }

@@ -1,28 +1,30 @@
 // Mobile navigation toggle
-function toggleMobileNav() {
-  const menu = document.getElementById('mobile-menu');
-  const icon = document.getElementById('nav-icon');
+// function toggleMobileNav() {
+//   const menu = document.getElementById('mobile-menu');
+//   const icon = document.getElementById('nav-icon');
 
-  if (menu.classList.contains('hidden')) {
-    menu.classList.remove('hidden');
-    icon.classList.remove('fa-bars');
-    icon.classList.add('fa-times');
-  } else {
-    menu.classList.add('hidden');
-    icon.classList.remove('fa-times');
-    icon.classList.add('fa-bars');
-  }
-}
+//   if (menu.classList.contains('hidden')) {
+//     menu.classList.remove('hidden');
+//     icon.classList.remove('fa-bars');
+//     icon.classList.add('fa-times');
+//   } else {
+//     menu.classList.add('hidden');
+//     icon.classList.remove('fa-times');
+//     icon.classList.add('fa-bars');
+//   }
+// }
 
 // Navbar scroll effect
 window.addEventListener('scroll', () => {
   const navbar = document.getElementById('navbar');
+  const isLight = document.documentElement.classList.contains('light-theme');
+
   if (window.scrollY > 50) {
-    navbar.classList.add('shadow-lg', 'bg-gray-900/90');
-    navbar.classList.remove('bg-gray-900/40');
+    navbar.classList.add('shadow-lg');
+    navbar.style.backgroundColor = isLight ? 'rgba(255, 255, 255, 0.95)' : 'rgba(17, 24, 39, 0.90)';
   } else {
-    navbar.classList.remove('shadow-lg', 'bg-gray-900/90');
-    navbar.classList.add('bg-gray-900/40');
+    navbar.classList.remove('shadow-lg');
+    navbar.style.backgroundColor = isLight ? 'rgba(255, 255, 255, 0.85)' : 'rgba(17, 24, 39, 0.40)';
   }
 
   // Active Nav Link on Scroll
@@ -34,13 +36,11 @@ window.addEventListener('scroll', () => {
 
   sections.forEach(section => {
     const sectionTop = section.offsetTop;
-    // 200px offset to activate link slightly before it hits the top (accounting for fixed navbar)
     if (window.scrollY >= (sectionTop - 200)) {
       currentSection = section.getAttribute('id') || '';
     }
   });
 
-  // If scrolled to the bottom of the page, forcefully activate the last section (Contact)
   if ((window.innerHeight + Math.round(window.scrollY)) >= document.body.offsetHeight - 50) {
     currentSection = 'contact';
   }
@@ -61,7 +61,7 @@ window.addEventListener('scroll', () => {
     }
   });
 
-  // Mobile links (excluding the specifically styled Contact button)
+  // Mobile links
   mobileLinks.forEach(link => {
     const href = link.getAttribute('href');
     if (!href || !href.startsWith('#') || href === '#contact') return;
@@ -78,12 +78,47 @@ window.addEventListener('scroll', () => {
 
 // Trigger dynamic updates on load
 window.addEventListener('load', () => {
-  // Set dynamic copyright year
   const yearElement = document.getElementById('current-year');
   if (yearElement) yearElement.textContent = new Date().getFullYear();
 
-  // Set correct initial active link nav
   window.dispatchEvent(new Event('scroll'));
+});
+
+// --- Theme Toggle Logic ---
+function initThemeToggle() {
+  const desktopBtn = document.getElementById('theme-toggle');
+  const mobileBtn = document.getElementById('theme-toggle-mobile');
+  const desktopIcon = document.getElementById('theme-toggle-icon');
+  const mobileIcon = document.getElementById('theme-toggle-icon-mobile');
+
+  function updateIcons(isLight) {
+    [desktopIcon, mobileIcon].forEach(icon => {
+      if (!icon) return;
+      if (isLight) {
+        icon.className = 'fas fa-moon text-base text-indigo-400';
+      } else {
+        icon.className = 'fas fa-sun text-base text-yellow-400';
+      }
+    });
+  }
+
+  // Set initial icon state on load
+  const isLightInitial = document.documentElement.classList.contains('light-theme');
+  updateIcons(isLightInitial);
+
+  function handleThemeSwitch() {
+    const isLightNow = document.documentElement.classList.toggle('light-theme');
+    localStorage.setItem('theme', isLightNow ? 'light' : 'dark');
+    updateIcons(isLightNow);
+    window.dispatchEvent(new Event('scroll'));
+  }
+
+  if (desktopBtn) desktopBtn.addEventListener('click', handleThemeSwitch);
+  if (mobileBtn) mobileBtn.addEventListener('click', handleThemeSwitch);
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  initThemeToggle();
 });
 
 // --- Scroll Activation logic for the Widget panel overlay ---
@@ -93,11 +128,9 @@ const triggerSection = document.getElementById('counter-trigger-section');
 const scrollObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
-      // Fade and slide it into view when scrolling down past reviews
       analyticsPanel.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
       analyticsPanel.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
     } else {
-      // Hide it again cleanly when scrolling back above the reviews section
       analyticsPanel.classList.add('opacity-0', 'translate-y-10', 'pointer-events-none');
       analyticsPanel.classList.remove('opacity-100', 'translate-y-0', 'pointer-events-auto');
     }
@@ -108,7 +141,6 @@ if (triggerSection) {
   scrollObserver.observe(triggerSection);
 }
 
-// Global toggle logic for analytics box accordion frame
 function toggleAnalyticsBody() {
   const body = document.getElementById('analytics-body');
   const arrow = document.getElementById('analytics-arrow');
@@ -124,7 +156,7 @@ function toggleAnalyticsBody() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  // --- Counter Animation logic using IntersectionObserver ---
+  // Counter Animation logic
   const counters = document.querySelectorAll('.counter');
   const speed = 60;
 
@@ -157,25 +189,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   counters.forEach(counter => counterObserver.observe(counter));
 
-  // --- Scroll Activation logic for the Widget panel overlay ---
-  const analyticsPanel = document.getElementById('analytics-panel');
-  const triggerSection = document.getElementById('counter-trigger-section');
-
-  const scrollObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        // Fade and slide it into physical interactive view state layout
-        analyticsPanel.classList.remove('opacity-0', 'translate-y-10', 'pointer-events-none');
-        analyticsPanel.classList.add('opacity-100', 'translate-y-0', 'pointer-events-auto');
-      }
-    });
-  }, { threshold: 0.1 });
-
-  if (triggerSection) {
-    scrollObserver.observe(triggerSection);
-  }
-
-  // --- Analytics Realtime Activity Simulator logic ---
+  // Analytics Realtime Activity Simulator logic
   const activeEl = document.getElementById('stat-active');
   const viewsEl = document.getElementById('stat-views');
 
@@ -214,19 +228,14 @@ document.addEventListener('DOMContentLoaded', () => {
       return response.json();
     })
     .then(data => {
-      // -------------------------------------------------------------
-      // PART A: Update Top Stats Counter Targets
-      // -------------------------------------------------------------
       const rawTotal = parseInt(data.total_reviews, 10) || 0;
       const rawRating = parseFloat(data.rating) || 0.0;
 
-      // 1. Total Reviews -> Floor to nearest 10 (e.g., 769 -> 760)
       if (totalCounter && rawTotal > 0) {
         const roundedTotal = Math.floor(rawTotal / 10) * 10;
         totalCounter.setAttribute('data-target', roundedTotal);
       }
 
-      // 2. 5-Star Ratings -> Floor to nearest 10
       if (starCounter && rawTotal > 0) {
         let fiveStarPercentage = (rawRating - 3.0) / (5.0 - 3.0);
         fiveStarPercentage = Math.max(0.1, Math.min(1.0, fiveStarPercentage));
@@ -236,16 +245,12 @@ document.addEventListener('DOMContentLoaded', () => {
         starCounter.setAttribute('data-target', roundedStars);
       }
 
-      // 3. Average Rating
       if (averageCounter && rawRating > 0) {
         averageCounter.setAttribute('data-target', rawRating.toFixed(1));
       }
 
-      // -------------------------------------------------------------
-      // PART B: Build Infinite Marquee Cards
-      // -------------------------------------------------------------
       if (marqueeTrack && data.reviews && data.reviews.length > 0) {
-        marqueeTrack.innerHTML = ''; // Clear loader
+        marqueeTrack.innerHTML = '';
 
         const highRatings = data.reviews.filter(item => item.rating === 5);
         const displayList = highRatings.length > 0 ? highRatings : data.reviews;
@@ -263,20 +268,20 @@ document.addEventListener('DOMContentLoaded', () => {
             : item.snippet;
 
           return `
-            <div class="w-[350px] shrink-0 p-6 rounded-2xl glass-panel border border-gray-700/60 flex flex-col gap-4 transition-all hover:scale-[1.02] hover:border-gray-500/60 whitespace-normal">
+            <div class="w-[350px] shrink-0 p-6 rounded-2xl glass-panel border theme-border flex flex-col gap-4 transition-all hover:scale-[1.02] theme-border-hover whitespace-normal">
                 <div class="flex items-center gap-2 text-yellow-500 text-sm">
                     ${starsHTML}
                 </div>
-                <p class="text-gray-300 flex-grow italic text-[15px] leading-relaxed block whitespace-normal break-words">
+                <p class="theme-text-muted flex-grow italic text-[15px] leading-relaxed block whitespace-normal break-words">
                     "${truncatedSnippet}"
                 </p>
                 <div class="flex items-center gap-3 mt-2">
                     ${item.user.thumbnail ?
-              `<img src="${item.user.thumbnail}" alt="${item.user.name}" class="w-10 h-10 rounded-full border border-gray-700/60 object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 font-bold border border-brand-500/30\\'>${initial}</div>'"/>`
+              `<img src="${item.user.thumbnail}" alt="${item.user.name}" class="w-10 h-10 rounded-full border theme-border object-cover" onerror="this.onerror=null; this.parentElement.innerHTML='<div class=\\'w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 font-bold border border-brand-500/30\\'>${initial}</div>'"/>`
               : `<div class="w-10 h-10 rounded-full bg-brand-500/20 flex items-center justify-center text-brand-400 font-bold border border-brand-500/30">${initial}</div>`
             }
                     <div class="text-sm">
-                        <p class="text-white font-bold tracking-wide">${item.user.name}</p>
+                        <p class="theme-text-heading font-bold tracking-wide">${item.user.name}</p>
                     </div>
                 </div>
             </div>
@@ -293,7 +298,6 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .catch(error => console.error('⚠️ Reviews system load error:', error))
     .finally(() => {
-      // Crucial: Fire counter animation ONLY after data-target attributes are guaranteed to be set
       if (typeof initCounters === 'function') {
         initCounters();
       }
@@ -316,12 +320,9 @@ document.addEventListener('DOMContentLoaded', () => {
   fjs.parentNode.insertBefore(js, fjs);
 })(document, 'script', 'tomorrow-sdk');
 
-// ---------------------------------------------------------------------------
-// Document Title Manager (SEO Friendly)
-// ---------------------------------------------------------------------------
+// Document Title Manager
 const defaultBrandTitle = "Mahakaal 🔱 Tours & Bike Rentals";
 
-// Function to update document title
 function updatePageTitle(sectionName) {
   if (!sectionName || sectionName.toLowerCase() === 'home' || sectionName.toLowerCase() === 'hero') {
     document.title = defaultBrandTitle;
@@ -330,11 +331,10 @@ function updatePageTitle(sectionName) {
   }
 }
 
-// Handle dynamic title update on Scroll
 const sections = document.querySelectorAll('section[id]');
 const observerOptions = {
   root: null,
-  rootMargin: '-20% 0px -70% 0px', // Triggers as sections enter view
+  rootMargin: '-20% 0px -70% 0px',
   threshold: 0
 };
 
@@ -346,7 +346,6 @@ const sectionObserver = new IntersectionObserver((entries) => {
       if (sectionId === 'home' || sectionId === 'hero') {
         updatePageTitle('Home');
       } else {
-        // Capitalize first letter (e.g., 'destinations' -> 'Destinations')
         const formattedName = sectionId.charAt(0).toUpperCase() + sectionId.slice(1);
         updatePageTitle(formattedName);
       }
@@ -356,38 +355,22 @@ const sectionObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(section => sectionObserver.observe(section));
 
-// Fallback: Reset title to default if scrolled near the top of the page
 window.addEventListener('scroll', () => {
   if (window.scrollY < 100) {
     updatePageTitle('Home');
   }
 });
 
-// ---------------------------------------------------------------------------
 // WhatsApp Button Configuration
-// ---------------------------------------------------------------------------
 document.addEventListener("DOMContentLoaded", function () {
-  // Get phone number from central config file
   const phoneNumber = SITE_CONFIG.WHATSAPP_NUMBER;
-  // console.log(phoneNumber);
-
-  // Custom query message
   const queryMsg = "Hello! I'm interested in your tour packages. Can you please provide me with more information?";
-
-  // Construct official WhatsApp API URL
-  const waUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(queryMsg)}`;
-  // Clean short URL shown in browser preview on hover
   const shortWaUrl = `https://wa.me/${phoneNumber}`;
-  // Assign link to button
-  // const waBtn = document.getElementById("wa-float-btn");
-  // if (waBtn) {
-  //   waBtn.href = waUrl;
-  // }
+
   const waBtn = document.getElementById("wa-float-btn");
   if (waBtn) {
     waBtn.href = shortWaUrl;
 
-    // Dynamically append the full message when clicked
     waBtn.addEventListener("click", function (e) {
       e.preventDefault();
       const fullWaUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(queryMsg)}`;
@@ -395,3 +378,190 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 });
+
+// Updated Navbar Scroll Handler in script.js
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return; // Guard clause if navbar is missing
+
+  const isLight = document.documentElement.classList.contains('light-theme');
+
+  if (window.scrollY > 50) {
+    navbar.classList.add('shadow-lg');
+    navbar.style.backgroundColor = isLight ? 'rgba(255, 255, 255, 0.95)' : 'rgba(17, 24, 39, 0.90)';
+  } else {
+    navbar.classList.remove('shadow-lg');
+    navbar.style.backgroundColor = isLight ? 'rgba(255, 255, 255, 0.88)' : 'rgba(17, 24, 39, 0.75)';
+  }
+
+  // Active Nav Link highlight on Scroll (Desktop)
+  const sections = document.querySelectorAll('main, section[id]');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  let currentSection = '';
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    if (window.scrollY >= (sectionTop - 200)) {
+      currentSection = section.getAttribute('id') || '';
+    }
+  });
+
+  const activeHref = currentSection ? `#${currentSection}` : '#';
+
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (!href || !href.startsWith('#')) return;
+
+    if (href === activeHref) {
+      link.classList.add('font-bold');
+      link.style.color = '#059669'; // High contrast green for active tab
+    } else {
+      link.classList.remove('font-bold');
+      link.style.color = ''; // Reverts back to --nav-link-color CSS variable
+    }
+  });
+
+  // Also trigger mobile active link updater on scroll
+  updateActiveNavLink();
+});
+
+// --- Active Nav Link Scroll Handler for Mobile/General ---
+function updateActiveNavLink() {
+  const scrollPosition = window.scrollY || window.pageYOffset;
+  const navLinks = document.querySelectorAll('.mobile-nav-link, .nav-link');
+
+  // Get all targetable sections
+  const sections = Array.from(document.querySelectorAll('section[id], main[id], header[id], div[id]'));
+
+  let currentSection = '';
+
+  // 1. Force 'home' active if scrolled near the top
+  if (scrollPosition < 150) {
+    currentSection = 'home';
+  } else {
+    // 2. Check each section's offset position
+    const navbarHeight = 100; // Account for top navbar space
+
+    for (let i = 0; i < sections.length; i++) {
+      const section = sections[i];
+      const sectionId = section.getAttribute('id');
+      if (!sectionId) continue;
+
+      const top = section.offsetTop - navbarHeight;
+      const bottom = top + section.offsetHeight;
+
+      if (scrollPosition >= top && scrollPosition < bottom) {
+        currentSection = sectionId.toLowerCase();
+        break; // Stop at the matching active section
+      }
+    }
+  }
+
+  // 3. Apply active class
+  navLinks.forEach((link) => {
+    if (!link) return;
+    link.classList.remove('active');
+    const href = link.getAttribute('href');
+
+    if (!href) return;
+
+    const targetId = href.replace('#', '').toLowerCase();
+
+    if (
+      (targetId === 'home' || href === '#' || href === '') && currentSection === 'home'
+    ) {
+      link.classList.add('active');
+    } else if (targetId && targetId === currentSection) {
+      link.classList.add('active');
+    }
+  });
+}
+
+// Mobile Nav Toggle with Safe Icon Class Switching
+function toggleMobileNav() {
+  const mobileMenu = document.getElementById('mobile-menu');
+  const navIcon = document.getElementById('nav-icon');
+
+  if (mobileMenu) {
+    mobileMenu.classList.toggle('hidden');
+
+    // Toggle icon safely
+    if (navIcon) {
+      if (mobileMenu.classList.contains('hidden')) {
+        navIcon.className = 'fas fa-bars'; // Restores hamburger icon when menu closes
+      } else {
+        navIcon.className = 'fas fa-times'; // Changes to 'X' close icon when menu opens
+      }
+    }
+
+    // Immediately recalculate active item when menu opens
+    if (!mobileMenu.classList.contains('hidden')) {
+      updateActiveNavLink();
+    }
+  }
+}
+
+// Bind scroll and DOM ready events
+window.addEventListener('scroll', updateActiveNavLink);
+window.addEventListener('DOMContentLoaded', updateActiveNavLink);
+
+// Cycles All Background Images Dynamically
+// function startBackgroundSlideshow() {
+//   const slides = document.querySelectorAll('.bg-slide');
+//   if (slides.length === 0) return;
+
+//   let currentSlide = 0;
+
+//   setInterval(() => {
+//     // Hide current slide
+//     slides[currentSlide].classList.remove('opacity-70', 'opacity-90');
+//     slides[currentSlide].classList.add('opacity-0');
+
+//     // Move to next slide (loops automatically using modulo)
+//     currentSlide = (currentSlide + 1) % slides.length;
+
+//     // Show next slide
+//     slides[currentSlide].classList.remove('opacity-0');
+//     slides[currentSlide].classList.add('opacity-70');
+//   }, 5000); // Transitions every 5 seconds
+// }
+
+// document.addEventListener('DOMContentLoaded', startBackgroundSlideshow);
+
+function initBackgroundSlideshow() {
+  const slideshowContainer = document.querySelector('.bg-slide')?.parentElement;
+  const slides = document.querySelectorAll('.bg-slide');
+
+  if (!slides.length || !slideshowContainer) return;
+
+  // --- RANDOM EFFECT SELECTOR PER REFRESH / SESSION ---
+  // Option A: Use sessionStorage so it stays uniform while clicking around, but randomized per session
+  let selectedEffect = sessionStorage.getItem('slideshowEffect');
+
+  if (!selectedEffect) {
+    // 50% chance for Zoom-In, 50% chance for Blur-to-Focus
+    selectedEffect = Math.random() < 0.5 ? 'transition-zoom' : 'transition-blur';
+    sessionStorage.setItem('slideshowEffect', selectedEffect);
+  }
+
+  // Apply the chosen effect class to the container parent
+  slideshowContainer.classList.add(selectedEffect);
+  console.log(`Slideshow initialized with effect: ${selectedEffect}`);
+
+  if (slides.length < 2) return;
+
+  let currentIndex = 0;
+
+  // Cycle through images every 5 seconds
+  setInterval(() => {
+    slides[currentIndex].classList.remove('active');
+    currentIndex = (currentIndex + 1) % slides.length;
+    slides[currentIndex].classList.add('active');
+  }, 5000);
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initBackgroundSlideshow);
+} else {
+  initBackgroundSlideshow();
+}

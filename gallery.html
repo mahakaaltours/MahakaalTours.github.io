@@ -7,6 +7,18 @@
     <title>Gallery - Mahakaal 🔱 Tours & Bike Rental</title>
     <link rel="icon" href="fav.png" type="image/png">
 
+    <!-- Immediate Theme Check (Prevents Flash of Unstyled Content) -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-theme');
+            } else {
+                document.documentElement.classList.remove('light-theme');
+            }
+        })();
+    </script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,17 +59,17 @@
 
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Custom scrollbar for gallery */
+        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #111827;
+            background: #0f172a;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #374151;
+            background: #334155;
             border-radius: 4px;
         }
 
@@ -65,64 +77,115 @@
             background: #10b981;
         }
 
-        .lightbox-enter {
-            opacity: 0;
-            transform: scale(0.9);
+        /* Dark Mode Default Styles */
+        body {
+            background-color: #090d16;
+            color: #f8fafc;
         }
 
-        .lightbox-enter-active {
-            opacity: 1;
-            transform: scale(1);
-            transition: opacity 300ms, transform 300ms;
+        #gallery-nav {
+            background-color: rgba(15, 23, 42, 0.75);
+            border-color: rgba(51, 65, 85, 0.5);
         }
 
-        .lightbox-exit {
-            opacity: 1;
-            transform: scale(1);
+        #video-overlay {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.90));
         }
 
-        .lightbox-exit-active {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 300ms, transform 300ms;
+        .gallery-card {
+            background-color: rgba(30, 41, 59, 0.8);
+            border-color: rgba(51, 65, 85, 0.6);
+        }
+
+        /* Light Theme Styles (Fixed Video Transparency & Contrast) */
+        /* Light theme background for the theme toggle button */
+        .light-theme #themeToggle {
+            background-color: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        .light-theme body {
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .light-theme #gallery-nav {
+            background-color: rgba(255, 255, 255, 0.90);
+            border-color: rgba(203, 213, 225, 0.8);
+        }
+
+        /* Clean overlay to show video clearly without white haze */
+        .light-theme #video-overlay {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.40), rgba(241, 245, 249, 0.20), rgba(255, 255, 255, 0.50));
+            mix-blend-mode: normal;
+        }
+
+        .light-theme h2,
+        .light-theme .gallery-title {
+            color: #0f172a !important;
+            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+        }
+
+        .light-theme .gallery-subtitle {
+            color: #334155 !important;
+            font-weight: 500;
+        }
+
+        .light-theme .gallery-card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-color: rgba(203, 213, 225, 0.8);
+        }
+
+        .light-theme footer {
+            background-color: #e2e8f0;
+            border-color: #cbd5e1;
+        }
+
+        .light-theme footer p {
+            color: #475569;
         }
     </style>
 </head>
 
 <body
-    class="font-sans antialiased text-gray-100 overflow-x-hidden selection:bg-brand-500 selection:text-white min-h-screen flex flex-col bg-transparent">
+    class="font-sans antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white min-h-screen flex flex-col bg-transparent transition-colors duration-300">
 
     <!-- Video Background -->
     <div class="fixed inset-0 z-[-1]">
-        <video id="bgVideo" autoplay loop muted playsinline class="w-full h-full object-cover opacity-70">
-            <!-- <source src="media/ed18fc17-be92-4858-a4d0-9973872c4649.mp4" type="video/mp4"> -->
+        <video id="bgVideo" autoplay loop muted playsinline class="w-full h-full object-cover">
             <source src="media/video_2026-07-26_20-48-45.mp4" type="video/mp4">
         </video>
-        <!-- Dark gradient overlay to ensure gallery images pop -->
-        <div
-            class="absolute inset-0 bg-gradient-to-b from-gray-900/90 via-gray-900/75 to-gray-900/95 mix-blend-multiply">
+        <!-- Overlay -->
+        <div id="video-overlay" class="absolute inset-0 transition-all duration-300 pointer-events-none">
         </div>
     </div>
 
     <!-- Navigation -->
-    <nav
-        class="fixed w-full z-40 transition-all duration-300 backdrop-blur-md bg-gray-900/60 border-b border-gray-700/50">
+    <nav id="gallery-nav" class="fixed w-full z-40 transition-all duration-300 backdrop-blur-md border-b">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-20">
                 <div class="flex-shrink-0">
                     <a href="index.html" class="flex items-center group">
                         <div
                             class="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center mr-3 border border-brand-500/20 group-hover:bg-brand-500/20 transition-colors">
-                            <i class="fas fa-arrow-left text-brand-400"></i>
+                            <i class="fas fa-arrow-left text-brand-600 dark:text-brand-400"></i>
                         </div>
                         <h1
-                            class="text-xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-400 to-teal-300 group-hover:from-brand-300 group-hover:to-teal-200 transition-all">
+                            class="text-xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-teal-600 dark:from-brand-400 dark:to-teal-300 group-hover:opacity-80 transition-all">
                             Back to Home
                         </h1>
                     </a>
                 </div>
-                <div class="text-gray-300 font-display font-semibold text-lg hidden sm:block">
-                    Our Gallery
+                <div class="flex items-center space-x-4">
+                    <div class="gallery-title font-display font-semibold text-lg hidden sm:block">
+                        Our Gallery
+                    </div>
+
+                    <!-- Theme Toggle Button -->
+                    <button id="themeToggle" aria-label="Toggle Theme"
+                        class="p-2.5 rounded-full bg-gray-800/20 hover:bg-gray-800/30 dark:bg-gray-800 dark:hover:bg-gray-700 text-amber-500 dark:text-yellow-400 border border-gray-300 dark:border-gray-700 transition-all duration-300 flex items-center justify-center shadow-sm">
+                        <i id="themeIcon" class="fas fa-moon text-lg"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -131,23 +194,27 @@
     <!-- Gallery Header -->
     <main class="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10">
         <div class="mb-12 text-center">
-            <h2 class="text-4xl md:text-5xl font-display font-bold text-white mb-4 animate-fade-in-up">Capturing
-                Memories</h2>
+            <h2
+                class="text-4xl md:text-5xl font-display font-bold mb-4 animate-fade-in-up transition-colors duration-300">
+                Capturing Memories
+            </h2>
             <div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mb-6"></div>
-            <p class="text-gray-400 max-w-2xl mx-auto text-lg animate-fade-in-up delay-200">A glimpse into the stunning
-                landscapes, majestic views, and unforgettable journeys.</p>
+            <p
+                class="gallery-subtitle max-w-2xl mx-auto text-lg animate-fade-in-up delay-200 transition-colors duration-300">
+                A glimpse into the stunning landscapes, majestic views, and unforgettable journeys.
+            </p>
         </div>
 
         <!-- Gallery Grid -->
         <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4" id="galleryGrid">
-            <!-- Images will be dynamically injected here -->
+            <!-- Images dynamically injected here -->
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 bg-gray-950 text-center border-t border-gray-800/50 mt-auto relative z-10">
-        <p class="text-gray-500 font-medium tracking-wide text-sm">&copy; 2024 Mahakaal Tours & Bike Rental. All rights
-            reserved.</p>
+    <footer
+        class="py-8 bg-gray-950 text-center border-t border-gray-800/50 mt-auto relative z-10 transition-colors duration-300">
+        <p class="font-medium tracking-wide text-sm">&copy; 2024 Mahakaal Tours & Bike Rental. All rights reserved.</p>
     </footer>
 
     <!-- Lightbox Modal -->
@@ -157,7 +224,7 @@
         <!-- Top actions -->
         <div
             class="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-gradient-to-b from-black/80 to-transparent">
-            <div class="text-gray-400 font-medium tracking-wider text-sm px-4" id="imageCounter">1 / 10</div>
+            <div class="text-gray-300 font-medium tracking-wider text-sm px-4" id="imageCounter">1 / 10</div>
             <button id="closeBtn"
                 class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all backdrop-blur-md">
                 <i class="fas fa-times text-xl"></i>
@@ -184,8 +251,48 @@
         </div>
     </div>
 
+    <!-- Main JavaScript file -->
+    <script src="script.js"></script>
+
     <script>
-        // List of images from the media folder
+        // --- Theme Toggle Logic ---
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateThemeUI() {
+            const isLight = document.documentElement.classList.contains('light-theme');
+            if (themeIcon) {
+                // Show Moon icon in Light mode, Sun icon in Dark mode
+                themeIcon.className = isLight
+                    ? 'fas fa-moon text-base text-indigo-400'
+                    : 'fas fa-sun text-base text-yellow-400';
+                // themeIcon.className = isLight ? 'fas fa-sun text-amber-500 text-lg' : 'fas fa-moon text-yellow-400 text-lg';
+            }
+            if (themeToggle) {
+                // Update the button container background and border color
+                if (isLight) {
+                    themeToggle.classList.remove('bg-slate-800', 'border-slate-700');
+                    themeToggle.classList.add('bg-slate-100', 'border-slate-300');
+                } else {
+                    themeToggle.classList.remove('bg-slate-100', 'border-slate-300');
+                    themeToggle.classList.add('bg-slate-800', 'border-slate-700');
+                }
+            }
+        }
+
+        // Initialize theme UI state on load
+        updateThemeUI();
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('light-theme');
+                const isLight = document.documentElement.classList.contains('light-theme');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                updateThemeUI();
+            });
+        }
+
+        // --- Gallery Lightbox & Images ---
         const images = [
             "Almora.jpg", "Almora_2.jpg", "Almora_3.jpg", "Almora_4.jpg",
             "PicsArt_10-24-05.49.47.jpg", "PicsArt_03-11-11.31.17.jpg",
@@ -217,7 +324,7 @@
         // Inject images into grid
         images.forEach((img, index) => {
             const div = document.createElement('div');
-            div.className = 'break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl bg-gray-800 border border-gray-700 hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300';
+            div.className = 'gallery-card break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl border hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300';
 
             const imageEl = document.createElement('img');
             imageEl.src = `media/${img}`;
@@ -242,7 +349,6 @@
             updateLightboxImage();
             lightbox.classList.remove('hidden');
             lightbox.classList.add('flex');
-            // Small delay for fade in effect
             setTimeout(() => {
                 lightbox.classList.remove('opacity-0');
                 lightbox.classList.add('opacity-100');
@@ -286,7 +392,7 @@
 
         // Set Background Video Playback Speed
         const bgVideo = document.getElementById('bgVideo');
-        if (bgVideo) bgVideo.playbackRate = 0.5; // (0.5 means half speed, 1.0 is normal, 2.0 is double)
+        if (bgVideo) bgVideo.playbackRate = 0.5;
 
         // Event Listeners
         closeBtn.addEventListener('click', closeLightbox);
