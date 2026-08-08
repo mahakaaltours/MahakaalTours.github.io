@@ -14,4 +14,5 @@ module.exports = [
     "VCard2.png",
     "20230823_145118.jpg",
     "IMG-20221030-WA0000.jpg",
+    "IMG-20230224-WA0030.jpg",
 ];
