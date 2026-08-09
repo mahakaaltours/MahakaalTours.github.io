@@ -7,7 +7,7 @@
     <title>Gallery - Mahakaal 🔱 Tours & Bike Rental</title>
     <link rel="icon" href="fav.png" type="image/png">
 
-    <!-- Immediate Theme Check (Prevents Flash of Unstyled Content) -->
+    <!-- Immediate Theme Check -->
     <script>
         (function () {
             const savedTheme = localStorage.getItem('theme');
@@ -19,11 +19,13 @@
         })();
     </script>
     <script src="gallery-data.js"></script>
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
@@ -40,16 +42,9 @@
                     },
                     colors: {
                         brand: {
-                            50: '#ecfdf5',
-                            100: '#d1fae5',
-                            200: '#a7f3d0',
-                            300: '#6ee7b7',
-                            400: '#34d399',
-                            500: '#10b981',
-                            600: '#059669',
-                            700: '#047857',
-                            800: '#065f46',
-                            900: '#064e3b'
+                            50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7',
+                            400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857',
+                            800: '#065f46', 900: '#064e3b'
                         }
                     }
                 }
@@ -59,9 +54,9 @@
 
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* Custom scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
+            height: 6px;
         }
 
         ::-webkit-scrollbar-track {
@@ -77,7 +72,6 @@
             background: #10b981;
         }
 
-        /* Dark Mode Default Styles */
         body {
             background-color: #090d16;
             color: #f8fafc;
@@ -92,18 +86,92 @@
             background: linear-gradient(to bottom, rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.65), rgba(15, 23, 42, 0.90));
         }
 
-        .gallery-card {
-            background-color: rgba(30, 41, 59, 0.8);
-            border-color: rgba(51, 65, 85, 0.6);
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
         }
 
-        /* Light Theme Styles (Fixed Video Transparency & Contrast) */
-        /* Light theme background for the theme toggle button */
-        .light-theme #themeToggle {
-            background-color: #f1f5f9 !important;
-            border-color: #cbd5e1 !important;
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
+        /* Category Pills Styling */
+        .category-btn {
+            white-space: nowrap;
+            transition: all 0.25s ease;
+        }
+
+        /* Dark Mode Pill States */
+        .category-btn.active {
+            background-color: #0f172a;
+            color: #ffffff;
+            border-color: #38bdf8;
+            box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+        }
+
+        .category-btn:not(.active) {
+            background-color: rgba(255, 255, 255, 0.05);
+            color: #cbd5e1;
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .category-btn:not(.active):hover {
+            background-color: rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* 3D Coverflow Carousel Stage */
+        .coverflow-stage {
+            perspective: 1200px;
+            position: relative;
+            height: 520px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Card — handles ONLY the 3D positioning/transform */
+        .coverflow-card {
+            position: absolute;
+            width: 320px;
+            height: 440px;
+            transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .coverflow-card {
+                width: 360px;
+                height: 480px;
+            }
+        }
+
+        /* Inner wrapper — handles clipping and rounding (no 3D transform on this element) */
+        .coverflow-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+
+        /* Expand overlay: show only on hover, CSS-driven */
+        .coverflow-card .card-overlay {
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .coverflow-card:hover .card-overlay {
+            opacity: 1;
+        }
+
+        /* Light Theme Adjustments */
         .light-theme body {
             background-color: #f1f5f9;
             color: #0f172a;
@@ -114,50 +182,87 @@
             border-color: rgba(203, 213, 225, 0.8);
         }
 
-        /* Clean overlay to show video clearly without white haze */
         .light-theme #video-overlay {
             background: linear-gradient(to bottom, rgba(255, 255, 255, 0.40), rgba(241, 245, 249, 0.20), rgba(255, 255, 255, 0.50));
-            mix-blend-mode: normal;
         }
 
         .light-theme h2,
         .light-theme .gallery-title {
             color: #0f172a !important;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
         }
 
         .light-theme .gallery-subtitle {
             color: #334155 !important;
-            font-weight: 500;
         }
 
-        .light-theme .gallery-card {
-            background-color: rgba(255, 255, 255, 0.9);
-            border-color: rgba(203, 213, 225, 0.8);
+        .light-theme #themeToggle {
+            background-color: #f1f5f9 !important;
+            border-color: #cbd5e1 !important;
         }
 
-        .light-theme footer {
-            background-color: #e2e8f0;
+        .light-theme .category-btn.active {
+            background-color: #0f172a;
+            color: #ffffff;
+            border-color: #0f172a;
+            box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+        }
+
+        .light-theme .category-btn:not(.active) {
+            background-color: #ffffff;
+            color: #475569;
             border-color: #cbd5e1;
         }
 
-        .light-theme footer p {
-            color: #475569;
+        .light-theme .category-btn:not(.active):hover {
+            background-color: #f8fafc;
+            color: #0f172a;
+            border-color: #94a3b8;
+        }
+
+        /* Round Navigation Buttons */
+        .nav-circle-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(8px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #ffffff;
+            transition: all 0.25s ease;
+        }
+
+        .nav-circle-btn:hover {
+            background: rgba(16, 185, 129, 0.9);
+            border-color: #10b981;
+            transform: scale(1.08);
+        }
+
+        .light-theme .nav-circle-btn {
+            border-color: #cbd5e1;
+            background: rgba(255, 255, 255, 0.9);
+            color: #0f172a;
+        }
+
+        .light-theme .nav-circle-btn:hover {
+            background: #0f172a;
+            color: #ffffff;
+            border-color: #0f172a;
         }
     </style>
 </head>
 
 <body
-    class="font-sans antialiased overflow-x-hidden selection:bg-brand-500 selection:text-white min-h-screen flex flex-col bg-transparent transition-colors duration-300">
+    class="font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col bg-transparent transition-colors duration-300">
 
     <!-- Video Background -->
     <div class="fixed inset-0 z-[-1]">
         <video id="bgVideo" autoplay loop muted playsinline class="w-full h-full object-cover">
             <source src="media/video_2026-07-26_20-48-45.mp4" type="video/mp4">
         </video>
-        <!-- Overlay -->
-        <div id="video-overlay" class="absolute inset-0 transition-all duration-300 pointer-events-none">
-        </div>
+        <div id="video-overlay" class="absolute inset-0 transition-all duration-300 pointer-events-none"></div>
     </div>
 
     <!-- Navigation -->
@@ -180,10 +285,8 @@
                     <div class="gallery-title font-display font-semibold text-lg hidden sm:block">
                         Our Gallery
                     </div>
-
-                    <!-- Theme Toggle Button -->
                     <button id="themeToggle" aria-label="Toggle Theme"
-                        class="w-8 h-8 flex-shrink-0 rounded-full bg-gray-800/20 hover:bg-gray-800/30 dark:bg-gray-800 dark:hover:bg-gray-700 text-amber-500 dark:text-yellow-400 border border-gray-300 dark:border-gray-700 transition-all duration-300 flex items-center justify-center shadow-sm">
+                        class="w-8 h-8 flex-shrink-0 rounded-full bg-gray-800/20 hover:bg-gray-800/30 text-amber-500 dark:text-yellow-400 border border-gray-300 dark:border-gray-700 transition-all duration-300 flex items-center justify-center shadow-sm">
                         <i id="themeIcon" class="fas fa-moon text-sm"></i>
                     </button>
                 </div>
@@ -191,37 +294,66 @@
         </div>
     </nav>
 
-    <!-- Gallery Header -->
-    <main class="flex-grow pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10">
-        <div class="mb-12 text-center">
+    <!-- Main Content Stage -->
+    <main
+        class="flex-grow pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
+
+        <!-- Header -->
+        <div class="mb-6 text-center">
             <h2
-                class="text-4xl md:text-5xl font-display font-bold mb-4 animate-fade-in-up transition-colors duration-300">
+                class="text-3xl md:text-5xl font-display font-bold mb-3 animate-fade-in-up transition-colors duration-300">
                 Capturing Memories
             </h2>
-            <div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mb-6"></div>
-            <p
-                class="gallery-subtitle max-w-2xl mx-auto text-lg animate-fade-in-up delay-200 transition-colors duration-300">
+            <div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mb-4"></div>
+            <p class="gallery-subtitle max-w-2xl mx-auto text-base sm:text-lg transition-colors duration-300">
+                <!-- Explore Uttarakhand destinations through our 3D interactive showcase. -->
                 A glimpse into the stunning landscapes, majestic views, and unforgettable journeys.
             </p>
         </div>
 
-        <!-- Gallery Grid -->
-        <div class="columns-1 sm:columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4" id="galleryGrid">
-            <!-- Images dynamically injected here -->
+        <!-- Category Pills Filter Bar -->
+        <div class="relative max-w-7xl mx-auto mb-6 w-full px-2 sm:px-6">
+            <div id="categoryContainer"
+                class="flex items-center gap-3 overflow-x-auto no-scrollbar py-3 px-3 scroll-smooth justify-start md:justify-center">
+                <!-- Dynamic Pill Buttons Injected Here -->
+            </div>
+        </div>
+
+        <!-- 3D Coverflow Stage -->
+        <div class="coverflow-stage" id="coverflowStage">
+            <!-- Cards dynamically rendered here -->
+        </div>
+
+        <!-- Bottom Controls -->
+        <div class="flex flex-col items-center justify-center gap-3 mt-6">
+            <div class="flex items-center gap-6">
+                <button id="prevCardBtn" aria-label="Previous Image" class="nav-circle-btn shadow-lg">
+                    <i class="fas fa-arrow-left text-lg"></i>
+                </button>
+                <span id="carouselCounter"
+                    class="text-sm font-semibold tracking-wider opacity-80 min-w-[70px] text-center">
+                    1 / 1
+                </span>
+                <button id="nextCardBtn" aria-label="Next Image" class="nav-circle-btn shadow-lg">
+                    <i class="fas fa-arrow-right text-lg"></i>
+                </button>
+            </div>
+            <!-- Autoplay progress bar -->
+            <div class="w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
+                <div id="autoplayProgress" class="h-full bg-brand-400 rounded-full" style="width:0%"></div>
+            </div>
         </div>
     </main>
 
     <!-- Footer -->
     <footer
-        class="py-8 bg-gray-950 text-center border-t border-gray-800/50 mt-auto relative z-10 transition-colors duration-300">
+        class="py-6 bg-gray-950 text-center border-t border-gray-800/50 mt-auto relative z-10 transition-colors duration-300">
         <p class="font-medium tracking-wide text-sm">&copy; 2024 Mahakaal Tours & Bike Rental. All rights reserved.</p>
     </footer>
 
     <!-- Lightbox Modal -->
     <div id="lightbox"
         class="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300">
-
-        <!-- Top actions -->
         <div
             class="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-gradient-to-b from-black/80 to-transparent">
             <div class="text-gray-300 font-medium tracking-wider text-sm px-4" id="imageCounter">1 / 10</div>
@@ -231,29 +363,23 @@
             </button>
         </div>
 
-        <!-- Main Image Container -->
         <div class="relative w-full h-full flex items-center justify-center p-4 sm:p-12" id="lightboxContent">
-            <!-- Prev Button -->
-            <button id="prevBtn"
+            <button id="modalPrevBtn"
                 class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 hover:bg-brand-500/80 hover:scale-110 flex items-center justify-center text-white transition-all backdrop-blur-md z-50">
                 <i class="fas fa-chevron-left text-xl sm:text-2xl"></i>
             </button>
 
-            <!-- The Image -->
             <img id="lightboxImg" src="" alt="Gallery Image"
                 class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
 
-            <!-- Next Button -->
-            <button id="nextBtn"
+            <button id="modalNextBtn"
                 class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 hover:bg-brand-500/80 hover:scale-110 flex items-center justify-center text-white transition-all backdrop-blur-md z-50">
                 <i class="fas fa-chevron-right text-xl sm:text-2xl"></i>
             </button>
         </div>
     </div>
 
-    <!-- Main JavaScript file -->
-    <script src="script.js"></script>
-
+    <!-- Main JavaScript Logic -->
     <script>
         // --- Theme Toggle Logic ---
         const themeToggle = document.getElementById('themeToggle');
@@ -262,25 +388,9 @@
         function updateThemeUI() {
             const isLight = document.documentElement.classList.contains('light-theme');
             if (themeIcon) {
-                // Show Moon icon in Light mode, Sun icon in Dark mode
-                themeIcon.className = isLight
-                    ? 'fas fa-moon text-base text-indigo-400'
-                    : 'fas fa-sun text-base text-yellow-400';
-                // themeIcon.className = isLight ? 'fas fa-sun text-amber-500 text-lg' : 'fas fa-moon text-yellow-400 text-lg';
-            }
-            if (themeToggle) {
-                // Update the button container background and border color
-                if (isLight) {
-                    themeToggle.classList.remove('bg-slate-800', 'border-slate-700');
-                    themeToggle.classList.add('bg-slate-100', 'border-slate-300');
-                } else {
-                    themeToggle.classList.remove('bg-slate-100', 'border-slate-300');
-                    themeToggle.classList.add('bg-slate-800', 'border-slate-700');
-                }
+                themeIcon.className = isLight ? 'fas fa-moon text-base text-indigo-400' : 'fas fa-sun text-base text-yellow-400';
             }
         }
-
-        // Initialize theme UI state on load
         updateThemeUI();
 
         if (themeToggle) {
@@ -292,46 +402,294 @@
             });
         }
 
-        // --- Gallery Lightbox & Images ---
-        // const images = [
-        //     "Almora.jpg", "Almora_2.jpg", "Almora_3.jpg", "Almora_4.jpg",
-        // ];
+        // --- District Mapping ---
+        const districtKeywords = {
+            "Almora": ["almora"],
+            "Nainital": ["nainital", "naini"],
+            "Bhimtal": ["bhimtal"],
+            "Mukteshwar": ["mukteshwar"],
+            "Ranikhet": ["ranikhet"],
+            "Pithoragarh": ["pithoragarh", "birthi"],
+            "Dehradun": ["dehradun", "doon", "mussoorie"],
+            "Haridwar": ["haridwar"],
+            "Chamoli": ["chamoli", "badrinath", "auli", "hemkund"],
+            "Pauri Garhwal": ["pauri", "lansdowne"],
+            "Tehri Garhwal": ["tehri"],
+            "Rudraprayag": ["rudraprayag", "kedarnath"],
+            "Uttarkashi": ["uttarkashi", "gangotri"],
+            "US Nagar": ["pantnagar", "rudrapur"],
+            "Bageshwar": ["bageshwar", "kausani"],
+            "Champawat": ["champawat", "lohaghat"]
+        };
 
-        const galleryGrid = document.getElementById('galleryGrid');
+        function getCategory(filename) {
+            const lowerName = filename.toLowerCase();
+            for (const [district, keywords] of Object.entries(districtKeywords)) {
+                if (keywords.some(keyword => lowerName.includes(keyword))) {
+                    return district;
+                }
+            }
+            return "Others";
+        }
+
+        const categories = [
+            "All", "Almora", "Nainital", "Bhimtal", "Mukteshwar",
+            "Ranikhet", "Pithoragarh", "Dehradun", "Haridwar",
+            "Chamoli", "Pauri Garhwal", "Tehri Garhwal", "Rudraprayag",
+            "Uttarkashi", "Bageshwar", "Champawat", "US Nagar", "Others"
+        ];
+
+        let currentCategory = "All";
+        let filteredImages = [];
+        let activeIndex = 0;
+
+        const coverflowStage = document.getElementById('coverflowStage');
+        const categoryContainer = document.getElementById('categoryContainer');
+        const prevCardBtn = document.getElementById('prevCardBtn');
+        const nextCardBtn = document.getElementById('nextCardBtn');
+        const carouselCounter = document.getElementById('carouselCounter');
+
+        // Lightbox Elements
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const closeBtn = document.getElementById('closeBtn');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
+        const modalPrevBtn = document.getElementById('modalPrevBtn');
+        const modalNextBtn = document.getElementById('modalNextBtn');
         const imageCounter = document.getElementById('imageCounter');
 
-        let currentIndex = 0;
+        // --- Render Category Pills ---
+        function renderCategories() {
+            categoryContainer.innerHTML = '';
 
-        // Inject images into grid
-        images.forEach((img, index) => {
-            const div = document.createElement('div');
-            div.className = 'gallery-card break-inside-avoid relative group cursor-pointer overflow-hidden rounded-xl border hover:shadow-[0_0_20px_rgba(16,185,129,0.3)] transition-all duration-300';
+            categories.forEach(cat => {
+                const hasImages = cat === "All" || images.some(img => getCategory(img) === cat);
+                if (!hasImages) return;
 
-            const imageEl = document.createElement('img');
-            imageEl.src = `media/${img}`;
-            imageEl.alt = `Gallery Image ${index + 1}`;
-            imageEl.className = 'w-full object-cover transform group-hover:scale-105 transition-transform duration-700 ease-out';
-            imageEl.loading = "lazy";
+                const button = document.createElement('button');
+                button.type = 'button';
+                button.className = `category-btn px-6 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 ${cat === currentCategory ? 'active' : ''}`;
+                button.textContent = cat;
 
-            const overlay = document.createElement('div');
-            overlay.className = 'absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center';
-            overlay.innerHTML = '<div class="w-12 h-12 rounded-full bg-brand-500/80 text-white flex items-center justify-center backdrop-blur-sm transform scale-50 group-hover:scale-100 transition-transform duration-300"><i class="fas fa-expand text-xl"></i></div>';
+                button.addEventListener('click', () => {
+                    currentCategory = cat;
+                    activeIndex = 0;
+                    renderCategories();
+                    initCoverflow();
+                });
 
-            div.appendChild(imageEl);
-            div.appendChild(overlay);
+                categoryContainer.appendChild(button);
+            });
+        }
 
-            div.addEventListener('click', () => openLightbox(index));
+        // --- 3D Coverflow Rendering & Mathematics ---
+        function initCoverflow() {
+            coverflowStage.innerHTML = '';
 
-            galleryGrid.appendChild(div);
-        });
+            filteredImages = currentCategory === "All"
+                ? images
+                : images.filter(img => getCategory(img) === currentCategory);
 
+            if (filteredImages.length === 0) {
+                coverflowStage.innerHTML = `<div class="text-center py-12 text-gray-400 font-medium">No photos found in ${currentCategory} yet.</div>`;
+                carouselCounter.textContent = `0 / 0`;
+                return;
+            }
+
+            // Create card elements
+            filteredImages.forEach((img, idx) => {
+                // Outer card: handles 3D transform only (no overflow/border-radius here)
+                const card = document.createElement('div');
+                card.className = 'coverflow-card';
+
+                // Inner wrapper: handles corner clipping (overflow:hidden works here since no translateZ on this element)
+                const inner = document.createElement('div');
+                inner.className = 'coverflow-inner';
+
+                const imageEl = document.createElement('img');
+                imageEl.src = `media/${img}`;
+                imageEl.alt = `Gallery Image - ${getCategory(img)}`;
+                imageEl.className = 'w-full h-full object-cover pointer-events-none block';
+                imageEl.loading = "lazy";
+
+                // Overlay — lives inside inner wrapper, shown on hover via CSS
+                const overlay = document.createElement('div');
+                overlay.className = 'card-overlay absolute inset-0 bg-black/30 flex items-center justify-center';
+                overlay.innerHTML = '<div class="w-14 h-14 rounded-full bg-black/50 border border-white/40 text-white flex items-center justify-center shadow-xl"><i class="fas fa-expand-alt text-2xl"></i></div>';
+
+                inner.appendChild(imageEl);
+                inner.appendChild(overlay);
+                card.appendChild(inner);
+
+                // Click event: If side card, bring to front. If center card, open Lightbox.
+                card.addEventListener('click', () => {
+                    if (idx === activeIndex) {
+                        openLightbox(idx);
+                    } else {
+                        activeIndex = idx;
+                        updateCoverflowPosition();
+                    }
+                });
+
+                coverflowStage.appendChild(card);
+            });
+
+            updateCoverflowPosition();
+            startAutoplay(); // Auto-start rotation whenever a category is loaded
+        }
+
+        // Position each card in 3D space relative to activeIndex
+        function updateCoverflowPosition() {
+            const cards = Array.from(coverflowStage.children);
+            if (!cards.length) return;
+
+            const isMobile = window.innerWidth < 640;
+            const xOffset = isMobile ? 140 : 220;
+
+            cards.forEach((card, idx) => {
+                const offset = idx - activeIndex;
+                const absOffset = Math.abs(offset);
+
+                if (absOffset > 3) {
+                    card.style.opacity = '0';
+                    card.style.pointerEvents = 'none';
+                    card.style.transform = `translateX(${offset * xOffset}px) scale(0.6) rotateY(0deg)`;
+                    card.style.zIndex = '0';
+                    return;
+                }
+
+                card.style.opacity = '1';
+                card.style.pointerEvents = 'auto';
+
+                if (offset === 0) {
+                    // Center Active Card — no translateZ to avoid Chromium 3D stacking context bug
+                    // (translateZ breaks overflow:hidden clipping on the inner wrapper's rounded corners)
+                    card.style.transform = `translateX(0px) scale(1.15) rotateY(0deg)`;
+                    card.style.zIndex = '30';
+                    card.style.filter = 'brightness(100%)';
+                    card.style.boxShadow = '0 30px 60px rgba(0,0,0,0.7)';
+                } else if (offset < 0) {
+                    // Cards on Left
+                    const rotate = Math.min(25 * absOffset, 45);
+                    card.style.transform = `translateX(${offset * xOffset}px) scale(${1 - absOffset * 0.15}) translateZ(${-absOffset * 80}px) rotateY(${rotate}deg)`;
+                    card.style.zIndex = `${20 - absOffset}`;
+                    card.style.filter = `brightness(${100 - absOffset * 25}%)`;
+                    card.style.boxShadow = '';
+                } else {
+                    // Cards on Right
+                    const rotate = -Math.min(25 * absOffset, 45);
+                    card.style.transform = `translateX(${offset * xOffset}px) scale(${1 - absOffset * 0.15}) translateZ(${-absOffset * 80}px) rotateY(${rotate}deg)`;
+                    card.style.zIndex = `${20 - absOffset}`;
+                    card.style.filter = `brightness(${100 - absOffset * 25}%)`;
+                    card.style.boxShadow = '';
+                }
+            });
+
+            carouselCounter.textContent = `${activeIndex + 1} / ${filteredImages.length}`;
+        }
+
+        // --- Autoplay / Auto-rotation ---
+        const AUTOPLAY_DELAY = 3500;    // ms between slides
+        const RESUME_AFTER = 5000;    // ms to wait before resuming after manual interaction
+
+        let autoplayTimer = null;   // setInterval handle
+        let resumeTimer = null;   // setTimeout handle for resuming after manual action
+        let autoplayPaused = false;  // true = user-paused (hover or manual click)
+
+        const progressBar = document.getElementById('autoplayProgress');
+
+        function startAutoplay() {
+            stopAutoplay();
+            autoplayPaused = false;
+            if (filteredImages.length < 2) return;
+
+            // Reset + play the CSS progress animation
+            if (progressBar) {
+                progressBar.style.transition = 'none';
+                progressBar.style.width = '0%';
+                // Force reflow so the reset takes effect before the animation
+                progressBar.offsetWidth;
+                progressBar.style.transition = `width ${AUTOPLAY_DELAY}ms linear`;
+                progressBar.style.width = '100%';
+            }
+
+            autoplayTimer = setInterval(() => {
+                if (!autoplayPaused) {
+                    activeIndex = (activeIndex + 1) % filteredImages.length;
+                    updateCoverflowPosition();
+                    // Restart the progress bar for the next slide
+                    if (progressBar) {
+                        progressBar.style.transition = 'none';
+                        progressBar.style.width = '0%';
+                        progressBar.offsetWidth;
+                        progressBar.style.transition = `width ${AUTOPLAY_DELAY}ms linear`;
+                        progressBar.style.width = '100%';
+                    }
+                }
+            }, AUTOPLAY_DELAY);
+        }
+
+        function stopAutoplay() {
+            clearInterval(autoplayTimer);
+            autoplayTimer = null;
+            if (progressBar) {
+                progressBar.style.transition = 'none';
+                progressBar.style.width = '0%';
+            }
+        }
+
+        // pauseAutoplay(withResume=false) — pass true for manual interactions so it auto-resumes
+        function pauseAutoplay(withResume = false) {
+            autoplayPaused = true;
+            if (progressBar) {
+                // Freeze the progress bar at its current width
+                const current = progressBar.getBoundingClientRect().width;
+                const parent = progressBar.parentElement.getBoundingClientRect().width;
+                progressBar.style.transition = 'none';
+                progressBar.style.width = parent > 0 ? `${(current / parent) * 100}%` : '0%';
+            }
+            clearTimeout(resumeTimer);
+            if (withResume) {
+                resumeTimer = setTimeout(() => {
+                    autoplayPaused = false;
+                    startAutoplay(); // restart from current position
+                }, RESUME_AFTER);
+            }
+        }
+
+        function resumeAutoplay() {
+            if (!autoplayTimer) return; // already stopped (e.g. single-image category)
+            autoplayPaused = false;
+            // Resume the progress bar animation for the remaining time
+            if (progressBar) {
+                progressBar.style.transition = `width ${AUTOPLAY_DELAY}ms linear`;
+                progressBar.style.width = '100%';
+            }
+        }
+
+        // Pause on hover over the carousel stage, resume on leave
+        coverflowStage.addEventListener('mouseenter', () => { clearTimeout(resumeTimer); pauseAutoplay(false); });
+        coverflowStage.addEventListener('mouseleave', () => { resumeAutoplay(); });
+
+        // --- Navigation Handlers ---
+        function nextCard() {
+            if (filteredImages.length === 0) return;
+            activeIndex = (activeIndex + 1) % filteredImages.length;
+            updateCoverflowPosition();
+        }
+
+        function prevCard() {
+            if (filteredImages.length === 0) return;
+            activeIndex = (activeIndex - 1 + filteredImages.length) % filteredImages.length;
+            updateCoverflowPosition();
+        }
+
+        prevCardBtn.addEventListener('click', () => { pauseAutoplay(true); prevCard(); });
+        nextCardBtn.addEventListener('click', () => { pauseAutoplay(true); nextCard(); });
+
+        // --- Lightbox Functions ---
         function openLightbox(index) {
-            currentIndex = index;
+            activeIndex = index;
+            pauseAutoplay(false); // freeze autoplay while lightbox is open
             updateLightboxImage();
             lightbox.classList.remove('hidden');
             lightbox.classList.add('flex');
@@ -354,36 +712,33 @@
                 lightbox.classList.add('hidden');
                 lightbox.classList.remove('flex');
                 document.body.style.overflow = '';
+                startAutoplay(); // resume from current image after closing lightbox
             }, 300);
         }
 
         function updateLightboxImage() {
             lightboxImg.style.opacity = '0';
             setTimeout(() => {
-                lightboxImg.src = `media/${images[currentIndex]}`;
-                imageCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+                lightboxImg.src = `media/${filteredImages[activeIndex]}`;
+                imageCounter.textContent = `${activeIndex + 1} / ${filteredImages.length}`;
                 lightboxImg.style.opacity = '1';
             }, 150);
         }
 
-        function nextImage() {
-            currentIndex = (currentIndex + 1) % images.length;
+        function nextLightboxImage() {
+            nextCard();
             updateLightboxImage();
         }
 
-        function prevImage() {
-            currentIndex = (currentIndex - 1 + images.length) % images.length;
+        function prevLightboxImage() {
+            prevCard();
             updateLightboxImage();
         }
 
-        // Set Background Video Playback Speed
-        const bgVideo = document.getElementById('bgVideo');
-        if (bgVideo) bgVideo.playbackRate = 0.5;
-
-        // Event Listeners
+        // Lightbox Listeners
         closeBtn.addEventListener('click', closeLightbox);
-        nextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextImage(); });
-        prevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevImage(); });
+        modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
+        modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
 
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox || e.target.id === 'lightboxContent') {
@@ -391,14 +746,28 @@
             }
         });
 
-        // Keyboard navigation
+        // Global Keyboard Controls
         document.addEventListener('keydown', (e) => {
-            if (lightbox.classList.contains('hidden')) return;
-
-            if (e.key === 'Escape') closeLightbox();
-            if (e.key === 'ArrowRight') nextImage();
-            if (e.key === 'ArrowLeft') prevImage();
+            if (!lightbox.classList.contains('hidden')) {
+                if (e.key === 'Escape') closeLightbox();
+                if (e.key === 'ArrowRight') nextLightboxImage();
+                if (e.key === 'ArrowLeft') prevLightboxImage();
+            } else {
+                if (e.key === 'ArrowRight') nextCard();
+                if (e.key === 'ArrowLeft') prevCard();
+            }
         });
+
+        // Window Resize Listener
+        window.addEventListener('resize', updateCoverflowPosition);
+
+        // Video Speed
+        const bgVideo = document.getElementById('bgVideo');
+        if (bgVideo) bgVideo.playbackRate = 0.5;
+
+        // Initialize Page
+        renderCategories();
+        initCoverflow();
     </script>
 </body>
 
