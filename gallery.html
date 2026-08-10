@@ -53,6 +53,8 @@
     </script>
 
     <link rel="stylesheet" href="styles.css">
+
+    <!-- Custom & Critical CSS -->
     <style>
         ::-webkit-scrollbar {
             width: 8px;
@@ -77,9 +79,11 @@
             color: #f8fafc;
         }
 
+        /* Fixed High Z-Index for Navbar so cards never obscure buttons */
         #gallery-nav {
-            background-color: rgba(15, 23, 42, 0.75);
+            background-color: rgba(15, 23, 42, 0.95);
             border-color: rgba(51, 65, 85, 0.5);
+            z-index: 100 !important;
         }
 
         #video-overlay {
@@ -95,13 +99,19 @@
             scrollbar-width: none;
         }
 
-        /* Category Pills Styling */
+        /* Category Container Glow Blur Effect */
+        #categoryContainer {
+            scroll-padding: 0.5rem;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+            mask-image: linear-gradient(to right, transparent, black 12px, black calc(100% - 12px), transparent);
+        }
+
+        /* Category Pills */
         .category-btn {
             white-space: nowrap;
             transition: all 0.25s ease;
         }
 
-        /* Dark Mode Pill States */
         .category-btn.active {
             background-color: #0f172a;
             color: #ffffff;
@@ -121,26 +131,47 @@
             border-color: rgba(255, 255, 255, 0.4);
         }
 
-        /* 3D Coverflow Carousel Stage */
+        /* Responsive 3D Coverflow Stage Heights */
         .coverflow-stage {
             perspective: 1200px;
             position: relative;
-            height: 520px;
+            height: 310px;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            overflow: visible;
+            overflow: hidden;
+            z-index: 10;
         }
 
-        /* Card — handles ONLY the 3D positioning/transform */
+        @media (min-width: 640px) {
+            .coverflow-stage {
+                height: 440px;
+                overflow: visible;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .coverflow-stage {
+                height: 520px;
+            }
+        }
+
+        /* Card Dimensions */
         .coverflow-card {
             position: absolute;
-            width: 320px;
-            height: 440px;
+            width: 210px;
+            height: 280px;
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
             cursor: pointer;
             user-select: none;
+        }
+
+        @media (min-width: 640px) {
+            .coverflow-card {
+                width: 300px;
+                height: 400px;
+            }
         }
 
         @media (min-width: 768px) {
@@ -150,18 +181,16 @@
             }
         }
 
-        /* Inner wrapper — handles clipping and rounding (no 3D transform on this element) */
         .coverflow-inner {
             width: 100%;
             height: 100%;
-            border-radius: 1.5rem;
+            border-radius: 1.25rem;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
             position: relative;
             border: 1px solid rgba(255, 255, 255, 0.125);
         }
 
-        /* Expand overlay: show only on hover, CSS-driven */
         .coverflow-card .card-overlay {
             opacity: 0;
             transition: opacity 0.25s ease;
@@ -171,14 +200,14 @@
             opacity: 1;
         }
 
-        /* Light Theme Adjustments */
+        /* Light Theme Styles */
         .light-theme body {
             background-color: #f1f5f9;
             color: #0f172a;
         }
 
         .light-theme #gallery-nav {
-            background-color: rgba(255, 255, 255, 0.90);
+            background-color: rgba(255, 255, 255, 0.95);
             border-color: rgba(203, 213, 225, 0.8);
         }
 
@@ -196,7 +225,7 @@
         }
 
         .light-theme #themeToggle {
-            background-color: #f1f5f9 !important;
+            background-color: #ffffff !important;
             border-color: #cbd5e1 !important;
         }
 
@@ -219,10 +248,10 @@
             border-color: #94a3b8;
         }
 
-        /* Round Navigation Buttons */
+        /* Control Buttons */
         .nav-circle-btn {
-            width: 52px;
-            height: 52px;
+            width: 42px;
+            height: 42px;
             border-radius: 50%;
             border: 1.5px solid rgba(255, 255, 255, 0.3);
             background: rgba(15, 23, 42, 0.6);
@@ -232,6 +261,13 @@
             justify-content: center;
             color: #ffffff;
             transition: all 0.25s ease;
+        }
+
+        @media (min-width: 640px) {
+            .nav-circle-btn {
+                width: 52px;
+                height: 52px;
+            }
         }
 
         .nav-circle-btn:hover {
@@ -251,11 +287,29 @@
             color: #ffffff;
             border-color: #0f172a;
         }
+
+        /* Lightbox Styling */
+        #lightbox {
+            z-index: 200 !important;
+        }
+
+        #lightboxImg {
+            max-height: 72vh;
+            max-width: 92vw;
+            object-fit: contain;
+        }
+
+        @media (min-width: 640px) {
+            #lightboxImg {
+                max-height: 82vh;
+                max-width: 85vw;
+            }
+        }
     </style>
 </head>
 
 <body
-    class="font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col bg-transparent transition-colors duration-300">
+    class="font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col bg-transparent transition-colors duration-300 overflow-x-hidden">
 
     <!-- Video Background -->
     <div class="fixed inset-0 z-[-1]">
@@ -265,56 +319,67 @@
         <div id="video-overlay" class="absolute inset-0 transition-all duration-300 pointer-events-none"></div>
     </div>
 
-    <!-- Navigation -->
-    <nav id="gallery-nav" class="fixed w-full z-40 transition-all duration-300 backdrop-blur-md border-b">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex-shrink-0">
+    <!-- Top Navigation Header -->
+    <nav id="gallery-nav" class="fixed w-full transition-all duration-300 backdrop-blur-md border-b top-0 left-0">
+        <div class="w-full px-4 sm:px-8">
+            <div class="flex items-center justify-between h-14 sm:h-20">
+
+                <!-- Back Link -->
+                <div class="flex-shrink-0 z-10">
                     <a href="index.html" class="flex items-center group">
                         <div
-                            class="w-10 h-10 rounded-full bg-brand-500/10 flex items-center justify-center mr-3 border border-brand-500/20 group-hover:bg-brand-500/20 transition-colors">
-                            <i class="fas fa-arrow-left text-brand-600 dark:text-brand-400"></i>
+                            class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-500/10 flex items-center justify-center mr-2 border border-brand-500/20 group-hover:bg-brand-500/20 transition-colors">
+                            <i class="fas fa-arrow-left text-xs sm:text-base text-brand-600 dark:text-brand-400"></i>
                         </div>
                         <h1
-                            class="text-xl font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-teal-600 dark:from-brand-400 dark:to-teal-300 group-hover:opacity-80 transition-all">
-                            Back to Home
+                            class="text-xs sm:text-lg font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-teal-600 dark:from-brand-400 dark:to-teal-300 group-hover:opacity-80 transition-all">
+                            <span class="inline sm:hidden">Home</span>
+                            <span class="hidden sm:inline">Back to Home</span>
                         </h1>
                     </a>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <div class="gallery-title font-display font-semibold text-lg hidden sm:block">
-                        Our Gallery
-                    </div>
+
+                <!-- Title (Centered on Desktop) -->
+                <div
+                    class="gallery-title font-display font-semibold text-sm sm:text-lg hidden md:block text-center truncate">
+                    Our Gallery
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <div class="flex items-center flex-shrink-0 z-10">
                     <button id="themeToggle" aria-label="Toggle Theme"
-                        class="w-8 h-8 flex-shrink-0 rounded-full bg-gray-800/20 hover:bg-gray-800/30 text-amber-500 dark:text-yellow-400 border border-gray-300 dark:border-gray-700 transition-all duration-300 flex items-center justify-center shadow-sm">
-                        <i id="themeIcon" class="fas fa-moon text-sm"></i>
+                        class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800/40 hover:bg-gray-800/60 text-amber-500 dark:text-yellow-400 border border-gray-300 dark:border-gray-700 transition-all duration-300 flex items-center justify-center shadow-md">
+                        <i id="themeIcon" class="fas fa-moon text-xs sm:text-sm"></i>
                     </button>
                 </div>
+
             </div>
         </div>
     </nav>
 
     <!-- Main Content Stage -->
     <main
-        class="flex-grow pt-28 pb-16 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
+        class="flex-grow pt-16 sm:pt-24 pb-6 sm:pb-12 px-2 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
 
         <!-- Header -->
-        <div class="mb-6 text-center">
+        <div class="mb-2 sm:mb-4 text-center px-2">
             <h2
-                class="text-3xl md:text-5xl font-display font-bold mb-3 animate-fade-in-up transition-colors duration-300">
+                class="text-xl sm:text-3xl md:text-5xl font-display font-bold mb-1 sm:mb-3 animate-fade-in-up transition-colors duration-300">
                 Capturing Memories
             </h2>
-            <div class="h-1.5 w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mb-4"></div>
-            <p class="gallery-subtitle max-w-2xl mx-auto text-base sm:text-lg transition-colors duration-300">
-                <!-- Explore Uttarakhand destinations through our 3D interactive showcase. -->
+            <div
+                class="h-1 sm:h-1.5 w-16 sm:w-24 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mb-1.5 sm:mb-4">
+            </div>
+            <p
+                class="gallery-subtitle max-w-2xl mx-auto text-xs sm:text-base leading-snug transition-colors duration-300">
                 A glimpse into the stunning landscapes, majestic views, and unforgettable journeys.
             </p>
         </div>
 
         <!-- Category Pills Filter Bar -->
-        <div class="relative max-w-7xl mx-auto mb-6 w-full px-2 sm:px-6">
+        <div class="relative max-w-7xl mx-auto mb-2 sm:mb-4 w-full px-1">
             <div id="categoryContainer"
-                class="flex items-center gap-3 overflow-x-auto no-scrollbar py-3 px-3 scroll-smooth justify-start md:justify-center">
+                class="flex items-center gap-2 sm:gap-3 overflow-x-auto no-scrollbar py-1.5 sm:py-3 px-2 scroll-smooth justify-start md:justify-center">
                 <!-- Dynamic Pill Buttons Injected Here -->
             </div>
         </div>
@@ -325,21 +390,21 @@
         </div>
 
         <!-- Bottom Controls -->
-        <div class="flex flex-col items-center justify-center gap-3 mt-6">
-            <div class="flex items-center gap-6">
+        <div class="flex flex-col items-center justify-center gap-2 sm:gap-3 mt-2 sm:mt-6">
+            <div class="flex items-center gap-4 sm:gap-6">
                 <button id="prevCardBtn" aria-label="Previous Image" class="nav-circle-btn shadow-lg">
-                    <i class="fas fa-arrow-left text-lg"></i>
+                    <i class="fas fa-arrow-left text-xs sm:text-lg"></i>
                 </button>
                 <span id="carouselCounter"
-                    class="text-sm font-semibold tracking-wider opacity-80 min-w-[70px] text-center">
+                    class="text-xs sm:text-sm font-semibold tracking-wider opacity-80 min-w-[50px] text-center">
                     1 / 1
                 </span>
                 <button id="nextCardBtn" aria-label="Next Image" class="nav-circle-btn shadow-lg">
-                    <i class="fas fa-arrow-right text-lg"></i>
+                    <i class="fas fa-arrow-right text-xs sm:text-lg"></i>
                 </button>
             </div>
             <!-- Autoplay progress bar -->
-            <div class="w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
+            <div class="w-32 sm:w-48 h-0.5 bg-white/10 rounded-full overflow-hidden">
                 <div id="autoplayProgress" class="h-full bg-brand-400 rounded-full" style="width:0%"></div>
             </div>
         </div>
@@ -347,34 +412,55 @@
 
     <!-- Footer -->
     <footer
-        class="py-6 bg-gray-950 text-center border-t border-gray-800/50 mt-auto relative z-10 transition-colors duration-300">
-        <p class="font-medium tracking-wide text-sm">&copy; 2024 Mahakaal Tours & Bike Rental. All rights reserved.</p>
+        class="py-3 sm:py-6 bg-gray-950 text-center border-t border-gray-800/50 mt-auto relative z-10 transition-colors duration-300 px-4">
+        <p class="font-medium tracking-wide text-xs sm:text-sm">&copy; 2024 Mahakaal Tours & Bike Rental. All rights
+            reserved.</p>
     </footer>
 
     <!-- Lightbox Modal -->
     <div id="lightbox"
-        class="fixed inset-0 z-50 bg-black/95 backdrop-blur-sm hidden flex-col items-center justify-center opacity-0 transition-opacity duration-300">
-        <div
-            class="absolute top-0 left-0 w-full p-4 flex justify-between items-center z-50 bg-gradient-to-b from-black/80 to-transparent">
-            <div class="text-gray-300 font-medium tracking-wider text-sm px-4" id="imageCounter">1 / 10</div>
-            <button id="closeBtn"
-                class="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-all backdrop-blur-md">
-                <i class="fas fa-times text-xl"></i>
+        class="fixed inset-0 bg-black/95 backdrop-blur-md hidden flex-col items-center justify-between p-3 sm:p-6 opacity-0 transition-opacity duration-300">
+
+        <!-- Header Bar -->
+        <div class="w-full flex justify-between items-center z-50 px-2 pt-1">
+            <div class="text-gray-200 font-semibold tracking-wider text-xs bg-white/10 px-3 py-1 rounded-full border border-white/10 backdrop-blur-md"
+                id="imageCounter">
+                1 / 10
+            </div>
+            <button id="closeBtn" aria-label="Close Lightbox"
+                class="w-8 h-8 sm:w-11 sm:h-11 rounded-full bg-white/20 hover:bg-white/30 active:scale-95 flex items-center justify-center text-white transition-all backdrop-blur-md border border-white/20 shadow-lg">
+                <i class="fas fa-times text-sm sm:text-lg"></i>
             </button>
         </div>
 
-        <div class="relative w-full h-full flex items-center justify-center p-4 sm:p-12" id="lightboxContent">
-            <button id="modalPrevBtn"
-                class="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 hover:bg-brand-500/80 hover:scale-110 flex items-center justify-center text-white transition-all backdrop-blur-md z-50">
-                <i class="fas fa-chevron-left text-xl sm:text-2xl"></i>
+        <!-- Image Stage -->
+        <div class="relative w-full flex-grow flex items-center justify-center my-auto p-1" id="lightboxContent">
+
+            <!-- Desktop Side Nav Arrows -->
+            <button id="modalPrevBtn" aria-label="Previous Image"
+                class="hidden sm:flex absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 border border-white/20 hover:bg-brand-500/80 active:scale-95 items-center justify-center text-white transition-all backdrop-blur-md z-50 shadow-2xl">
+                <i class="fas fa-chevron-left text-xl"></i>
             </button>
 
             <img id="lightboxImg" src="" alt="Gallery Image"
-                class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-transform duration-300 scale-95">
+                class="rounded-lg sm:rounded-xl shadow-2xl transition-transform duration-300 scale-95 border border-white/10">
 
-            <button id="modalNextBtn"
-                class="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-white/10 hover:bg-brand-500/80 hover:scale-110 flex items-center justify-center text-white transition-all backdrop-blur-md z-50">
-                <i class="fas fa-chevron-right text-xl sm:text-2xl"></i>
+            <!-- Desktop Side Nav Arrows -->
+            <button id="modalNextBtn" aria-label="Next Image"
+                class="hidden sm:flex absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 rounded-full bg-black/60 border border-white/20 hover:bg-brand-500/80 active:scale-95 items-center justify-center text-white transition-all backdrop-blur-md z-50 shadow-2xl">
+                <i class="fas fa-chevron-right text-xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Bottom Control Buttons -->
+        <div class="flex sm:hidden items-center justify-center gap-6 pb-2 z-50 w-full">
+            <button id="modalPrevBtnMobile" aria-label="Previous Image"
+                class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white active:bg-brand-500">
+                <i class="fas fa-arrow-left text-sm"></i>
+            </button>
+            <button id="modalNextBtnMobile" aria-label="Next Image"
+                class="w-10 h-10 rounded-full bg-white/10 border border-white/20 flex items-center justify-center text-white active:bg-brand-500">
+                <i class="fas fa-arrow-right text-sm"></i>
             </button>
         </div>
     </div>
@@ -388,7 +474,7 @@
         function updateThemeUI() {
             const isLight = document.documentElement.classList.contains('light-theme');
             if (themeIcon) {
-                themeIcon.className = isLight ? 'fas fa-moon text-base text-indigo-400' : 'fas fa-sun text-base text-yellow-400';
+                themeIcon.className = isLight ? 'fas fa-moon text-xs sm:text-sm text-indigo-400' : 'fas fa-sun text-xs sm:text-sm text-yellow-400';
             }
         }
         updateThemeUI();
@@ -455,6 +541,8 @@
         const closeBtn = document.getElementById('closeBtn');
         const modalPrevBtn = document.getElementById('modalPrevBtn');
         const modalNextBtn = document.getElementById('modalNextBtn');
+        const modalPrevBtnMobile = document.getElementById('modalPrevBtnMobile');
+        const modalNextBtnMobile = document.getElementById('modalNextBtnMobile');
         const imageCounter = document.getElementById('imageCounter');
 
         // --- Render Category Pills ---
@@ -467,7 +555,7 @@
 
                 const button = document.createElement('button');
                 button.type = 'button';
-                button.className = `category-btn px-6 py-2.5 rounded-full border text-sm font-medium transition-all duration-300 ${cat === currentCategory ? 'active' : ''}`;
+                button.className = `category-btn px-3.5 sm:px-6 py-1 sm:py-2 rounded-full border text-xs sm:text-sm font-medium transition-all duration-300 ${cat === currentCategory ? 'active' : ''}`;
                 button.textContent = cat;
 
                 button.addEventListener('click', () => {
@@ -484,24 +572,22 @@
         // --- 3D Coverflow Rendering & Mathematics ---
         function initCoverflow() {
             coverflowStage.innerHTML = '';
+            activeIndex = 0; // Explicitly ensure starting index is 0
 
             filteredImages = currentCategory === "All"
                 ? images
                 : images.filter(img => getCategory(img) === currentCategory);
 
             if (filteredImages.length === 0) {
-                coverflowStage.innerHTML = `<div class="text-center py-12 text-gray-400 font-medium">No photos found in ${currentCategory} yet.</div>`;
+                coverflowStage.innerHTML = `<div class="text-center py-12 text-gray-400 font-medium text-xs sm:text-sm">No photos found in ${currentCategory} yet.</div>`;
                 carouselCounter.textContent = `0 / 0`;
                 return;
             }
 
-            // Create card elements
             filteredImages.forEach((img, idx) => {
-                // Outer card: handles 3D transform only (no overflow/border-radius here)
                 const card = document.createElement('div');
                 card.className = 'coverflow-card';
 
-                // Inner wrapper: handles corner clipping (overflow:hidden works here since no translateZ on this element)
                 const inner = document.createElement('div');
                 inner.className = 'coverflow-inner';
 
@@ -511,16 +597,14 @@
                 imageEl.className = 'w-full h-full object-cover pointer-events-none block';
                 imageEl.loading = "lazy";
 
-                // Overlay — lives inside inner wrapper, shown on hover via CSS
                 const overlay = document.createElement('div');
                 overlay.className = 'card-overlay absolute inset-0 bg-black/30 flex items-center justify-center';
-                overlay.innerHTML = '<div class="w-14 h-14 rounded-full bg-black/50 border border-white/40 text-white flex items-center justify-center shadow-xl"><i class="fas fa-expand-alt text-2xl"></i></div>';
+                overlay.innerHTML = '<div class="w-10 h-10 sm:w-14 sm:h-14 rounded-full bg-black/50 border border-white/40 text-white flex items-center justify-center shadow-xl"><i class="fas fa-expand-alt text-base sm:text-2xl"></i></div>';
 
                 inner.appendChild(imageEl);
                 inner.appendChild(overlay);
                 card.appendChild(inner);
 
-                // Click event: If side card, bring to front. If center card, open Lightbox.
                 card.addEventListener('click', () => {
                     if (idx === activeIndex) {
                         openLightbox(idx);
@@ -534,16 +618,15 @@
             });
 
             updateCoverflowPosition();
-            startAutoplay(); // Auto-start rotation whenever a category is loaded
+            startAutoplay();
         }
 
-        // Position each card in 3D space relative to activeIndex
         function updateCoverflowPosition() {
             const cards = Array.from(coverflowStage.children);
             if (!cards.length) return;
 
             const isMobile = window.innerWidth < 640;
-            const xOffset = isMobile ? 140 : 220;
+            const xOffset = isMobile ? 95 : 220;
 
             cards.forEach((card, idx) => {
                 const offset = idx - activeIndex;
@@ -561,21 +644,17 @@
                 card.style.pointerEvents = 'auto';
 
                 if (offset === 0) {
-                    // Center Active Card — no translateZ to avoid Chromium 3D stacking context bug
-                    // (translateZ breaks overflow:hidden clipping on the inner wrapper's rounded corners)
-                    card.style.transform = `translateX(0px) scale(1.15) rotateY(0deg)`;
-                    card.style.zIndex = '30';
+                    card.style.transform = `translateX(0px) scale(${isMobile ? 1.02 : 1.15}) rotateY(0deg)`;
+                    card.style.zIndex = '25';
                     card.style.filter = 'brightness(100%)';
-                    card.style.boxShadow = '0 30px 60px rgba(0,0,0,0.7)';
+                    card.style.boxShadow = '0 25px 50px rgba(0,0,0,0.7)';
                 } else if (offset < 0) {
-                    // Cards on Left
                     const rotate = Math.min(25 * absOffset, 45);
                     card.style.transform = `translateX(${offset * xOffset}px) scale(${1 - absOffset * 0.15}) translateZ(${-absOffset * 80}px) rotateY(${rotate}deg)`;
                     card.style.zIndex = `${20 - absOffset}`;
                     card.style.filter = `brightness(${100 - absOffset * 25}%)`;
                     card.style.boxShadow = '';
                 } else {
-                    // Cards on Right
                     const rotate = -Math.min(25 * absOffset, 45);
                     card.style.transform = `translateX(${offset * xOffset}px) scale(${1 - absOffset * 0.15}) translateZ(${-absOffset * 80}px) rotateY(${rotate}deg)`;
                     card.style.zIndex = `${20 - absOffset}`;
@@ -587,13 +666,13 @@
             carouselCounter.textContent = `${activeIndex + 1} / ${filteredImages.length}`;
         }
 
-        // --- Autoplay / Auto-rotation ---
-        const AUTOPLAY_DELAY = 3500;    // ms between slides
-        const RESUME_AFTER = 5000;    // ms to wait before resuming after manual interaction
+        // --- Autoplay Logic ---
+        const AUTOPLAY_DELAY = 3500;
+        const RESUME_AFTER = 5000;
 
-        let autoplayTimer = null;   // setInterval handle
-        let resumeTimer = null;   // setTimeout handle for resuming after manual action
-        let autoplayPaused = false;  // true = user-paused (hover or manual click)
+        let autoplayTimer = null;
+        let resumeTimer = null;
+        let autoplayPaused = false;
 
         const progressBar = document.getElementById('autoplayProgress');
 
@@ -602,11 +681,9 @@
             autoplayPaused = false;
             if (filteredImages.length < 2) return;
 
-            // Reset + play the CSS progress animation
             if (progressBar) {
                 progressBar.style.transition = 'none';
                 progressBar.style.width = '0%';
-                // Force reflow so the reset takes effect before the animation
                 progressBar.offsetWidth;
                 progressBar.style.transition = `width ${AUTOPLAY_DELAY}ms linear`;
                 progressBar.style.width = '100%';
@@ -616,7 +693,6 @@
                 if (!autoplayPaused) {
                     activeIndex = (activeIndex + 1) % filteredImages.length;
                     updateCoverflowPosition();
-                    // Restart the progress bar for the next slide
                     if (progressBar) {
                         progressBar.style.transition = 'none';
                         progressBar.style.width = '0%';
@@ -637,11 +713,9 @@
             }
         }
 
-        // pauseAutoplay(withResume=false) — pass true for manual interactions so it auto-resumes
         function pauseAutoplay(withResume = false) {
             autoplayPaused = true;
             if (progressBar) {
-                // Freeze the progress bar at its current width
                 const current = progressBar.getBoundingClientRect().width;
                 const parent = progressBar.parentElement.getBoundingClientRect().width;
                 progressBar.style.transition = 'none';
@@ -651,26 +725,35 @@
             if (withResume) {
                 resumeTimer = setTimeout(() => {
                     autoplayPaused = false;
-                    startAutoplay(); // restart from current position
+                    startAutoplay();
                 }, RESUME_AFTER);
             }
         }
 
         function resumeAutoplay() {
-            if (!autoplayTimer) return; // already stopped (e.g. single-image category)
+            if (!autoplayTimer) return;
             autoplayPaused = false;
-            // Resume the progress bar animation for the remaining time
             if (progressBar) {
                 progressBar.style.transition = `width ${AUTOPLAY_DELAY}ms linear`;
                 progressBar.style.width = '100%';
             }
         }
 
-        // Pause on hover over the carousel stage, resume on leave
         coverflowStage.addEventListener('mouseenter', () => { clearTimeout(resumeTimer); pauseAutoplay(false); });
         coverflowStage.addEventListener('mouseleave', () => { resumeAutoplay(); });
 
-        // --- Navigation Handlers ---
+        let touchStartX = 0;
+        coverflowStage.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+            pauseAutoplay(true);
+        }, { passive: true });
+
+        coverflowStage.addEventListener('touchend', (e) => {
+            const touchEndX = e.changedTouches[0].screenX;
+            if (touchStartX - touchEndX > 40) nextCard();
+            if (touchEndX - touchStartX > 40) prevCard();
+        }, { passive: true });
+
         function nextCard() {
             if (filteredImages.length === 0) return;
             activeIndex = (activeIndex + 1) % filteredImages.length;
@@ -686,10 +769,10 @@
         prevCardBtn.addEventListener('click', () => { pauseAutoplay(true); prevCard(); });
         nextCardBtn.addEventListener('click', () => { pauseAutoplay(true); nextCard(); });
 
-        // --- Lightbox Functions ---
+        // --- Lightbox Logic ---
         function openLightbox(index) {
             activeIndex = index;
-            pauseAutoplay(false); // freeze autoplay while lightbox is open
+            pauseAutoplay(false);
             updateLightboxImage();
             lightbox.classList.remove('hidden');
             lightbox.classList.add('flex');
@@ -712,7 +795,7 @@
                 lightbox.classList.add('hidden');
                 lightbox.classList.remove('flex');
                 document.body.style.overflow = '';
-                startAutoplay(); // resume from current image after closing lightbox
+                startAutoplay();
             }, 300);
         }
 
@@ -735,10 +818,12 @@
             updateLightboxImage();
         }
 
-        // Lightbox Listeners
         closeBtn.addEventListener('click', closeLightbox);
-        modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
-        modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
+
+        if (modalNextBtn) modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
+        if (modalPrevBtn) modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
+        if (modalNextBtnMobile) modalNextBtnMobile.addEventListener('click', (e) => { e.stopPropagation(); nextLightboxImage(); });
+        if (modalPrevBtnMobile) modalPrevBtnMobile.addEventListener('click', (e) => { e.stopPropagation(); prevLightboxImage(); });
 
         lightbox.addEventListener('click', (e) => {
             if (e.target === lightbox || e.target.id === 'lightboxContent') {
@@ -746,7 +831,6 @@
             }
         });
 
-        // Global Keyboard Controls
         document.addEventListener('keydown', (e) => {
             if (!lightbox.classList.contains('hidden')) {
                 if (e.key === 'Escape') closeLightbox();
@@ -758,14 +842,11 @@
             }
         });
 
-        // Window Resize Listener
         window.addEventListener('resize', updateCoverflowPosition);
 
-        // Video Speed
         const bgVideo = document.getElementById('bgVideo');
         if (bgVideo) bgVideo.playbackRate = 0.5;
 
-        // Initialize Page
         renderCategories();
         initCoverflow();
     </script>
