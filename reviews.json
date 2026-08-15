@@ -1,7 +1,7 @@
 {
-    "total_reviews": 776,
+    "total_reviews": 777,
     "rating": 5,
-    "updated_at": "2026-08-13T20:48:40.386Z",
+    "updated_at": "2026-08-15T20:26:27.525Z",
     "reviews": [
         {
             "user": {
@@ -32,24 +32,6 @@
         },
         {
             "user": {
-                "name": "VK Rakesh",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjU_XrOiVmQnJcUv9EffnpCwaAv-oLY5cwAFYDtZSkveLpuDuioHng=s120-c-rp-mo-ba12-br100"
-            },
-            "rating": 5,
-            "snippet": "I rented a bike here and had an amazing experience. The vehicle was clean, well-serviced, and ready on time. Staff was very cooperative and guided me well. Highly satisfied!",
-            "date": "9 months ago"
-        },
-        {
-            "user": {
-                "name": "SAURAV KUMAR",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXH8tFtulDKfZYo1kxwy03LDHeH69jxFKohCWa-EM05UcBlA23g=s120-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "Had a great experience with Mahakaal Tours & Bike Rentals during my trip to Nainital. I booked a scooter from them and traveled across Nainital and nearby places without any issues. The scooter was in excellent condition, well-maintained, and comfortable for long rides. The booking process was smooth, the staff was friendly and helpful, and the pricing was reasonable. Exploring the beautiful hills and lakes on my own scooter made the trip even more enjoyable. I highly recommend Mahakaal Tours & Bike Rentals to anyone looking for a reliable and hassle-free bike rental service in Nainital.",
-            "date": "2 months ago"
-        },
-        {
-            "user": {
                 "name": "Jatin sharma",
                 "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocLgloAChnQIpXiHA_FYV2XM0sQ__XyTGgt913YzPaqRNskcBA=s120-c-rp-mo-br100"
             },
@@ -68,12 +50,30 @@
         },
         {
             "user": {
-                "name": "Prashant Chaudhary (AkKy)",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjUlji9O83ZMUlmSnil_XOTqIaGY-w487xTXZrsmTCiwoNcHtd330g=s120-c-rp-mo-ba12-br100"
+                "name": "VK Rakesh",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjU_XrOiVmQnJcUv9EffnpCwaAv-oLY5cwAFYDtZSkveLpuDuioHng=s120-c-rp-mo-ba12-br100"
             },
             "rating": 5,
-            "snippet": "Service is mind blowing. Price is that much reasonable no one can beat. Staff behaviour is very kind, polite & friendly in nature. And even they give you pickup and drop service for free from station to station.\nNo one market can do that much they did.",
-            "date": "7 months ago"
+            "snippet": "I rented a bike here and had an amazing experience. The vehicle was clean, well-serviced, and ready on time. Staff was very cooperative and guided me well. Highly satisfied!",
+            "date": "9 months ago"
+        },
+        {
+            "user": {
+                "name": "SAURAV KUMAR",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXH8tFtulDKfZYo1kxwy03LDHeH69jxFKohCWa-EM05UcBlA23g=s120-c-rp-mo-br100"
+            },
+            "rating": 5,
+            "snippet": "Had a great experience with Mahakaal Tours & Bike Rentals during my trip to Nainital. I booked a scooter from them and traveled across Nainital and nearby places without any issues. The scooter was in excellent condition, well-maintained, and comfortable for long rides. The booking process was smooth, the staff was friendly and helpful, and the pricing was reasonable. Exploring the beautiful hills and lakes on my own scooter made the trip even more enjoyable. I highly recommend Mahakaal Tours & Bike Rentals to anyone looking for a reliable and hassle-free bike rental service in Nainital.",
+            "date": "2 months ago"
+        },
+        {
+            "user": {
+                "name": "Aditya Jha",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocKplQqUotoMx1CiGAYD7jbaUDeOtPLg3u33H-Co5y7Dt72kjQ=s120-c-rp-mo-br100"
+            },
+            "rating": 5,
+            "snippet": "Best experience and best customer support with good velue for money",
+            "date": "a month ago"
         }
     ]
 }
