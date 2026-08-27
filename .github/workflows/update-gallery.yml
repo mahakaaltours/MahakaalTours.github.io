@@ -5,7 +5,6 @@ on:
     paths:
       - 'media/**' # Triggers only when changes occur inside the media folder
 
-# Prevent race conditions if multiple pushes happen quickly
 concurrency:
   group: gallery-generation
   cancel-in-progress: false
@@ -21,19 +20,26 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0 # Fetches full history so auto-commit handles rebases properly
+          fetch-depth: 0 # Fetches full commit history for proper rebasing
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22' # Upgraded from Node 20 to suppress deprecation warning
+          node-version: '22' # Eliminates Node 20 deprecation warning
 
       - name: Run Gallery Generator
         run: node generate-gallery.js
 
       - name: Commit and Push Changes
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "auto: update gallery-data.js with new images [skip ci]"
-          file_pattern: "gallery-data.js"
-          push_options: '--force-with-lease'
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add gallery-data.js
+          
+          if git diff --staged --quiet; then
+            echo "No changes in gallery-data.js to commit."
+          else
+            git commit -m "auto: update gallery-data.js with new images [skip ci]"
+            git pull --rebase origin main
+            git push origin main
+          fi
