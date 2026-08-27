@@ -5,21 +5,28 @@ on:
     paths:
       - 'media/**' # Triggers only when changes occur inside the media folder
 
+# Prevent race conditions if multiple pushes happen quickly
+concurrency:
+  group: gallery-generation
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     permissions:
-      contents: write # Allows the workflow to commit changes back to your repository
+      contents: write # Allows committing back to the repo
 
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetches full history so auto-commit handles rebases properly
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: '22' # Upgraded from Node 20 to suppress deprecation warning
 
       - name: Run Gallery Generator
         run: node generate-gallery.js
@@ -27,5 +34,6 @@ jobs:
       - name: Commit and Push Changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: "auto: update gallery-data.js with new images"
+          commit_message: "auto: update gallery-data.js with new images [skip ci]"
           file_pattern: "gallery-data.js"
+          push_options: '--force-with-lease'
