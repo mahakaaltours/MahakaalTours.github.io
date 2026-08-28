@@ -3,7 +3,10 @@ name: Generate Gallery Data
 on:
   push:
     paths:
-      - 'media/**' # Triggers only when changes occur inside the media folder
+      - 'media/**' # Triggers when changes occur inside the media folder
+  schedule:
+    - cron: '0 0 * * *' # Runs daily at 00:00 UTC (adjust time as needed)
+  workflow_dispatch: # Allows manual trigger from GitHub Actions UI
 
 concurrency:
   group: gallery-generation
