@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike & Scooty Rental & Tour Packages - Mahakaal 🔱 Tours</title>
+    <link rel="icon" href="fav.png" type="image/png">
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TBQ6KC7M6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-1TBQ6KC7M6');
+    </script>
+    <!-- Immediate Theme Check -->
+    <script>
+        (function () {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.add('light-theme');
+            } else {
+                document.documentElement.classList.remove('light-theme');
+            }
+        })();
+    </script>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
+    <script src="config.js"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;600;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif']
+                    },
+                    colors: {
+                        brand: {
+                            50: '#ecfdf5', 100: '#d1fae5', 200: '#a7f3d0', 300: '#6ee7b7',
+                            400: '#34d399', 500: '#10b981', 600: '#059669', 700: '#047857',
+                            800: '#065f46', 900: '#064e3b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #10b981;
+        }
+
+        body {
+            background-color: #090d16;
+            color: #f8fafc;
+        }
+
+        #services-nav {
+            background-color: rgba(15, 23, 42, 0.95);
+            border-color: rgba(51, 65, 85, 0.5);
+            z-index: 100 !important;
+        }
+
+        #video-overlay {
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.88), rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.92));
+        }
+
+        /* Light Theme Adjustments */
+        .light-theme body {
+            background-color: #f1f5f9;
+            color: #0f172a;
+        }
+
+        .light-theme #services-nav {
+            background-color: rgba(255, 255, 255, 0.95);
+            border-color: rgba(203, 213, 225, 0.8);
+        }
+
+        .light-theme #video-overlay {
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.70), rgba(241, 245, 249, 0.50), rgba(255, 255, 255, 0.80));
+        }
+
+        .light-theme .services-title {
+            color: #0f172a !important;
+        }
+
+        .light-theme .services-subtitle {
+            color: #334155 !important;
+        }
+
+        .light-theme #themeToggle {
+            background-color: #ffffff !important;
+            border-color: #cbd5e1 !important;
+        }
+
+        /* Horizontal Accordion Layout (Desktop) */
+        @media (min-width: 1024px) {
+            .accordion-container {
+                display: flex;
+                flex-direction: row;
+                height: 580px;
+                width: 100%;
+                gap: 1rem;
+            }
+
+            .accordion-card {
+                flex: 1;
+                transition: flex 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+                overflow: hidden;
+                position: relative;
+                border-radius: 1.25rem;
+            }
+
+            /* Expand on hover OR when explicitly pinned via click (.is-pinned) */
+            .accordion-card:hover,
+            .accordion-card.is-pinned {
+                flex: 3.5;
+            }
+
+            .accordion-card .card-collapsed-title {
+                opacity: 1;
+                transition: opacity 0.3s ease;
+            }
+
+            .accordion-card:hover .card-collapsed-title,
+            .accordion-card.is-pinned .card-collapsed-title {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            .accordion-card .card-expanded-content {
+                opacity: 0;
+                transform: translateX(20px);
+                transition: opacity 0.4s ease 0.1s, transform 0.4s ease 0.1s;
+            }
+
+            .accordion-card:hover .card-expanded-content,
+            .accordion-card.is-pinned .card-expanded-content {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        /* Vertical Stack Layout (Mobile & Tablet) */
+        @media (max-width: 1023px) {
+            .accordion-container {
+                display: flex;
+                flex-direction: column;
+                gap: 1.25rem;
+            }
+
+            .accordion-card {
+                width: 100%;
+                min-height: 480px;
+                border-radius: 1.25rem;
+                overflow: hidden;
+                position: relative;
+            }
+
+            .accordion-card .card-collapsed-title {
+                display: none;
+            }
+
+            .accordion-card .card-expanded-content {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body
+    class="font-sans antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col bg-transparent transition-colors duration-300 overflow-x-hidden">
+
+    <!-- Video Background -->
+    <div class="fixed inset-0 z-[-1]">
+        <video id="bgVideo" autoplay loop muted playsinline class="w-full h-full object-cover">
+            <source src="media/video_2026-07-26_20-48-45.mp4" type="video/mp4">
+        </video>
+        <div id="video-overlay" class="absolute inset-0 transition-all duration-300 pointer-events-none"></div>
+    </div>
+
+    <!-- Top Navigation Header -->
+    <nav id="services-nav" class="fixed w-full transition-all duration-300 backdrop-blur-md border-b top-0 left-0">
+        <div class="w-full px-4 sm:px-8">
+            <div class="flex items-center justify-between h-14 sm:h-20">
+
+                <!-- Back Link to Home Page -->
+                <div class="flex-shrink-0 z-10">
+                    <a href="index.html" class="flex items-center group">
+                        <div
+                            class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-brand-500/10 flex items-center justify-center mr-2 border border-brand-500/20 group-hover:bg-brand-500/20 transition-colors">
+                            <i class="fas fa-arrow-left text-xs sm:text-base text-brand-600 dark:text-brand-400"></i>
+                        </div>
+                        <h1
+                            class="text-xs sm:text-lg font-display font-bold text-transparent bg-clip-text bg-gradient-to-r from-brand-600 to-teal-600 dark:from-brand-400 dark:to-teal-300 group-hover:opacity-80 transition-all">
+                            <span class="inline sm:hidden">Home</span>
+                            <span class="hidden sm:inline">Back to Home</span>
+                        </h1>
+                    </a>
+                </div>
+
+                <!-- Page Title -->
+                <div
+                    class="services-title font-display font-semibold text-sm sm:text-lg hidden md:block text-center truncate">
+                    Bike & Scooty Rentals & Packages
+                </div>
+
+                <!-- Theme Toggle Button -->
+                <div class="flex items-center flex-shrink-0 z-10">
+                    <button id="themeToggle" aria-label="Toggle Theme"
+                        class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-gray-800/40 hover:bg-gray-800/60 text-amber-500 dark:text-yellow-400 border border-gray-300 dark:border-gray-700 transition-all duration-300 flex items-center justify-center shadow-md">
+                        <i id="themeIcon" class="fas fa-moon text-xs sm:text-sm"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main
+        class="flex-grow pt-20 sm:pt-28 pb-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full relative z-10 flex flex-col justify-center">
+
+        <!-- Header -->
+        <div class="mb-6 sm:mb-8 text-center px-2">
+            <h2
+                class="text-2xl sm:text-4xl md:text-5xl font-display font-bold mb-2 sm:mb-3 services-title transition-colors duration-300">
+                Explore Our Packages & Rides
+            </h2>
+            <div
+                class="h-1 sm:h-1.5 w-20 sm:w-28 bg-gradient-to-r from-brand-500 to-teal-400 mx-auto rounded-full mb-3">
+            </div>
+            <!-- <p
+                class="services-subtitle max-w-2xl mx-auto text-xs sm:text-base leading-relaxed transition-colors duration-300">
+                Hover or tap on any package card below to expand details and instantly reserve via WhatsApp.
+            </p> -->
+        </div>
+
+        <!-- Dynamic Expandable Cards Container -->
+        <div class="accordion-container my-auto">
+
+            <!-- Card 1: Self-Drive Scooty -->
+            <div
+                class="accordion-card group border border-white/10 dark:border-white/10 shadow-2xl bg-slate-900/80 backdrop-blur-md">
+                <!-- Background Image -->
+                <img src="media/Services_Self_Drive_scooty.png" alt="Self Drive Scooty"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/80 to-slate-950/30 lg:to-slate-950/40">
+                </div>
+
+                <!-- Collapsed Title -->
+                <div
+                    class="card-collapsed-title absolute inset-0 hidden lg:flex flex-col items-center justify-end pb-12 px-4 text-center pointer-events-none">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-500/20 border border-brand-400/40 backdrop-blur-md flex items-center justify-center mb-4 text-brand-400 text-xl shadow-lg">
+                        🛵
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white tracking-wide uppercase">Scooty Rental</h3>
+                    <p class="text-xs text-brand-300 font-medium mt-1">₹500 / day</p>
+                </div>
+
+                <!-- Expanded Content Pane -->
+                <div
+                    class="card-expanded-content relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between text-white">
+                    <div>
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/40 text-brand-300 text-xs font-semibold uppercase tracking-wider mb-4">
+                            🛵 Instant Booking
+                        </div>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2 leading-tight">
+                            Self-Drive Scooty Rental
+                        </h3>
+                        <div class="h-1 w-12 bg-brand-400 rounded-full mb-4"></div>
+
+                        <ul class="space-y-3 text-xs sm:text-sm text-slate-200 font-medium">
+                            <li class="flex items-start">
+                                <i class="fas fa-tachometer-alt text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Limit:</strong> Up to 120 km running / day (Round figure)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Condition:</strong> Well-maintained, reliable & fuel-efficient</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-map-marked-alt text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Ideal For:</strong> Local sightseeing & city cruising</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/10 mt-6">
+                        <div class="mb-4">
+                            <span class="text-xs text-slate-400 line-through mr-2">₹700.00</span>
+                            <span class="text-xl sm:text-2xl font-bold text-brand-400">₹500.00 / day</span>
+                            <span
+                                class="ml-2 text-xs text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded font-semibold">Save
+                                ₹200</span>
+                        </div>
+                        <div class="space-y-2">
+                            <!-- Card 1: Self-Drive Scooty -->
+                            <a href="#" data-product="SCOOTY" target="_blank" rel="noopener"
+                                class="wa-btn w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/30 transition-all">
+                                <i class="fab fa-whatsapp text-lg"></i> Book via WhatsApp
+                            </a>
+                            </a>
+                            <a href="index.html#services"
+                                class="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-medium text-xs flex items-center justify-center gap-1 transition-colors">
+                                <i class="fas fa-chevron-left text-xs"></i> Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Upgraded Scooty / Bullet -->
+            <div
+                class="accordion-card group border border-white/10 dark:border-white/10 shadow-2xl bg-slate-900/80 backdrop-blur-md">
+                <!-- Background Image -->
+                <img src="media/Services_Scooty_&_Bullets.png" alt="Upgraded Scooty & Royal Enfield Bullet"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/80 to-slate-950/30 lg:to-slate-950/40">
+                </div>
+
+                <!-- Collapsed Title -->
+                <div
+                    class="card-collapsed-title absolute inset-0 hidden lg:flex flex-col items-center justify-end pb-12 px-4 text-center pointer-events-none">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-500/20 border border-brand-400/40 backdrop-blur-md flex items-center justify-center mb-4 text-brand-400 text-xl shadow-lg">
+                        🏍️
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white tracking-wide uppercase">Cruisers & Bikes</h3>
+                    <p class="text-xs text-brand-300 font-medium mt-1">₹500 onwards</p>
+                </div>
+
+                <!-- Expanded Content Pane -->
+                <div
+                    class="card-expanded-content relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between text-white">
+                    <div>
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/40 text-brand-300 text-xs font-semibold uppercase tracking-wider mb-4">
+                            🏔️ Mountain Cruisers
+                        </div>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2 leading-tight">
+                            Upgraded Scooty & Royal Enfield Bullet
+                        </h3>
+                        <div class="h-1 w-12 bg-brand-400 rounded-full mb-4"></div>
+
+                        <ul class="space-y-3 text-xs sm:text-sm text-slate-200 font-medium">
+                            <li class="flex items-start">
+                                <i class="fas fa-motorcycle text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Options:</strong> High-performance Scooties & Powerful Cruiser
+                                    Bikes</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-tags text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Price Range:</strong> Starting from ₹500 to ₹1,500 depending on
+                                    model</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-shield-alt text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Includes:</strong> Helmets & well-serviced vehicles for mountain
+                                    rides</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/10 mt-6">
+                        <div class="mb-4">
+                            <span class="text-xs text-slate-400 line-through mr-2">₹800.00</span>
+                            <span class="text-xl sm:text-2xl font-bold text-brand-400">₹500.00 onwards</span>
+                        </div>
+                        <div class="space-y-2">
+                            <a href="#" data-product="BULLET" target="_blank" rel="noopener"
+                                class="wa-btn w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/30 transition-all">
+                                <i class="fab fa-whatsapp text-lg"></i> Book via WhatsApp
+                            </a>
+                            <a href="index.html#services"
+                                class="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-medium text-xs flex items-center justify-center gap-1 transition-colors">
+                                <i class="fas fa-chevron-left text-xs"></i> Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Kumaon/Garhwal Tour -->
+            <div
+                class="accordion-card group border border-white/10 dark:border-white/10 shadow-2xl bg-slate-900/80 backdrop-blur-md">
+                <!-- Background Image -->
+                <img src="media/Services_Kumaon_Garhwal_Tour.png" alt="Kumaon Garhwal Tour Dzire"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/80 to-slate-950/30 lg:to-slate-950/40">
+                </div>
+
+                <!-- Collapsed Title -->
+                <div
+                    class="card-collapsed-title absolute inset-0 hidden lg:flex flex-col items-center justify-end pb-12 px-4 text-center pointer-events-none">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-500/20 border border-brand-400/40 backdrop-blur-md flex items-center justify-center mb-4 text-brand-400 text-xl shadow-lg">
+                        🚗
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white tracking-wide uppercase">Kumaon Tour</h3>
+                    <p class="text-xs text-brand-300 font-medium mt-1">₹3,000 / day</p>
+                </div>
+
+                <!-- Expanded Content Pane -->
+                <div
+                    class="card-expanded-content relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between text-white">
+                    <div>
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/40 text-brand-300 text-xs font-semibold uppercase tracking-wider mb-4">
+                            🚗 AC Sedan Comfort
+                        </div>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2 leading-tight">
+                            Kumaon / Garhwal Tour in Dazzling Dzire
+                        </h3>
+                        <div class="h-1 w-12 bg-brand-400 rounded-full mb-4"></div>
+
+                        <ul class="space-y-3 text-xs sm:text-sm text-slate-200 font-medium">
+                            <li class="flex items-start">
+                                <i class="fas fa-car text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Vehicle:</strong> Comfortable Swift Dzire Sedan</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-route text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Coverage:</strong> Flexible touring across scenic Kumaon & Garhwal
+                                    circuits</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-user-check text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Comfort:</strong> AC Sedan with experienced local mountain driver</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/10 mt-6">
+                        <div class="mb-4">
+                            <span class="text-xs text-slate-400 line-through mr-2">₹4,000.00</span>
+                            <span class="text-xl sm:text-2xl font-bold text-brand-400">₹3,000.00 / day</span>
+                            <span
+                                class="ml-2 text-xs text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded font-semibold">Save
+                                ₹1,000/day</span>
+                        </div>
+                        <div class="space-y-2">
+                            <!-- Card 3: Kumaon Tour -->
+                            <a href="#" data-product="KUMAON" target="_blank" rel="noopener"
+                                class="wa-btn w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/30 transition-all">
+                                <i class="fab fa-whatsapp text-lg"></i> Book via WhatsApp
+                            </a>
+                            <a href="index.html#services"
+                                class="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-medium text-xs flex items-center justify-center gap-1 transition-colors">
+                                <i class="fas fa-chevron-left text-xs"></i> Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Tour to Jageshwar -->
+            <div
+                class="accordion-card group border border-white/10 dark:border-white/10 shadow-2xl bg-slate-900/80 backdrop-blur-md">
+                <!-- Background Image -->
+                <img src="media/Services_Tour_to_Jageshwar.png" alt="Jageshwar Dham Temple Tour"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/80 to-slate-950/30 lg:to-slate-950/40">
+                </div>
+
+                <!-- Collapsed Title -->
+                <div
+                    class="card-collapsed-title absolute inset-0 hidden lg:flex flex-col items-center justify-end pb-12 px-4 text-center pointer-events-none">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-500/20 border border-brand-400/40 backdrop-blur-md flex items-center justify-center mb-4 text-brand-400 text-xl shadow-lg">
+                        🛕
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white tracking-wide uppercase">Jageshwar Dham</h3>
+                    <p class="text-xs text-brand-300 font-medium mt-1">₹3,800 total</p>
+                </div>
+
+                <!-- Expanded Content Pane -->
+                <div
+                    class="card-expanded-content relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between text-white">
+                    <div>
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/40 text-brand-300 text-xs font-semibold uppercase tracking-wider mb-3">
+                            🛕 Spiritual Pilgrimage
+                        </div>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2 leading-tight">
+                            Spiritual Tour to Jageshwar Dham
+                        </h3>
+                        <div class="h-1 w-12 bg-brand-400 rounded-full mb-3"></div>
+
+                        <p class="text-xs font-semibold text-brand-300 uppercase tracking-wide mb-1">Key Destinations
+                            Covered:</p>
+                        <ul class="space-y-1.5 text-xs text-slate-200 font-medium">
+                            <li class="flex items-center"><i
+                                    class="fas fa-place-of-worship text-brand-400 mr-2 text-xs"></i> Kainchi Dham (Neeb
+                                Karori Baba Ashram)</li>
+                            <li class="flex items-center"><i
+                                    class="fas fa-map-marker-alt text-brand-400 mr-2 text-xs"></i> Kakrighat</li>
+                            <li class="flex items-center"><i class="fas fa-gopuram text-brand-400 mr-2 text-xs"></i>
+                                Chitai Golu Devta Temple</li>
+                            <li class="flex items-center"><i class="fas fa-gopuram text-brand-400 mr-2 text-xs"></i>
+                                Historic Jageshwar Dham</li>
+                            <li class="flex items-center"><i class="fas fa-sun text-brand-400 mr-2 text-xs"></i> Kasar
+                                Devi Temple</li>
+                            <li class="flex items-center"><i class="fas fa-bus-arrival text-brand-400 mr-2 text-xs"></i>
+                                Drop-off / Pickup: Kathgodam</li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-4 border-t border-white/10 mt-4">
+                        <div class="mb-3">
+                            <span class="text-xs text-slate-400 line-through mr-2">₹4,500.00</span>
+                            <span class="text-xl sm:text-2xl font-bold text-brand-400">₹3,800.00</span>
+                            <span class="text-xs text-slate-300"> package</span>
+                            <span
+                                class="ml-2 text-xs text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded font-semibold">Save
+                                ₹700</span>
+                        </div>
+                        <div class="space-y-2">
+                            <!-- Card 4: Jageshwar Tour -->
+                            <a href="#" data-product="JAGESHWAR" target="_blank" rel="noopener"
+                                class="wa-btn w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/30 transition-all">
+                                <i class="fab fa-whatsapp text-lg"></i> Book via WhatsApp
+                            </a>
+                            <a href="index.html#services"
+                                class="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-medium text-xs flex items-center justify-center gap-1 transition-colors">
+                                <i class="fas fa-chevron-left text-xs"></i> Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: Chardham Tour -->
+            <div
+                class="accordion-card group border border-white/10 dark:border-white/10 shadow-2xl bg-slate-900/80 backdrop-blur-md">
+                <!-- Background Image -->
+                <img src="media/Services_Upgraded_Self_ride_bike.png" alt="Char Dham Yatra Tour"
+                    class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                <div
+                    class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-950/80 to-slate-950/30 lg:to-slate-950/40">
+                </div>
+
+                <!-- Collapsed Title -->
+                <div
+                    class="card-collapsed-title absolute inset-0 hidden lg:flex flex-col items-center justify-end pb-12 px-4 text-center pointer-events-none">
+                    <div
+                        class="w-12 h-12 rounded-full bg-brand-500/20 border border-brand-400/40 backdrop-blur-md flex items-center justify-center mb-4 text-brand-400 text-xl shadow-lg">
+                        🔱
+                    </div>
+                    <h3 class="font-display font-bold text-xl text-white tracking-wide uppercase">Chaar Dham Yatra</h3>
+                    <p class="text-xs text-brand-300 font-medium mt-1">₹4,800 / day</p>
+                </div>
+
+                <!-- Expanded Content Pane -->
+                <div
+                    class="card-expanded-content relative z-10 h-full p-6 sm:p-8 flex flex-col justify-between text-white">
+                    <div>
+                        <div
+                            class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-brand-500/20 border border-brand-400/40 text-brand-300 text-xs font-semibold uppercase tracking-wider mb-4">
+                            🔱 12 Days Circuit
+                        </div>
+                        <h3 class="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2 leading-tight">
+                            Chaar Dham Yatra Tour (12 Days)
+                        </h3>
+                        <div class="h-1 w-12 bg-brand-400 rounded-full mb-4"></div>
+
+                        <ul class="space-y-3 text-xs sm:text-sm text-slate-200 font-medium">
+                            <li class="flex items-start">
+                                <i class="fas fa-calendar-alt text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Duration:</strong> 12 Days Complete Circuit</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-car text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Vehicle:</strong> Swift Dzire Sedan</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-info-circle text-brand-400 mt-1 mr-2.5"></i>
+                                <span><strong>Exclusions:</strong> Toll, Parking, and Driver Allowance extra as per
+                                    actuals</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/10 mt-6">
+                        <div class="mb-4">
+                            <span class="text-xs text-slate-400 line-through mr-2">₹5,000.00</span>
+                            <span class="text-xl sm:text-2xl font-bold text-brand-400">₹4,800.00 / day</span>
+                            <span
+                                class="ml-2 text-xs text-emerald-400 bg-emerald-500/20 px-2 py-0.5 rounded font-semibold">Save
+                                ₹200/day</span>
+                        </div>
+                        <div class="space-y-2">
+                            <!-- Card 5: Chardham Tour -->
+                            <a href="#" data-product="CHARDHAM" target="_blank" rel="noopener"
+                                class="wa-btn w-full py-3 px-4 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/30 transition-all">
+                                <i class="fab fa-whatsapp text-lg"></i> Book via WhatsApp
+                            </a>
+                            <a href="index.html#services"
+                                class="w-full py-2.5 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-slate-200 font-medium text-xs flex items-center justify-center gap-1 transition-colors">
+                                <i class="fas fa-chevron-left text-xs"></i> Back
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 theme-footer theme-text-muted text-center border-t theme-border relative z-10">
+        <p class="font-medium tracking-wide text-sm">&copy; <span id="current-year">2026</span> Mahakaal
+            Tours & Bike Rentals. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // --- Theme Toggle Logic ---
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+
+        function updateThemeUI() {
+            const isLight = document.documentElement.classList.contains('light-theme');
+            if (themeIcon) {
+                themeIcon.className = isLight ? 'fas fa-moon text-xs sm:text-sm text-indigo-400' : 'fas fa-sun text-xs sm:text-sm text-yellow-400';
+            }
+        }
+        updateThemeUI();
+
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                document.documentElement.classList.toggle('light-theme');
+                const isLight = document.documentElement.classList.contains('light-theme');
+                localStorage.setItem('theme', isLight ? 'light' : 'dark');
+                updateThemeUI();
+            });
+        }
+
+        // --- Slow down background video playback slightly ---
+        const bgVideo = document.getElementById('bgVideo');
+        if (bgVideo) bgVideo.playbackRate = 0.5;
+
+        // --- Card Click & Expand/Collapse Logic ---
+        const accordionCards = document.querySelectorAll('.accordion-card');
+
+        // Helper function to remove pinned state from all cards
+        function clearAllPinnedCards() {
+            accordionCards.forEach(card => card.classList.remove('is-pinned'));
+        }
+
+        accordionCards.forEach(card => {
+            card.addEventListener('click', function (e) {
+                // Prevent click on action links (like WhatsApp or Back buttons) from triggering card toggle
+                if (e.target.closest('a')) return;
+
+                // Check if this card is currently pinned
+                const isCurrentlyPinned = this.classList.contains('is-pinned');
+
+                // Collapse any other previously pinned card
+                clearAllPinnedCards();
+
+                // Toggle state on this card: if it wasn't pinned, pin it now; if it was pinned, unpin it (collapse)
+                if (!isCurrentlyPinned) {
+                    this.classList.add('is-pinned');
+                }
+            });
+        });
+
+        // Click outside handler: collapse all pinned cards when user clicks outside card container
+        document.addEventListener('click', function (e) {
+            if (!e.target.closest('.accordion-card')) {
+                clearAllPinnedCards();
+            }
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            // Dynamically set all WhatsApp links from SITE_CONFIG
+            document.querySelectorAll('.wa-btn').forEach(button => {
+                const productKey = button.getAttribute('data-product');
+                if (productKey && SITE_CONFIG.PRODUCTS[productKey]) {
+                    const productId = SITE_CONFIG.PRODUCTS[productKey];
+                    button.href = SITE_CONFIG.getWaLink(productId);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

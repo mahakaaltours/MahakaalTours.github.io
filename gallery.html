@@ -7,6 +7,16 @@
     <title>Gallery - Mahakaal 🔱 Tours & Bike Rental</title>
     <link rel="icon" href="fav.png" type="image/png">
 
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1TBQ6KC7M6"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-1TBQ6KC7M6');
+    </script>
+
     <!-- Immediate Theme Check -->
     <script>
         (function () {
@@ -19,6 +29,9 @@
         })();
     </script>
     <script src="gallery-data.js"></script>
+
+    <!-- Custom Script -->
+    <script src="script.js"></script>
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -411,10 +424,9 @@
     </main>
 
     <!-- Footer -->
-    <footer
-        class="py-3 sm:py-6 bg-gray-950 text-center border-t border-gray-800/50 mt-auto relative z-10 transition-colors duration-300 px-4">
-        <p class="font-medium tracking-wide text-xs sm:text-sm">&copy; 2024 Mahakaal Tours & Bike Rental. All rights
-            reserved.</p>
+    <footer class="py-8 theme-footer theme-text-muted text-center border-t theme-border relative z-10">
+        <p class="font-medium tracking-wide text-sm">&copy; <span id="current-year">2026</span> Mahakaal
+            Tours & Bike Rentals. All rights reserved.</p>
     </footer>
 
     <!-- Lightbox Modal -->
