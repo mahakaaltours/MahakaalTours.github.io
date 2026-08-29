@@ -15,4 +15,9 @@ module.exports = [
     "20230823_145118.jpg",
     "IMG-20221030-WA0000.jpg",
     "IMG-20230224-WA0030.jpg",
+    "Services_Self_Drive_scooty.png",
+    "Services_Scooty_&_Bullets.png",
+    "Services_Kumaon_Garhwal_Tour.png",
+    "Services_Tour_to_Jageshwar.png",
+    "Services_Upgraded_Self_ride_bike.png",
 ];
