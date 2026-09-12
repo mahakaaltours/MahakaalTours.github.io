@@ -1,7 +1,7 @@
 {
     "total_reviews": 780,
     "rating": 5,
-    "updated_at": "2026-09-10T22:21:11.738Z",
+    "updated_at": "2026-09-12T22:01:43.842Z",
     "reviews": [
         {
             "user": {
@@ -47,33 +47,6 @@
             "rating": 5,
             "snippet": "Good bike and scooty are available here book for hassle free ride self drive we got brand new bike and covered munsyari from kathgodam without any problem. Great service. Owner is also very generous. He helped us in rain . Great service overall.",
             "date": "3 months ago"
-        },
-        {
-            "user": {
-                "name": "VK Rakesh",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjU_XrOiVmQnJcUv9EffnpCwaAv-oLY5cwAFYDtZSkveLpuDuioHng=s120-c-rp-mo-ba12-br100"
-            },
-            "rating": 5,
-            "snippet": "I rented a bike here and had an amazing experience. The vehicle was clean, well-serviced, and ready on time. Staff was very cooperative and guided me well. Highly satisfied!",
-            "date": "10 months ago"
-        },
-        {
-            "user": {
-                "name": "SAURAV KUMAR",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXH8tFtulDKfZYo1kxwy03LDHeH69jxFKohCWa-EM05UcBlA23g=s120-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "Had a great experience with Mahakaal Tours & Bike Rentals during my trip to Nainital. I booked a scooter from them and traveled across Nainital and nearby places without any issues. The scooter was in excellent condition, well-maintained, and comfortable for long rides. The booking process was smooth, the staff was friendly and helpful, and the pricing was reasonable. Exploring the beautiful hills and lakes on my own scooter made the trip even more enjoyable. I highly recommend Mahakaal Tours & Bike Rentals to anyone looking for a reliable and hassle-free bike rental service in Nainital.",
-            "date": "3 months ago"
-        },
-        {
-            "user": {
-                "name": "Aditya Jha",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocKplQqUotoMx1CiGAYD7jbaUDeOtPLg3u33H-Co5y7Dt72kjQ=s120-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "Best experience and best customer support with good velue for money",
-            "date": "2 months ago"
         }
     ]
 }
