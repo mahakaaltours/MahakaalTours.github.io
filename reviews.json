@@ -1,7 +1,7 @@
 {
-    "total_reviews": 839,
+    "total_reviews": 843,
     "rating": 5,
-    "updated_at": "2026-10-09T00:12:17.871Z",
+    "updated_at": "2026-10-10T23:20:36.372Z",
     "reviews": [
         {
             "user": {
@@ -37,7 +37,7 @@
             },
             "rating": 5,
             "snippet": "I rented a bike here and had an amazing experience. The vehicle was clean, well-serviced, and ready on time. Staff was very cooperative and guided me well. Highly satisfied!",
-            "date": "10 months ago"
+            "date": "11 months ago"
         },
         {
             "user": {
