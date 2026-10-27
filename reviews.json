@@ -1,17 +1,8 @@
 {
-    "total_reviews": 866,
+    "total_reviews": 872,
     "rating": 5,
-    "updated_at": "2026-10-25T22:22:36.831Z",
+    "updated_at": "2026-10-27T23:38:06.285Z",
     "reviews": [
-        {
-            "user": {
-                "name": "Abhishek Shukla",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocIY_8OjQat9B7Kwi0PzbdEnaYHky3wumAN-QH1Hu165_YNs53g=s120-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "I hired a Scooty from Kathgodam and had a great experience. The owner was extremely supportive, polite and cooperative throughout. The process was smooth and perfect. The best part was the price very visible and budget friendly compare to others. If anyone is planning to explore Nainital or nearby areas, I would definitely recommend taking a Scooty from here. Thank you so much",
-            "date": "8 months ago"
-        },
         {
             "user": {
                 "name": "prachi sharma",
@@ -23,12 +14,12 @@
         },
         {
             "user": {
-                "name": "Jatin sharma",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjU-yjWze_nMbVKTvE4Z2s7FPnO_K5QQIbjy4jpIGBq4IMDr9ySR=s120-c-rp-mo-br100"
+                "name": "Abhishek Shukla",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocIY_8OjQat9B7Kwi0PzbdEnaYHky3wumAN-QH1Hu165_YNs53g=s120-c-rp-mo-br100"
             },
             "rating": 5,
-            "snippet": "I rented a classic 350 from kamal bhaiya and the bike was really comfortable and had no braking or other mechanical issues, the clutch was also very smooth, highly recommended 😊",
-            "date": "4 months ago"
+            "snippet": "I hired a Scooty from Kathgodam and had a great experience. The owner was extremely supportive, polite and cooperative throughout. The process was smooth and perfect. The best part was the price very visible and budget friendly compare to others. If anyone is planning to explore Nainital or nearby areas, I would definitely recommend taking a Scooty from here. Thank you so much",
+            "date": "8 months ago"
         },
         {
             "user": {
@@ -41,12 +32,21 @@
         },
         {
             "user": {
-                "name": "SAURAV KUMAR",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXH8tFtulDKfZYo1kxwy03LDHeH69jxFKohCWa-EM05UcBlA23g=s120-c-rp-mo-br100"
+                "name": "Jatin sharma",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjU-yjWze_nMbVKTvE4Z2s7FPnO_K5QQIbjy4jpIGBq4IMDr9ySR=s120-c-rp-mo-br100"
             },
             "rating": 5,
-            "snippet": "Had a great experience with Mahakaal Tours & Bike Rentals during my trip to Nainital. I booked a scooter from them and traveled across Nainital and nearby places without any issues. The scooter was in excellent condition, well-maintained, and comfortable for long rides. The booking process was smooth, the staff was friendly and helpful, and the pricing was reasonable. Exploring the beautiful hills and lakes on my own scooter made the trip even more enjoyable. I highly recommend Mahakaal Tours & Bike Rentals to anyone looking for a reliable and hassle-free bike rental service in Nainital.",
+            "snippet": "I rented a classic 350 from kamal bhaiya and the bike was really comfortable and had no braking or other mechanical issues, the clutch was also very smooth, highly recommended 😊",
             "date": "4 months ago"
+        },
+        {
+            "user": {
+                "name": "Avineesh Parjapati",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjX9ALBzj4mA6ZwzqBTGTD-5vSkGxWXA-5Sbc6lg56ZJHi5xhRmUPA=s120-c-rp-mo-ba12-br100"
+            },
+            "rating": 5,
+            "snippet": "Recommended Bike rentals\nBest service and trusted bike rental from Kathgodam",
+            "date": "3 weeks ago"
         },
         {
             "user": {
@@ -77,12 +77,12 @@
         },
         {
             "user": {
-                "name": "Prakhar Gupta",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjWAzP1H2dBMHB_52PInLXm0iBjDXwXHiSQTQ55q_Im-kMT8-i3hqw=s120-c-rp-mo-ba12-br100"
+                "name": "SAURAV KUMAR",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXH8tFtulDKfZYo1kxwy03LDHeH69jxFKohCWa-EM05UcBlA23g=s120-c-rp-mo-br100"
             },
             "rating": 5,
-            "snippet": "Good behaviour and very services scooter....\nTravel was successful\nI'm 😊",
-            "date": "Edited 6 months ago"
+            "snippet": "Had a great experience with Mahakaal Tours & Bike Rentals during my trip to Nainital. I booked a scooter from them and traveled across Nainital and nearby places without any issues. The scooter was in excellent condition, well-maintained, and comfortable for long rides. The booking process was smooth, the staff was friendly and helpful, and the pricing was reasonable. Exploring the beautiful hills and lakes on my own scooter made the trip even more enjoyable. I highly recommend Mahakaal Tours & Bike Rentals to anyone looking for a reliable and hassle-free bike rental service in Nainital.",
+            "date": "4 months ago"
         },
         {
             "user": {
