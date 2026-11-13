@@ -1,7 +1,7 @@
 {
-    "total_reviews": 901,
+    "total_reviews": 905,
     "rating": 5,
-    "updated_at": "2026-11-11T00:28:20.947Z",
+    "updated_at": "2026-11-13T00:56:59.453Z",
     "reviews": [
         {
             "user": {
@@ -29,6 +29,15 @@
             "rating": 5,
             "snippet": "I rented a bike here and had an amazing experience. The vehicle was clean, well-serviced, and ready on time. Staff was very cooperative and guided me well. Highly satisfied!",
             "date": "a year ago"
+        },
+        {
+            "user": {
+                "name": "Ꮢᴏʜꫝɴ Ƥatel",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXi8wbBWlLwq_hfC_QBN6eBJP6vgKQcgsKaxhNUFbRvF2cp-mjl4w=s64-c-rp-mo-br100"
+            },
+            "rating": 5,
+            "snippet": "The experience was amazing! 🏍️ One of the best bike rental services in Kathgodam. Deepak Bhai is a very supportive and helpful person. Highly recommended if you’re travelling to Nainital and Kainchi Dham. 🙌✨",
+            "date": "3 weeks ago"
         },
         {
             "user": {
@@ -83,15 +92,6 @@
             "rating": 5,
             "snippet": "We came to Kathgodam from Delhi on 6 May 2026, and from here we hired the services of Mahakaal Tours & Bike Rentals. We visited Kainchi Dham, and the owner of Mahakal Taxi Service, Mr. Deepak Pant, is truly a wonderful person. He guided and accompanied us very nicely throughout the trip. After sightseeing, he safely dropped us back at our hotel.\nThe next day, on 7 May 2026, he took us to Mukteshwar Dham. After darshan there, he brought us to Nainital and showed us all the beautiful places properly. Later, he also took us to Hanuman Garhi Temple in Nainital, where we had a very peaceful and wonderful darshan. After completing the entire tour, he safely dropped us back at our hotel in Kathgodam.\nThe tour package provided by Mahakal Taxi Service was very affordable and perfectly suited to my budget.\nWhenever any of you plan to visit Uttarakhand — whether Nainital, Mukteshwar, Kainchi Dham, Almora, or any other place in Uttarakhand — you can definitely contact them. I personally had a very good experience, and I hope you all will have a wonderful experience too.\nWhenever I visit Uttarakhand again in the future, I will surely take their service again because I truly liked their hospitality and service.\nMay God always keep them happy, healthy, and successful. This is my heartfelt prayer for them.",
             "date": "6 months ago"
-        },
-        {
-            "user": {
-                "name": "Altamash Mohd",
-                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocJLpEv_pwbNEuMyCWt2EU72WUHITgry__gDE8WayqYOGqAuLA=s64-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "Amazing experience with Mahakal Tour and Bike rentals, I rented a meteor 350 and bike was super smooth and good condition. Deepak bhaiyaa is also very supportive.",
-            "date": "a month ago"
         }
     ]
 }
