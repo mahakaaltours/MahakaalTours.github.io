@@ -1,17 +1,8 @@
 {
-    "total_reviews": 905,
+    "total_reviews": 915,
     "rating": 5,
-    "updated_at": "2026-11-13T00:56:59.453Z",
+    "updated_at": "2026-11-14T23:44:43.690Z",
     "reviews": [
-        {
-            "user": {
-                "name": "prachi sharma",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjWvRf8dSai6cY96C8g9BWpDdnGMWEMSaqZLNGWu6mMy8tXzPiM=s64-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "Kamal bhaiya was very helpful and we had a very good tour, all thanks to the condition of the bike. We took bullet classic 350 and it was so comfortable that we took it till ranikhet and above yet as a pillion i had no issues.\nPlease rent your bikes/scooty from here, they offer very good condition bikes ☺️",
-            "date": "6 months ago"
-        },
         {
             "user": {
                 "name": "Abhishek Shukla",
@@ -38,6 +29,24 @@
             "rating": 5,
             "snippet": "The experience was amazing! 🏍️ One of the best bike rental services in Kathgodam. Deepak Bhai is a very supportive and helpful person. Highly recommended if you’re travelling to Nainital and Kainchi Dham. 🙌✨",
             "date": "3 weeks ago"
+        },
+        {
+            "user": {
+                "name": "Ashok Mal",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjX2b8II7M-WKRQtGc1lKaVu2XS-N_nY8gsVGmYpFcLVAR3ODzgu=s64-c-rp-mo-ba12-br100"
+            },
+            "rating": 5,
+            "snippet": "⭐Excellent Two-Wheeler Rental Service!⭐️\n\nHad a great experience with Mahakaal Tour and Travels, Kathgodam. Deepak ji is very cooperative and helpful, prices are reasonable, and the two-wheelers are well-maintained. A genuine and reliable option for authentic self-ride two-wheeler rentals in Kathgodam.",
+            "date": "2 weeks ago"
+        },
+        {
+            "user": {
+                "name": "prachi sharma",
+                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjWvRf8dSai6cY96C8g9BWpDdnGMWEMSaqZLNGWu6mMy8tXzPiM=s64-c-rp-mo-br100"
+            },
+            "rating": 5,
+            "snippet": "Kamal bhaiya was very helpful and we had a very good tour, all thanks to the condition of the bike. We took bullet classic 350 and it was so comfortable that we took it till ranikhet and above yet as a pillion i had no issues.\nPlease rent your bikes/scooty from here, they offer very good condition bikes ☺️",
+            "date": "6 months ago"
         },
         {
             "user": {
@@ -83,15 +92,6 @@
             "rating": 5,
             "snippet": "Everything is good... Deepak pant is very supportive..... I suggest you all guys whenever you plan for coming nainital... Please contact deepak pant for bikes and car ...... Good service and very supportive... Thank you",
             "date": "a month ago"
-        },
-        {
-            "user": {
-                "name": "Prafulla Kumar Ghosh",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjXZJQVszdpqCEMYomZ9qOV-9hObCckFrNON5HAcTIh0PJZsPVg3=s64-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "We came to Kathgodam from Delhi on 6 May 2026, and from here we hired the services of Mahakaal Tours & Bike Rentals. We visited Kainchi Dham, and the owner of Mahakal Taxi Service, Mr. Deepak Pant, is truly a wonderful person. He guided and accompanied us very nicely throughout the trip. After sightseeing, he safely dropped us back at our hotel.\nThe next day, on 7 May 2026, he took us to Mukteshwar Dham. After darshan there, he brought us to Nainital and showed us all the beautiful places properly. Later, he also took us to Hanuman Garhi Temple in Nainital, where we had a very peaceful and wonderful darshan. After completing the entire tour, he safely dropped us back at our hotel in Kathgodam.\nThe tour package provided by Mahakal Taxi Service was very affordable and perfectly suited to my budget.\nWhenever any of you plan to visit Uttarakhand — whether Nainital, Mukteshwar, Kainchi Dham, Almora, or any other place in Uttarakhand — you can definitely contact them. I personally had a very good experience, and I hope you all will have a wonderful experience too.\nWhenever I visit Uttarakhand again in the future, I will surely take their service again because I truly liked their hospitality and service.\nMay God always keep them happy, healthy, and successful. This is my heartfelt prayer for them.",
-            "date": "6 months ago"
         }
     ]
 }
