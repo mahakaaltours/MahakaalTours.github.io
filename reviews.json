@@ -1,7 +1,7 @@
 {
     "total_reviews": 929,
     "rating": 5,
-    "updated_at": "2026-11-22T00:10:08.536Z",
+    "updated_at": "2026-11-23T00:38:15.223Z",
     "reviews": [
         {
             "user": {
@@ -11,6 +11,15 @@
             "rating": 5,
             "snippet": "I hired a Scooty from Kathgodam and had a great experience. The owner was extremely supportive, polite and cooperative throughout. The process was smooth and perfect. The best part was the price very visible and budget friendly compare to others. If anyone is planning to explore Nainital or nearby areas, I would definitely recommend taking a Scooty from here. Thank you so much",
             "date": "9 months ago"
+        },
+        {
+            "user": {
+                "name": "Souvik Dutta",
+                "thumbnail": "https://lh3.googleusercontent.com/a/ACg8ocJL59O95JIl2Ie6aa22BSBk5x3UB4e0ST6cZ57gYKI-Wnc_U-k=s64-c-rp-mo-br100"
+            },
+            "rating": 5,
+            "snippet": "Very good bike rental service. Bhaiya gave me brand new hunter at very reasonable price. Bike conditions are very good. Owners are very good people.",
+            "date": "a week ago"
         },
         {
             "user": {
@@ -77,21 +86,12 @@
         },
         {
             "user": {
-                "name": "jai prakash",
-                "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjVNi7mtYVhLiWGxPbRJjtZU06hwtmkcc02raBih_L5LWG2Pbc0G=s64-c-rp-mo-br100"
-            },
-            "rating": 5,
-            "snippet": "Good bike and scooty are available here book for hassle free ride self drive we got brand new bike and covered munsyari from kathgodam without any problem. Great service. Owner is also very generous. He helped us in rain . Great service overall.",
-            "date": "5 months ago"
-        },
-        {
-            "user": {
                 "name": "alok mishra",
                 "thumbnail": "https://lh3.googleusercontent.com/a-/ALV-UjUBa5aWelWiRz81PTVL4mB8ExkJ78nN_B3ueydg7qivd583RgN9=s64-c-rp-mo-br100"
             },
             "rating": 5,
             "snippet": "Everything is good... Deepak pant is very supportive..... I suggest you all guys whenever you plan for coming nainital... Please contact deepak pant for bikes and car ...... Good service and very supportive... Thank you",
-            "date": "a month ago"
+            "date": "2 months ago"
         }
     ]
 }
